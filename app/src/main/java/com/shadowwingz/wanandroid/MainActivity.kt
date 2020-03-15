@@ -37,14 +37,14 @@ class MainActivity : AppCompatActivity() {
         rv_main.layoutManager = LinearLayoutManager(this)
         rv_main.adapter = ArticleListAdapter(items)
 
-        val subscribe = ApiClient.retrofit().loadData("101190201").subscribeOn(Schedulers.io())
+        val subscribe = ApiClient.retrofit().loadData("0").subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : ApiCallback<ArticleBean>() {
                 override fun onSuccess(model: ArticleBean) {
-                    SLog.d(model.weatherinfo.toString())
+                    SLog.d(model.data.toString())
                     Toast.makeText(
                         this@MainActivity,
-                        model.weatherinfo.toString(),
+                        model.data.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

@@ -7,9 +7,9 @@ import android.util.Log
  */
 object SLog {
 
-    private val TAG: String = "shadowwingz"
+    private const val TAG: String = "shadowwingz"
 
     fun d(msg: String) {
-        Log.d(TAG, "TAG " + msg)
+        Log.d(TAG, msg)
     }
 }
