@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.shadowwingz.bean.ArticleListBean
 
-class ArticleListAdapter(private val items: List<ArticleListBean>) :
+class ArticleListAdapter(private var items: ArrayList<ArticleListBean>) :
     RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         var itemView = LayoutInflater.from(parent.context)
@@ -29,13 +30,19 @@ class ArticleListAdapter(private val items: List<ArticleListBean>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.tvTime.text = items[position].time
+        holder.tvTime.text = items[position].niceDate
         holder.tvTitle.text = items[position].title
-        holder.tvCategory.text = items[position].category
-        if (items[position].like) {
+        holder.tvCategory.text = items[position].superChapterName
+        if (items[position].collect) {
             holder.ivLike.setImageResource(R.drawable.ic_like)
         } else {
             holder.ivLike.setImageResource(R.drawable.ic_like)
         }
+    }
+
+    fun setData(data: ArrayList<ArticleListBean>) {
+        items.clear()
+        items.addAll(data)
+        notifyDataSetChanged()
     }
 }

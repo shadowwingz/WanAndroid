@@ -1,5 +1,6 @@
 package com.shadowwingz.net
 
+import com.shadowwingz.utils.Option
 import com.shadowwingz.utils.SLog
 import io.reactivex.functions.Consumer
 import retrofit2.HttpException
@@ -25,6 +26,9 @@ abstract class ApiCallback<M> : Consumer<M> {
             }
             onFailure(msg)
         } else {
+            if (Option.showLog()) {
+                SLog.d(e.toString())
+            }
             onSuccess(e)
         }
         onFinish()
