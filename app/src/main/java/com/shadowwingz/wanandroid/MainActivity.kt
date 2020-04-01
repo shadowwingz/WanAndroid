@@ -2,9 +2,12 @@ package com.shadowwingz.wanandroid
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shadowwingz.bean.ArticleBean
 import com.shadowwingz.bean.ArticleListBean
+import com.shadowwingz.model.ArticleListModel
 import com.shadowwingz.net.ApiCallback
 import com.shadowwingz.net.ApiClient
 import com.shadowwingz.utils.SLog
@@ -15,6 +18,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var articleListModel: ArticleListModel
+    lateinit var articleListAdapter: ArticleListAdapter
+
     private var mCompositeDisposable = CompositeDisposable()
 
     private val items = ArrayList<ArticleListBean>()
@@ -22,20 +28,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        rv_main.layoutManager = LinearLayoutManager(this)
-        rv_main.adapter = ArticleListAdapter(items)
+
+        init()
         queryData()
     }
 
-    fun queryData() {
+    private fun init() {
+        rv_main.layoutManager = LinearLayoutManager(this)
+        rv_main.adapter = ArticleListAdapter(items)
+        articleListAdapter = rv_main.adapter as ArticleListAdapter
+        articleListModel = ViewModelProviders.of(this).get(ArticleListModel::class.java)
+        articleListModel.getArticleList().observe(this, object : Observer<List<ArticleListBean>> {
+            override fun onChanged(result: List<ArticleListBean>?) {
+                if (result != null) {
+                    articleListAdapter.setData(result as ArrayList<ArticleListBean>)
+                }
+            }
+        })
+    }
+
+    private fun queryData() {
         val subscribe = ApiClient.retrofit().loadData("0")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : ApiCallback<ArticleBean>() {
                 override fun onSuccess(model: ArticleBean) {
                     val data = model.data.articleListBean as ArrayList
-                    val articleListAdapter = rv_main.adapter as ArticleListAdapter
-                    articleListAdapter.setData(data)
+                    articleListModel.setArticleList(data)
                 }
 
                 override fun onFailure(msg: String?) {
