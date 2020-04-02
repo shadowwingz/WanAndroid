@@ -1,4 +1,4 @@
-package com.shadowwingz.net
+package com.shadowwingz.network
 
 import com.shadowwingz.bean.ArticleBean
 import io.reactivex.Observable

@@ -1,4 +1,4 @@
-package com.shadowwingz.net
+package com.shadowwingz.network
 
 import com.shadowwingz.wanandroid.BuildConfig
 import okhttp3.OkHttpClient

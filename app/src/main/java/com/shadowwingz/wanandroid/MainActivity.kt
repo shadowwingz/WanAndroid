@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shadowwingz.bean.ArticleBean
 import com.shadowwingz.bean.ArticleListBean
 import com.shadowwingz.model.ArticleListModel
-import com.shadowwingz.net.ApiCallback
-import com.shadowwingz.net.ApiClient
+import com.shadowwingz.network.ApiCallback
+import com.shadowwingz.network.ApiClient
 import com.shadowwingz.utils.SLog
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -17,6 +17,8 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+//    private val viewModel by lazy { ViewModelProviders.of(this, ) }
 
     lateinit var articleListModel: ArticleListModel
     lateinit var articleListAdapter: ArticleListAdapter
