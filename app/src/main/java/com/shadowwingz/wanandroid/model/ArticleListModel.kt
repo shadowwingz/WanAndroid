@@ -1,10 +1,10 @@
-package com.shadowwingz.model
+package com.shadowwingz.wanandroid.model
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.shadowwingz.bean.ArticleListBean
-import com.shadowwingz.utils.SLog
+import com.shadowwingz.wanandroid.bean.ArticleListBean
+import com.shadowwingz.wanandroid.utils.SLog
 
 class ArticleListModel(application: Application) : AndroidViewModel(application) {
 

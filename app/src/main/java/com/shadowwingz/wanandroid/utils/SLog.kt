@@ -1,4 +1,4 @@
-package com.shadowwingz.utils
+package com.shadowwingz.wanandroid.utils
 
 import android.util.Log
 

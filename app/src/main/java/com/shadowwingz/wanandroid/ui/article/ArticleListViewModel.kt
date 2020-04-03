@@ -1,10 +1,10 @@
-package com.shadowwingz.ui.article
+package com.shadowwingz.wanandroid.ui.article
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shadowwingz.bean.ArticleListBean
-import com.shadowwingz.network.ArticleRepository
+import com.shadowwingz.wanandroid.bean.ArticleListBean
+import com.shadowwingz.wanandroid.network.ArticleRepository
 import kotlinx.coroutines.launch
 
 class ArticleListViewModel(private val repository: ArticleRepository) : ViewModel() {

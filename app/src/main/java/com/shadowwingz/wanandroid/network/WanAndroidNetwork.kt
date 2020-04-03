@@ -1,6 +1,6 @@
-package com.shadowwingz.network
+package com.shadowwingz.wanandroid.network
 
-import com.shadowwingz.network.api.ArticleListService
+import com.shadowwingz.wanandroid.network.api.ArticleListService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,6 +28,21 @@ class WanAndroidNetwork {
                 }
 
             })
+        }
+    }
+
+    companion object {
+        private var network: WanAndroidNetwork? = null
+
+        fun getInstance(): WanAndroidNetwork {
+            if (network == null) {
+                synchronized(WanAndroidNetwork::class.java) {
+                    if (network == null) {
+                        network = WanAndroidNetwork()
+                    }
+                }
+            }
+            return network!!
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.shadowwingz.bean
+package com.shadowwingz.wanandroid.bean
 
 import com.google.gson.annotations.SerializedName
 

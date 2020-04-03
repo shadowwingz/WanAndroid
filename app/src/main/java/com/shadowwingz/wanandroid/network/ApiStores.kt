@@ -1,6 +1,6 @@
-package com.shadowwingz.network
+package com.shadowwingz.wanandroid.network
 
-import com.shadowwingz.bean.ArticleBean
+import com.shadowwingz.wanandroid.bean.ArticleBean
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

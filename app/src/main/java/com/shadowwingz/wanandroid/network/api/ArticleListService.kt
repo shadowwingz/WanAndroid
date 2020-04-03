@@ -1,6 +1,6 @@
-package com.shadowwingz.network.api
+package com.shadowwingz.wanandroid.network.api
 
-import com.shadowwingz.bean.ArticleListBean
+import com.shadowwingz.wanandroid.bean.ArticleListBean
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

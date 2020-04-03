@@ -1,4 +1,4 @@
-package com.shadowwingz.network
+package com.shadowwingz.wanandroid.network
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

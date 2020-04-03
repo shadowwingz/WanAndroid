@@ -1,7 +1,7 @@
-package com.shadowwingz.network
+package com.shadowwingz.wanandroid.network
 
-import com.shadowwingz.utils.Option
-import com.shadowwingz.utils.SLog
+import com.shadowwingz.wanandroid.utils.Option
+import com.shadowwingz.wanandroid.utils.SLog
 import io.reactivex.functions.Consumer
 import retrofit2.HttpException
 
