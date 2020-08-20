@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.viewpager.widget.PagerAdapter;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class ExamplePagerAdapter extends PagerAdapter {
@@ -23,10 +25,11 @@ public class ExamplePagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NotNull View view, @NotNull Object object) {
         return view == object;
     }
 
+    @NotNull
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         TextView textView = new TextView(container.getContext());
@@ -44,7 +47,7 @@ public class ExamplePagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public int getItemPosition(Object object) {
+    public int getItemPosition(@NotNull Object object) {
         TextView textView = (TextView) object;
         String text = textView.getText().toString();
         int index = mDataList.indexOf(text);

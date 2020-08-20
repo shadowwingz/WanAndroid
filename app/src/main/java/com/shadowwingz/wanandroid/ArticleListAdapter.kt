@@ -23,7 +23,7 @@ class ArticleListAdapter(private var items: ArrayList<ArticleListBean>) :
         // todo declaration has type inferred from a platform call which can lead to unchecked nullability issues
         // 这里如果不用 var tvTime: TextView 这种写法，会报上面的警告，待研究
         var tvTime: TextView = itemView.findViewById(R.id.tv_time)
-        var tvTitle: TextView = itemView.findViewById(R.id.tv_title)
+        var tvTitle: TextView = itemView.findViewById(R.id.tvTitle)
         var tvCategory: TextView = itemView.findViewById(R.id.tv_category)
         var ivLike: ImageView = itemView.findViewById(R.id.iv_like)
     }
