@@ -5,7 +5,7 @@ import android.util.Log
 /**
  * Log 工具类
  */
-object SLog {
+object LogUtil {
 
     private const val TAG: String = "shadowwingz"
 

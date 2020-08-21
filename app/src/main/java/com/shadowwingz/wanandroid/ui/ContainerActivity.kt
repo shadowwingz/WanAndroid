@@ -1,12 +1,15 @@
 package com.shadowwingz.wanandroid.ui
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 import com.shadowwingz.wanandroid.R
+import com.shadowwingz.wanandroid.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.activity_container.*
 import kotlinx.android.synthetic.main.simple_pager_title_layout.view.*
 import net.lucode.hackware.magicindicator.ViewPagerHelper
@@ -19,12 +22,29 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Common
 class ContainerActivity : AppCompatActivity() {
 
     private val mDataList: List<String> = listOf("首页", "问答", "体系", "我的")
+    private val mIconList: List<Int> = listOf(
+        R.drawable.ic_bottom_bar_home,
+        R.drawable.ic_bottom_bar_wechat,
+        R.drawable.ic_bottom_bar_navi,
+        R.drawable.ic_bottom_bar_mine
+    )
+
+    private val mFragments: List<Fragment> = listOf(
+        HomeFragment.newInstance(),
+        HomeFragment.newInstance(),
+        HomeFragment.newInstance(),
+        HomeFragment.newInstance()
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_container)
 
-        viewPager.adapter = ExamplePagerAdapter(mDataList)
+        viewPager.adapter = TabFragmentPagerAdapter(
+            supportFragmentManager,
+            BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+            mFragments
+        )
         val commonNavigator = CommonNavigator(this)
         commonNavigator.isAdjustMode = true
         commonNavigator.adapter = object : CommonNavigatorAdapter() {
@@ -39,17 +59,27 @@ class ContainerActivity : AppCompatActivity() {
                             .inflate(R.layout.simple_pager_title_layout, null)
                     customLayout.apply {
                         tvTitle.text = mDataList[index]
-                        ivTitle.setImageResource(R.mipmap.ic_launcher)
+                        ivTitle.setImageResource(mIconList[index])
                     }
                     setContentView(customLayout)
+                    val selectedColor = ContextCompat.getColor(
+                        this@ContainerActivity,
+                        R.color.bottom_nav_selected
+                    )
+                    val unselectedColor = ContextCompat.getColor(
+                        this@ContainerActivity,
+                        R.color.bottom_nav_unselected
+                    )
                     onPagerTitleChangeListener =
                         object : CommonPagerTitleView.OnPagerTitleChangeListener {
                             override fun onDeselected(index: Int, totalCount: Int) {
-                                tvTitle.setTextColor(Color.GRAY)
+                                tvTitle.setTextColor(unselectedColor)
+                                ivTitle.setColorFilter(resources.getColor(R.color.bottom_nav_unselected))
                             }
 
                             override fun onSelected(index: Int, totalCount: Int) {
-                                tvTitle.setTextColor(Color.BLUE)
+                                tvTitle.setTextColor(selectedColor)
+                                ivTitle.setColorFilter(resources.getColor(R.color.bottom_nav_selected))
                             }
 
                             override fun onLeave(

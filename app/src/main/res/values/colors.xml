@@ -6,4 +6,6 @@
     <color name="colorBlack">#000000</color>
     <color name="colorGray">#BEBEBE</color>
     <color name="colorWhite">#EEEEEE</color>
+    <color name="bottom_nav_unselected">#BEBEBE</color>
+    <color name="bottom_nav_selected">#273C87</color>
 </resources>

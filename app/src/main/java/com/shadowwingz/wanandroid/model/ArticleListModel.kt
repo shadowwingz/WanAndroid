@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.shadowwingz.wanandroid.bean.ArticleListBean
-import com.shadowwingz.wanandroid.utils.SLog
+import com.shadowwingz.wanandroid.utils.LogUtil
 
 class ArticleListModel(application: Application) : AndroidViewModel(application) {
 
@@ -20,6 +20,6 @@ class ArticleListModel(application: Application) : AndroidViewModel(application)
 
     override fun onCleared() {
         super.onCleared()
-        SLog.d("ArticleListModel onCleared")
+        LogUtil.d("ArticleListModel onCleared")
     }
 }

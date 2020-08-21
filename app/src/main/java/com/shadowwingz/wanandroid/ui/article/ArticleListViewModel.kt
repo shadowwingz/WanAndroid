@@ -9,13 +9,13 @@ import kotlinx.coroutines.launch
 
 class ArticleListViewModel(private val repository: ArticleRepository) : ViewModel() {
 
-    var isLoading = MutableLiveData<Boolean>()
+    private var isLoading = MutableLiveData<Boolean>()
 
-    var dataChanged = MutableLiveData<Int>()
+    private var dataChanged = MutableLiveData<Int>()
 
-    lateinit var articles: MutableList<ArticleListBean>
+    private lateinit var articles: MutableList<ArticleListBean>
 
-    val dataList = ArrayList<ArticleListBean>()
+    private val dataList = ArrayList<ArticleListBean>()
 
     fun getArticleList() {
         launch {

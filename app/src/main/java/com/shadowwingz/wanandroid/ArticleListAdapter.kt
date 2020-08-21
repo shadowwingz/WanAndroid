@@ -14,7 +14,7 @@ import com.shadowwingz.wanandroid.bean.ArticleListBean
 class ArticleListAdapter(private var items: ArrayList<ArticleListBean>) :
     RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var itemView = LayoutInflater.from(parent.context)
+        val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.article_list_item, parent, false)
         return ViewHolder(itemView)
     }

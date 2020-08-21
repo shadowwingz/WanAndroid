@@ -1,10 +1,15 @@
-package com.shadowwingz.wanandroid
+package com.shadowwingz.wanandroid.ui.home
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.shadowwingz.wanandroid.ArticleListAdapter
+import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.ArticleBean
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.model.ArticleListModel
@@ -16,9 +21,9 @@ import com.shadowwingz.wanandroid.utils.LogUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
-class MainActivity : AppCompatActivity() {
+class HomeFragment : Fragment() {
 
     private val viewModel by lazy {
         ViewModelProviders.of(
@@ -36,17 +41,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         init()
         queryData()
     }
 
     private fun init() {
 //        val binding = DataBindingUtil.bind<ActivityMainBindingImpl>(this)
-        rv_main.layoutManager = LinearLayoutManager(this)
-        rv_main.adapter = ArticleListAdapter(items)
-        articleListAdapter = rv_main.adapter as ArticleListAdapter
+        rvHomeFragment.layoutManager = LinearLayoutManager(activity)
+        rvHomeFragment.adapter = ArticleListAdapter(items)
+        articleListAdapter = rvHomeFragment.adapter as ArticleListAdapter
         articleListModel = ViewModelProviders.of(this).get(ArticleListModel::class.java)
         articleListModel.getArticleList().observe(this, object : Observer<List<ArticleListBean>> {
             override fun onChanged(result: List<ArticleListBean>?) {
@@ -77,6 +90,11 @@ class MainActivity : AppCompatActivity() {
             })
 
         mCompositeDisposable.add(subscribe)
+    }
+
+    companion object {
+        @JvmStatic
+        fun newInstance() = HomeFragment()
     }
 
     override fun onDestroy() {

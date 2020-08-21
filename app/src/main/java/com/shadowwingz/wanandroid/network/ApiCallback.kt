@@ -1,7 +1,7 @@
 package com.shadowwingz.wanandroid.network
 
 import com.shadowwingz.wanandroid.utils.Option
-import com.shadowwingz.wanandroid.utils.SLog
+import com.shadowwingz.wanandroid.utils.LogUtil
 import io.reactivex.functions.Consumer
 import retrofit2.HttpException
 
@@ -17,7 +17,7 @@ abstract class ApiCallback<M> : Consumer<M> {
         if (e is HttpException) {
             val code = e.code()
             var msg = e.message()
-            SLog.d("code = $code")
+            LogUtil.d("code = $code")
             if (code == 504) {
                 msg = "网络不给力"
             }
@@ -27,7 +27,7 @@ abstract class ApiCallback<M> : Consumer<M> {
             onFailure(msg)
         } else {
             if (Option.showLog()) {
-                SLog.d(e.toString())
+                LogUtil.d(e.toString())
             }
             onSuccess(e)
         }
