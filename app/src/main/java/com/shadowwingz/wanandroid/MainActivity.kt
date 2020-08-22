@@ -10,6 +10,7 @@ import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.model.ArticleListModel
 import com.shadowwingz.wanandroid.network.ApiCallback
 import com.shadowwingz.wanandroid.network.ApiClient
+import com.shadowwingz.wanandroid.ui.article.ArticleListAdapter
 import com.shadowwingz.wanandroid.ui.article.ArticleListViewModel
 import com.shadowwingz.wanandroid.utils.InjectorUtil
 import com.shadowwingz.wanandroid.utils.LogUtil
@@ -45,7 +46,8 @@ class MainActivity : AppCompatActivity() {
     private fun init() {
 //        val binding = DataBindingUtil.bind<ActivityMainBindingImpl>(this)
         rv_main.layoutManager = LinearLayoutManager(this)
-        rv_main.adapter = ArticleListAdapter(items)
+        rv_main.adapter =
+            ArticleListAdapter(items)
         articleListAdapter = rv_main.adapter as ArticleListAdapter
         articleListModel = ViewModelProviders.of(this).get(ArticleListModel::class.java)
         articleListModel.getArticleList().observe(this, object : Observer<List<ArticleListBean>> {

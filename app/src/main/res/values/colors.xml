@@ -8,4 +8,6 @@
     <color name="colorWhite">#EEEEEE</color>
     <color name="bottom_nav_unselected">#BEBEBE</color>
     <color name="bottom_nav_selected">#273C87</color>
+    <!--通用颜色-->
+    <color name="main">#4282f4</color>
 </resources>

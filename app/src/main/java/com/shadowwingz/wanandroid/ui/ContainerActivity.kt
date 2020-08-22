@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.ui.home.HomeFragment
+import com.shadowwingz.wanandroid.ui.mine.MineFragment
 import kotlinx.android.synthetic.main.activity_container.*
 import kotlinx.android.synthetic.main.simple_pager_title_layout.view.*
 import net.lucode.hackware.magicindicator.ViewPagerHelper
@@ -33,7 +34,7 @@ class ContainerActivity : AppCompatActivity() {
         HomeFragment.newInstance(),
         HomeFragment.newInstance(),
         HomeFragment.newInstance(),
-        HomeFragment.newInstance()
+        MineFragment.newInstance()
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

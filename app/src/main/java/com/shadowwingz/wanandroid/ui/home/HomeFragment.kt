@@ -8,13 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.shadowwingz.wanandroid.ArticleListAdapter
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.ArticleBean
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.model.ArticleListModel
 import com.shadowwingz.wanandroid.network.ApiCallback
 import com.shadowwingz.wanandroid.network.ApiClient
+import com.shadowwingz.wanandroid.ui.article.ArticleListAdapter
 import com.shadowwingz.wanandroid.ui.article.ArticleListViewModel
 import com.shadowwingz.wanandroid.utils.InjectorUtil
 import com.shadowwingz.wanandroid.utils.LogUtil
@@ -58,7 +58,8 @@ class HomeFragment : Fragment() {
     private fun init() {
 //        val binding = DataBindingUtil.bind<ActivityMainBindingImpl>(this)
         rvHomeFragment.layoutManager = LinearLayoutManager(activity)
-        rvHomeFragment.adapter = ArticleListAdapter(items)
+        rvHomeFragment.adapter =
+            ArticleListAdapter(items)
         articleListAdapter = rvHomeFragment.adapter as ArticleListAdapter
         articleListModel = ViewModelProviders.of(this).get(ArticleListModel::class.java)
         articleListModel.getArticleList().observe(this, object : Observer<List<ArticleListBean>> {

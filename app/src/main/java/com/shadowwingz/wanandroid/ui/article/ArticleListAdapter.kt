@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid
+package com.shadowwingz.wanandroid.ui.article
 
 import android.os.Build
 import android.text.Html
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 
 class ArticleListAdapter(private var items: ArrayList<ArticleListBean>) :
@@ -16,7 +17,9 @@ class ArticleListAdapter(private var items: ArrayList<ArticleListBean>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.article_list_item, parent, false)
-        return ViewHolder(itemView)
+        return ViewHolder(
+            itemView
+        )
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
