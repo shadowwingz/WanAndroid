@@ -9,8 +9,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Adapter
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.ui.article.SubTitleItem
+import com.shadowwingz.wanandroid.ui.wrapper.HeaderAndFootWrapper
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : Fragment() {
@@ -26,6 +29,8 @@ class MineFragment : Fragment() {
         SubTitleItem.SETTINGS
     )
 
+    private var mParent: ViewGroup? = null
+
     companion object {
         @JvmStatic
         fun newInstance() = MineFragment()
@@ -36,17 +41,25 @@ class MineFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mParent = container
         return inflater.inflate(R.layout.fragment_mine, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = MineAdapter(dataList)
+
+        val profilePanelView: View =
+            LayoutInflater.from(activity).inflate(R.layout.profile_panel, mParent, false)
+
+        val headerAndFootWrapper = HeaderAndFootWrapper(adapter as Adapter<ViewHolder>)
+        headerAndFootWrapper.addHeaderView(profilePanelView)
+
         rvMine.layoutManager = LinearLayoutManager(activity)
-        rvMine.adapter = adapter
+        rvMine.adapter = headerAndFootWrapper
     }
 
     class MineAdapter(val dataList: List<SubTitleItem>) :
-        RecyclerView.Adapter<MineAdapter.ViewHolder>() {
+        Adapter<MineAdapter.ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val itemView = LayoutInflater.from(parent.context)

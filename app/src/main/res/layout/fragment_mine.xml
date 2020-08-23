@@ -5,15 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
-        android:id="@+id/profilePanel"
-        layout="@layout/profile_panel" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMine"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/profilePanel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/fragment_mine_list_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
