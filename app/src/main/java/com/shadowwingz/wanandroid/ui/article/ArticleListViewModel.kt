@@ -9,32 +9,32 @@ import kotlinx.coroutines.launch
 
 class ArticleListViewModel(private val repository: ArticleRepository) : ViewModel() {
 
-    private var isLoading = MutableLiveData<Boolean>()
+  private var isLoading = MutableLiveData<Boolean>()
 
-    private var dataChanged = MutableLiveData<Int>()
+  private var dataChanged = MutableLiveData<Int>()
 
-    private lateinit var articles: MutableList<ArticleListBean>
+  private lateinit var articles: MutableList<ArticleListBean>
 
-    private val dataList = ArrayList<ArticleListBean>()
+  private val dataList = ArrayList<ArticleListBean>()
 
-    fun getArticleList() {
-        launch {
-            articles = repository.getArticleList()
-            dataList.addAll(articles)
-        }
+  fun getArticleList() {
+    launch {
+      articles = repository.getArticleList()
+      dataList.addAll(articles)
     }
+  }
 
-    private fun launch(block: suspend () -> Unit) = viewModelScope.launch {
-        try {
-            isLoading.value = true
-            dataList.clear()
-            block()
-            dataChanged.value = dataChanged.value?.plus(1)
-            isLoading.value = false
-        } catch (t: Throwable) {
-            t.printStackTrace()
-            dataChanged.value = dataChanged.value?.plus(1)
-            isLoading.value = false
-        }
+  private fun launch(block: suspend () -> Unit) = viewModelScope.launch {
+    try {
+      isLoading.value = true
+      dataList.clear()
+      block()
+      dataChanged.value = dataChanged.value?.plus(1)
+      isLoading.value = false
+    } catch (t: Throwable) {
+      t.printStackTrace()
+      dataChanged.value = dataChanged.value?.plus(1)
+      isLoading.value = false
     }
+  }
 }

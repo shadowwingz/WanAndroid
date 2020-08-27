@@ -8,18 +8,18 @@ import com.shadowwingz.wanandroid.utils.LogUtil
 
 class ArticleListModel(application: Application) : AndroidViewModel(application) {
 
-    var mutableLiveData = MutableLiveData<List<ArticleListBean>>()
+  var mutableLiveData = MutableLiveData<List<ArticleListBean>>()
 
-    fun setArticleList(articleList: List<ArticleListBean>) {
-        mutableLiveData.value = articleList
-    }
+  fun setArticleList(articleList: List<ArticleListBean>) {
+    mutableLiveData.value = articleList
+  }
 
-    fun getArticleList(): MutableLiveData<List<ArticleListBean>> {
-        return mutableLiveData
-    }
+  fun getArticleList(): MutableLiveData<List<ArticleListBean>> {
+    return mutableLiveData
+  }
 
-    override fun onCleared() {
-        super.onCleared()
-        LogUtil.d("ArticleListModel onCleared")
-    }
+  override fun onCleared() {
+    super.onCleared()
+    LogUtil.d("ArticleListModel onCleared")
+  }
 }

@@ -18,69 +18,69 @@ import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : Fragment() {
 
-    private val dataList = listOf<SubTitleItem>(
-        SubTitleItem.MY_COIN,
-        SubTitleItem.MY_SHARE,
-        SubTitleItem.MY_COLLECTION,
-        SubTitleItem.READ_LATER,
-        SubTitleItem.READ_RECORD,
-        SubTitleItem.GITHUB,
-        SubTitleItem.ABOUT,
-        SubTitleItem.SETTINGS
-    )
+  private val dataList = listOf<SubTitleItem>(
+    SubTitleItem.MY_COIN,
+    SubTitleItem.MY_SHARE,
+    SubTitleItem.MY_COLLECTION,
+    SubTitleItem.READ_LATER,
+    SubTitleItem.READ_RECORD,
+    SubTitleItem.GITHUB,
+    SubTitleItem.ABOUT,
+    SubTitleItem.SETTINGS
+  )
 
-    private var mParent: ViewGroup? = null
+  private var mParent: ViewGroup? = null
 
-    companion object {
-        @JvmStatic
-        fun newInstance() = MineFragment()
+  companion object {
+    @JvmStatic
+    fun newInstance() = MineFragment()
+  }
+
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
+    mParent = container
+    return inflater.inflate(R.layout.fragment_mine, container, false)
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    val adapter = MineAdapter(dataList)
+
+    val profilePanelView: View =
+      LayoutInflater.from(activity).inflate(R.layout.profile_panel, mParent, false)
+
+    val headerAndFootWrapper = HeaderAndFootWrapper(adapter as Adapter<ViewHolder>)
+    headerAndFootWrapper.addHeaderView(profilePanelView)
+
+    rvMine.layoutManager = LinearLayoutManager(activity)
+    rvMine.adapter = headerAndFootWrapper
+  }
+
+  class MineAdapter(val dataList: List<SubTitleItem>) :
+    Adapter<MineAdapter.ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+      val itemView = LayoutInflater.from(parent.context)
+        .inflate(R.layout.fragment_mine_list_item, parent, false)
+      return ViewHolder(itemView)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        mParent = container
-        return inflater.inflate(R.layout.fragment_mine, container, false)
+    override fun getItemCount(): Int {
+      return dataList.size
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = MineAdapter(dataList)
-
-        val profilePanelView: View =
-            LayoutInflater.from(activity).inflate(R.layout.profile_panel, mParent, false)
-
-        val headerAndFootWrapper = HeaderAndFootWrapper(adapter as Adapter<ViewHolder>)
-        headerAndFootWrapper.addHeaderView(profilePanelView)
-
-        rvMine.layoutManager = LinearLayoutManager(activity)
-        rvMine.adapter = headerAndFootWrapper
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+      holder.ivIcon.setImageResource(dataList[position].icon)
+      holder.tvSubTitle.text = dataList[position].subTitle
+      holder.tvSubDesc.text = dataList[position].subDesc
     }
 
-    class MineAdapter(val dataList: List<SubTitleItem>) :
-        Adapter<MineAdapter.ViewHolder>() {
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val itemView = LayoutInflater.from(parent.context)
-                .inflate(R.layout.fragment_mine_list_item, parent, false)
-            return ViewHolder(itemView)
-        }
-
-        override fun getItemCount(): Int {
-            return dataList.size
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.ivIcon.setImageResource(dataList[position].icon)
-            holder.tvSubTitle.text = dataList[position].subTitle
-            holder.tvSubDesc.text = dataList[position].subDesc
-        }
-
-        class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            val ivIcon: ImageView = itemView.findViewById(R.id.ivIcon)
-            val tvSubTitle: TextView = itemView.findViewById(R.id.tvSubTitle)
-            val tvSubDesc: TextView = itemView.findViewById(R.id.tvSubDesc)
-        }
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+      val ivIcon: ImageView = itemView.findViewById(R.id.ivIcon)
+      val tvSubTitle: TextView = itemView.findViewById(R.id.tvSubTitle)
+      val tvSubDesc: TextView = itemView.findViewById(R.id.tvSubDesc)
     }
+  }
 }

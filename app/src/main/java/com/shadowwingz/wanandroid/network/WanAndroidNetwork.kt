@@ -10,39 +10,39 @@ import kotlin.coroutines.suspendCoroutine
 
 class WanAndroidNetwork {
 
-    private val articleListService = ServiceCreator.create(ArticleListService::class.java)
+  private val articleListService = ServiceCreator.create(ArticleListService::class.java)
 
-    suspend fun fetchArticleList(pageId: Int) = articleListService.getArticleList(pageId).await()
+  suspend fun fetchArticleList(pageId: Int) = articleListService.getArticleList(pageId).await()
 
-    private suspend fun <T> Call<T>.await(): T {
-        return suspendCoroutine { continuation ->
-            enqueue(object : Callback<T> {
-                override fun onFailure(call: Call<T>, t: Throwable) {
-                    continuation.resumeWithException(t)
-                }
-
-                override fun onResponse(call: Call<T>, response: Response<T>) {
-                    val body = response.body()
-                    if (body != null) continuation.resume(body)
-                    else continuation.resumeWithException(RuntimeException("response body is null"))
-                }
-
-            })
+  private suspend fun <T> Call<T>.await(): T {
+    return suspendCoroutine { continuation ->
+      enqueue(object : Callback<T> {
+        override fun onFailure(call: Call<T>, t: Throwable) {
+          continuation.resumeWithException(t)
         }
-    }
 
-    companion object {
-        private var network: WanAndroidNetwork? = null
-
-        fun getInstance(): WanAndroidNetwork {
-            if (network == null) {
-                synchronized(WanAndroidNetwork::class.java) {
-                    if (network == null) {
-                        network = WanAndroidNetwork()
-                    }
-                }
-            }
-            return network!!
+        override fun onResponse(call: Call<T>, response: Response<T>) {
+          val body = response.body()
+          if (body != null) continuation.resume(body)
+          else continuation.resumeWithException(RuntimeException("response body is null"))
         }
+
+      })
     }
+  }
+
+  companion object {
+    private var network: WanAndroidNetwork? = null
+
+    fun getInstance(): WanAndroidNetwork {
+      if (network == null) {
+        synchronized(WanAndroidNetwork::class.java) {
+          if (network == null) {
+            network = WanAndroidNetwork()
+          }
+        }
+      }
+      return network!!
+    }
+  }
 }
