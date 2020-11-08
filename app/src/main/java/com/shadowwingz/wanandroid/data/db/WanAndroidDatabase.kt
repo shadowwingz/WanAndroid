@@ -4,7 +4,7 @@ object WanAndroidDatabase {
 
   private var articleListDao: ArticleListDao? = null
 
-  fun getArticleList(): ArticleListDao {
+  fun getArticleListDao(): ArticleListDao {
     if (articleListDao == null) {
       articleListDao = ArticleListDao()
     }
