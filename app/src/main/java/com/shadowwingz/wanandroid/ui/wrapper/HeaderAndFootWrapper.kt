@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 
 class HeaderAndFootWrapper(adapter: Adapter<RecyclerView.ViewHolder>) :
-  Adapter<RecyclerView.ViewHolder>() {
+        Adapter<RecyclerView.ViewHolder>() {
 
   companion object {
     private const val BASE_HEADER_VIEW_TYPE = 10000;

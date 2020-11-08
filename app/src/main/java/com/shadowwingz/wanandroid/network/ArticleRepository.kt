@@ -5,8 +5,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class ArticleRepository private constructor(
-  private val articleListDao: ArticleListDao,
-  private val network: WanAndroidNetwork
+        private val articleListDao: ArticleListDao,
+        private val network: WanAndroidNetwork
 ) {
   suspend fun getArticleList() = withContext(Dispatchers.IO) {
     var list = network.fetchArticleList(0)
@@ -17,8 +17,8 @@ class ArticleRepository private constructor(
     private var instance: ArticleRepository? = null
 
     fun getInstance(
-      articleListDao: ArticleListDao,
-      network: WanAndroidNetwork
+            articleListDao: ArticleListDao,
+            network: WanAndroidNetwork
     ): ArticleRepository {
       if (instance == null) {
         synchronized(ArticleRepository::class.java) {

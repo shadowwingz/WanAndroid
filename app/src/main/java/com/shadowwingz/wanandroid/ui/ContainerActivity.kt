@@ -15,17 +15,17 @@ class ContainerActivity : AppCompatActivity() {
 
   private val mDataList: List<String> = listOf("首页", "问答", "体系", "我的")
   private val mIconList: List<Int> = listOf(
-    R.drawable.ic_bottom_bar_home,
-    R.drawable.ic_bottom_bar_wechat,
-    R.drawable.ic_bottom_bar_navi,
-    R.drawable.ic_bottom_bar_mine
+          R.drawable.ic_bottom_bar_home,
+          R.drawable.ic_bottom_bar_wechat,
+          R.drawable.ic_bottom_bar_navi,
+          R.drawable.ic_bottom_bar_mine
   )
 
   private val mFragments: List<Fragment> = listOf(
-    HomeFragment.newInstance(),
-    HomeFragment.newInstance(),
-    HomeFragment.newInstance(),
-    MineFragment.newInstance()
+          HomeFragment.newInstance(),
+          HomeFragment.newInstance(),
+          HomeFragment.newInstance(),
+          MineFragment.newInstance()
   )
 
   override fun onCreate(savedInstanceState: Bundle?) {

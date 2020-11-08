@@ -8,8 +8,8 @@ import com.shadowwingz.wanandroid.ui.article.ArticleListModelFactory
 object InjectorUtil {
 
   private fun getArticleRepository() = ArticleRepository.getInstance(
-    WanAndroidDatabase.getArticleList(),
-    WanAndroidNetwork.getInstance()
+          WanAndroidDatabase.getArticleList(),
+          WanAndroidNetwork.getInstance()
   )
 
   fun getArticleModeFactory() = ArticleListModelFactory(getArticleRepository())

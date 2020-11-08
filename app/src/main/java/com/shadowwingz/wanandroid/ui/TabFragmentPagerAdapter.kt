@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 class TabFragmentPagerAdapter(fm: FragmentManager, behavior: Int, fragments: List<Fragment>) :
-  FragmentPagerAdapter(fm, behavior) {
+        FragmentPagerAdapter(fm, behavior) {
 
   private val mFragments = fragments
 

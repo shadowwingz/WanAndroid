@@ -13,12 +13,12 @@ import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 
 class ArticleListAdapter(private var items: ArrayList<ArticleListBean>) :
-  RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() {
+        RecyclerView.Adapter<ArticleListAdapter.ViewHolder>() {
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val itemView = LayoutInflater.from(parent.context)
-      .inflate(R.layout.article_list_item, parent, false)
+            .inflate(R.layout.article_list_item, parent, false)
     return ViewHolder(
-      itemView
+            itemView
     )
   }
 

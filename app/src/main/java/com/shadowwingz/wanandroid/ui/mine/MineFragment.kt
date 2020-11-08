@@ -22,14 +22,14 @@ class MineFragment : Fragment() {
   val MineFragmentViewModel: ViewModel? = null
 
   private val dataList = listOf<SubTitleItem>(
-    SubTitleItem.MY_COIN,
-    SubTitleItem.MY_SHARE,
-    SubTitleItem.MY_COLLECTION,
-    SubTitleItem.READ_LATER,
-    SubTitleItem.READ_RECORD,
-    SubTitleItem.GITHUB,
-    SubTitleItem.ABOUT,
-    SubTitleItem.SETTINGS
+          SubTitleItem.MY_COIN,
+          SubTitleItem.MY_SHARE,
+          SubTitleItem.MY_COLLECTION,
+          SubTitleItem.READ_LATER,
+          SubTitleItem.READ_RECORD,
+          SubTitleItem.GITHUB,
+          SubTitleItem.ABOUT,
+          SubTitleItem.SETTINGS
   )
 
   private var mParent: ViewGroup? = null
@@ -40,9 +40,9 @@ class MineFragment : Fragment() {
   }
 
   override fun onCreateView(
-    inflater: LayoutInflater,
-    container: ViewGroup?,
-    savedInstanceState: Bundle?
+          inflater: LayoutInflater,
+          container: ViewGroup?,
+          savedInstanceState: Bundle?
   ): View? {
     mParent = container
     return inflater.inflate(R.layout.fragment_mine, container, false)
@@ -52,7 +52,7 @@ class MineFragment : Fragment() {
     val adapter = MineAdapter(dataList)
 
     val profilePanelView: View =
-      LayoutInflater.from(activity).inflate(R.layout.profile_panel, mParent, false)
+            LayoutInflater.from(activity).inflate(R.layout.profile_panel, mParent, false)
 
     val headerAndFootWrapper = HeaderAndFootWrapper(adapter as Adapter<ViewHolder>)
     headerAndFootWrapper.addHeaderView(profilePanelView)
@@ -62,11 +62,11 @@ class MineFragment : Fragment() {
   }
 
   class MineAdapter(val dataList: List<SubTitleItem>) :
-    Adapter<MineAdapter.ViewHolder>() {
+          Adapter<MineAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
       val itemView = LayoutInflater.from(parent.context)
-        .inflate(R.layout.fragment_mine_list_item, parent, false)
+              .inflate(R.layout.fragment_mine_list_item, parent, false)
       return ViewHolder(itemView)
     }
 

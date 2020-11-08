@@ -18,11 +18,11 @@ object ApiClient {
     }
     val okHttpClient = builder.build()
     val retrofit = Retrofit.Builder()
-      .baseUrl(ApiStores.API_SERVER_URL)
-      .addConverterFactory(GsonConverterFactory.create())
-      .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-      .client(okHttpClient)
-      .build()
+            .baseUrl(ApiStores.API_SERVER_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(okHttpClient)
+            .build()
     return retrofit.create(ApiStores::class.java)
   }
 }

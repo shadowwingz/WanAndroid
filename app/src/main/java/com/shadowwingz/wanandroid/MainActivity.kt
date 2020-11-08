@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 //        val binding = DataBindingUtil.bind<ActivityMainBindingImpl>(this)
     rv_main.layoutManager = LinearLayoutManager(this)
     rv_main.adapter =
-      ArticleListAdapter(items)
+            ArticleListAdapter(items)
     articleListAdapter = rv_main.adapter as ArticleListAdapter
     articleListModel = ViewModelProviders.of(this).get(ArticleListModel::class.java)
     articleListModel.getArticleList().observe(this, object : Observer<List<ArticleListBean>> {
@@ -58,22 +58,22 @@ class MainActivity : AppCompatActivity() {
 
   private fun queryData() {
     val subscribe = ApiClient.retrofit().loadData("0")
-      .subscribeOn(Schedulers.io())
-      .observeOn(AndroidSchedulers.mainThread())
-      .subscribe(object : ApiCallback<ArticleBean>() {
-        override fun onSuccess(model: ArticleBean) {
-          val data = model.data.articleListBean as ArrayList
-          articleListModel.setArticleList(data)
-        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : ApiCallback<ArticleBean>() {
+              override fun onSuccess(model: ArticleBean) {
+                val data = model.data.articleListBean as ArrayList
+                articleListModel.setArticleList(data)
+              }
 
-        override fun onFailure(msg: String?) {
-          LogUtil.d("失败 $msg")
-        }
+              override fun onFailure(msg: String?) {
+                LogUtil.d("失败 $msg")
+              }
 
-        override fun onFinish() {
-          LogUtil.d("完成")
-        }
-      })
+              override fun onFinish() {
+                LogUtil.d("完成")
+              }
+            })
 
     mCompositeDisposable.add(subscribe)
   }

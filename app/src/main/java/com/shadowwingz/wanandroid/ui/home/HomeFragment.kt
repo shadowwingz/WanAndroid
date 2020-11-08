@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.ArticleBean
@@ -17,6 +18,7 @@ import com.shadowwingz.wanandroid.network.ApiCallback
 import com.shadowwingz.wanandroid.network.ApiClient
 import com.shadowwingz.wanandroid.ui.article.ArticleListAdapter
 import com.shadowwingz.wanandroid.ui.article.ArticleListViewModel
+import com.shadowwingz.wanandroid.ui.home.adapter.TopBannerAdapter
 import com.shadowwingz.wanandroid.utils.InjectorUtil
 import com.shadowwingz.wanandroid.utils.LogUtil
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,10 +31,7 @@ class HomeFragment : Fragment() {
   val HomeFragmentViewModel: ViewModel? = null
 
   private val viewModel by lazy {
-    ViewModelProviders.of(
-      this,
-      InjectorUtil.getArticleModeFactory()
-    ).get(ArticleListViewModel::class.java)
+    ViewModelProviders.of(this, InjectorUtil.getArticleModeFactory()).get(ArticleListViewModel::class.java)
   }
 
   lateinit var articleListModel: ArticleListModel
@@ -46,10 +45,7 @@ class HomeFragment : Fragment() {
     super.onCreate(savedInstanceState)
   }
 
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? {
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     return inflater.inflate(R.layout.fragment_home, container, false)
   }
 
@@ -59,39 +55,42 @@ class HomeFragment : Fragment() {
   }
 
   private fun init() {
+    val topBannerAdapter = TopBannerAdapter()
+    articleListAdapter = ArticleListAdapter(items)
+    val mergeAdapter = ConcatAdapter(topBannerAdapter, articleListAdapter)
+
 //        val binding = DataBindingUtil.bind<ActivityMainBindingImpl>(this)
     rvHomeFragment.layoutManager = LinearLayoutManager(activity)
-    rvHomeFragment.adapter =
-      ArticleListAdapter(items)
-    articleListAdapter = rvHomeFragment.adapter as ArticleListAdapter
+    rvHomeFragment.adapter = mergeAdapter
     articleListModel = ViewModelProviders.of(this).get(ArticleListModel::class.java)
-    articleListModel.getArticleList().observe(this, object : Observer<List<ArticleListBean>> {
-      override fun onChanged(result: List<ArticleListBean>?) {
-        if (result != null) {
-          articleListAdapter.setData(result as ArrayList<ArticleListBean>)
-        }
-      }
-    })
+    articleListModel.getArticleList()
+            .observe(viewLifecycleOwner, object : Observer<List<ArticleListBean>> {
+              override fun onChanged(result: List<ArticleListBean>?) {
+                if (result != null) {
+                  articleListAdapter.setData(result as ArrayList<ArticleListBean>)
+                }
+              }
+            })
   }
 
   private fun queryData() {
     val subscribe = ApiClient.retrofit().loadData("0")
-      .subscribeOn(Schedulers.io())
-      .observeOn(AndroidSchedulers.mainThread())
-      .subscribe(object : ApiCallback<ArticleBean>() {
-        override fun onSuccess(model: ArticleBean) {
-          val data = model.data.articleListBean as ArrayList
-          articleListModel.setArticleList(data)
-        }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : ApiCallback<ArticleBean>() {
+              override fun onSuccess(model: ArticleBean) {
+                val data = model.data.articleListBean as ArrayList
+                articleListModel.setArticleList(data)
+              }
 
-        override fun onFailure(msg: String?) {
-          LogUtil.d("失败 $msg")
-        }
+              override fun onFailure(msg: String?) {
+                LogUtil.d("失败 $msg")
+              }
 
-        override fun onFinish() {
-          LogUtil.d("完成")
-        }
-      })
+              override fun onFinish() {
+                LogUtil.d("完成")
+              }
+            })
 
     mCompositeDisposable.add(subscribe)
   }

@@ -12,10 +12,10 @@ object ServiceCreator {
   private val httpClient = OkHttpClient.Builder()
 
   private val builder = Retrofit.Builder()
-    .baseUrl(BASE_URL)
-    .client(httpClient.build())
-    .addConverterFactory(ScalarsConverterFactory.create())
-    .addConverterFactory(GsonConverterFactory.create())
+          .baseUrl(BASE_URL)
+          .client(httpClient.build())
+          .addConverterFactory(ScalarsConverterFactory.create())
+          .addConverterFactory(GsonConverterFactory.create())
 
   private val retrofit = builder.build()
 
