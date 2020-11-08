@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
@@ -17,6 +18,8 @@ import com.shadowwingz.wanandroid.ui.wrapper.HeaderAndFootWrapper
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 class MineFragment : Fragment() {
+
+  val MineFragmentViewModel: ViewModel? = null
 
   private val dataList = listOf<SubTitleItem>(
     SubTitleItem.MY_COIN,
