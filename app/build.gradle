@@ -71,4 +71,7 @@ dependencies {
     // paging
     implementation 'android.arch.paging:runtime:1.0.1'
     implementation 'android.arch.paging:common:1.0.1'
+    // 骨架屏
+    implementation 'com.ethanhua:skeleton:1.1.2'
+    implementation 'io.supercharge:shimmerlayout:2.1.0'
 }
