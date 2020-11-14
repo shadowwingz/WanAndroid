@@ -1,42 +1,35 @@
 package com.shadowwingz.wanandroid.ui.home
 
-import android.app.ProgressDialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shadowwingz.wanandroid.R
+import com.shadowwingz.wanandroid.ui.BaseFragment
 import com.shadowwingz.wanandroid.ui.article.ArticleListAdapter
-import com.shadowwingz.wanandroid.ui.article.ArticleListViewModel
 import com.shadowwingz.wanandroid.ui.home.adapter.TopBannerAdapter
 import com.shadowwingz.wanandroid.utils.InjectorUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment() {
-  
-  private var progressDialog: ProgressDialog? = null
-  
-  val HomeFragmentViewModel: ViewModel? = null
+class HomeFragment : BaseFragment() {
   
   private val viewModel by lazy {
-    ViewModelProviders.of(this, InjectorUtil.getArticleModeFactory()).get(ArticleListViewModel::class.java)
+    ViewModelProviders.of(this, InjectorUtil.getArticleModeFactory()).get(HomeFragmentViewModel::class.java)
   }
   
   lateinit var articleListAdapter: ArticleListAdapter
   
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    return inflater.inflate(R.layout.fragment_home, container, false)
+  lateinit var topBannerAdapter: TopBannerAdapter
+  
+  override fun getLayoutId(): Int {
+    return R.layout.fragment_home
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     init()
-    queryHomeArticleList()
+    loadData()
     observe()
   }
   
@@ -50,38 +43,26 @@ class HomeFragment : Fragment() {
     })
     viewModel.dataChanged.observe(viewLifecycleOwner, Observer {
       articleListAdapter.notifyDataSetChanged()
+      topBannerAdapter.notifyDataSetChanged()
     })
   }
   
   private fun init() {
-    val topBannerAdapter = TopBannerAdapter()
+    topBannerAdapter = TopBannerAdapter(viewModel.banner)
     articleListAdapter = ArticleListAdapter(viewModel.dataList)
-    val mergeAdapter = ConcatAdapter(topBannerAdapter, articleListAdapter)
+    val concatAdapter = ConcatAdapter(topBannerAdapter, articleListAdapter)
     
     rvHomeFragment.layoutManager = LinearLayoutManager(activity)
-    rvHomeFragment.adapter = mergeAdapter
+    rvHomeFragment.adapter = concatAdapter
   }
   
-  private fun queryHomeArticleList() {
+  private fun loadData() {
     viewModel.getArticleList()
   }
   
   companion object {
     @JvmStatic
     fun newInstance() = HomeFragment()
-  }
-  
-  private fun showProgressDialog() {
-    if (progressDialog == null) {
-      progressDialog = ProgressDialog(activity)
-      progressDialog?.setMessage("正在加载...")
-      progressDialog?.setCanceledOnTouchOutside(false)
-    }
-    progressDialog?.show()
-  }
-  
-  private fun closeProgressDialog() {
-    progressDialog?.dismiss()
   }
   
 }

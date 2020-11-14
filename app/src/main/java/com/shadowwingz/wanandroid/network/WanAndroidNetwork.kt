@@ -1,6 +1,6 @@
 package com.shadowwingz.wanandroid.network
 
-import com.shadowwingz.wanandroid.network.api.ArticleListService
+import com.shadowwingz.wanandroid.network.api.HomeService
 import com.shadowwingz.wanandroid.utils.LogUtil
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,9 +11,11 @@ import kotlin.coroutines.suspendCoroutine
 
 class WanAndroidNetwork {
 
-  private val articleListService = ServiceCreator.create(ArticleListService::class.java)
+  private val articleListService = ServiceCreator.create(HomeService::class.java)
 
   suspend fun fetchArticleList(pageId: Int) = articleListService.getArticleList(pageId).await()
+  
+  suspend fun fetchBanner() = articleListService.getBanner().await()
 
   private suspend fun <T> Call<T>.await(): T {
     return suspendCoroutine { continuation ->

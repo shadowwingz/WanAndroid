@@ -12,6 +12,11 @@ class ArticleRepository private constructor(
     var list = network.fetchArticleList(0)
     list
   }
+  
+  suspend fun getBanner() = withContext(Dispatchers.IO) {
+    var banner = network.fetchBanner()
+    banner
+  }
 
   companion object {
     private var instance: ArticleRepository? = null

@@ -6,18 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.shadowwingz.wanandroid.R
-import com.shadowwingz.wanandroid.bean.BannerBean
+import com.shadowwingz.wanandroid.bean.BannerData
 import com.shadowwingz.wanandroid.databinding.LayoutBannerBinding
 import com.youth.banner.indicator.RectangleIndicator
 import com.youth.banner.util.BannerUtils
 import kotlinx.android.synthetic.main.layout_banner.view.*
 
-class TopBannerAdapter() :
+class TopBannerAdapter(var mDataList: ArrayList<BannerData>) :
         RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-  private val dataList: List<BannerBean> = listOf(
-          BannerBean("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png", "")
-  )
 
   private var mContext: Context? = null
   private var bind: LayoutBannerBinding? = null
@@ -29,12 +26,12 @@ class TopBannerAdapter() :
   }
 
   override fun getItemCount(): Int {
-    return dataList.size
+    return 1
   }
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     holder.itemView.banner.apply {
-      adapter = ImageNetAdapter(dataList)
+      adapter = ImageNetAdapter(mDataList)
       indicator = RectangleIndicator(mContext)
       setIndicatorSpace((BannerUtils.dp2px(4F).toInt()))
       setIndicatorRadius(0)

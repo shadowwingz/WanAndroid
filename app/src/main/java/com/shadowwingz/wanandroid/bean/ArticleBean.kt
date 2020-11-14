@@ -3,12 +3,12 @@ package com.shadowwingz.wanandroid.bean
 import com.google.gson.annotations.SerializedName
 
 data class ArticleBean(
-        val `data`: Data,
+        val `data`: ArticleData,
         val errorCode: Int,
         val errorMsg: String
 )
 
-data class Data(
+data class ArticleData(
         val curPage: Int,
         @SerializedName("datas")
         val articleListBean: List<ArticleListBean>,

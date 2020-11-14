@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.model.ArticleListModel
 import com.shadowwingz.wanandroid.ui.article.ArticleListAdapter
-import com.shadowwingz.wanandroid.ui.article.ArticleListViewModel
+import com.shadowwingz.wanandroid.ui.home.HomeFragmentViewModel
 import com.shadowwingz.wanandroid.utils.InjectorUtil
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
   private val viewModel by lazy {
-    ViewModelProviders.of(this, InjectorUtil.getArticleModeFactory()).get(ArticleListViewModel::class.java)
+    ViewModelProviders.of(this, InjectorUtil.getArticleModeFactory()).get(HomeFragmentViewModel::class.java)
   }
 
   lateinit var articleListModel: ArticleListModel

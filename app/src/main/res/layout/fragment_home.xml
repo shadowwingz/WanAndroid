@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.shadowwingz.wanandroid.ui.article.ArticleListViewModel" />
+            type="com.shadowwingz.wanandroid.ui.home.HomeFragmentViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
