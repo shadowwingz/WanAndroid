@@ -10,6 +10,7 @@ import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.ui.BaseFragment
 import com.shadowwingz.wanandroid.ui.article.ArticleListAdapter
 import com.shadowwingz.wanandroid.ui.home.adapter.TopBannerAdapter
+import com.shadowwingz.wanandroid.ui.widget.OnLoadMoreListener
 import com.shadowwingz.wanandroid.utils.InjectorUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -29,7 +30,7 @@ class HomeFragment : BaseFragment() {
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     init()
-    loadData()
+    viewModel.loadData()
     observe()
   }
   
@@ -41,23 +42,45 @@ class HomeFragment : BaseFragment() {
         closeProgressDialog()
       }
     })
-    viewModel.dataChanged.observe(viewLifecycleOwner, Observer {
+    viewModel.articleDataChanged.observe(viewLifecycleOwner, Observer {
       articleListAdapter.notifyDataSetChanged()
       topBannerAdapter.notifyDataSetChanged()
+      refresh.isRefreshing = false
     })
   }
   
   private fun init() {
+    initAdapter()
+    
+    initRefreshListener()
+    
+    rvHomeFragment.addOnScrollListener(object : OnLoadMoreListener() {
+      override fun onLoadMore() {
+        viewModel.queryArticle(++viewModel.pageId)
+      }
+    })
+  }
+  
+  private fun initRefreshListener() {
+    refresh.setColorSchemeResources(
+            android.R.color.holo_blue_dark,
+            android.R.color.holo_blue_light,
+            android.R.color.holo_green_light,
+            android.R.color.holo_green_light);
+    
+    refresh.setOnRefreshListener {
+      refresh.isRefreshing = true
+      viewModel.loadData()
+    }
+  }
+  
+  private fun initAdapter() {
     topBannerAdapter = TopBannerAdapter(viewModel.banner)
     articleListAdapter = ArticleListAdapter(viewModel.dataList)
     val concatAdapter = ConcatAdapter(topBannerAdapter, articleListAdapter)
     
     rvHomeFragment.layoutManager = LinearLayoutManager(activity)
     rvHomeFragment.adapter = concatAdapter
-  }
-  
-  private fun loadData() {
-    viewModel.getArticleList()
   }
   
   companion object {

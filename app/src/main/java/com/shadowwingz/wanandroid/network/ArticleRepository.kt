@@ -8,8 +8,8 @@ class ArticleRepository private constructor(
         private val articleListDao: ArticleListDao,
         private val network: WanAndroidNetwork
 ) {
-  suspend fun getArticleList() = withContext(Dispatchers.IO) {
-    var list = network.fetchArticleList(0)
+  suspend fun getArticleList(pageId: Int) = withContext(Dispatchers.IO) {
+    var list = network.fetchArticleList(pageId)
     list
   }
   

@@ -1,49 +1,67 @@
 package com.shadowwingz.wanandroid.ui.home
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.shadowwingz.wanandroid.base.BaseViewModel
+import com.shadowwingz.wanandroid.base.WanAndroidApplication
 import com.shadowwingz.wanandroid.bean.ArticleBean
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.bean.BannerData
 import com.shadowwingz.wanandroid.network.ArticleRepository
-import kotlinx.coroutines.launch
+import com.shadowwingz.wanandroid.ui.widget.ToastUtil
 
-class HomeFragmentViewModel(private val repository: ArticleRepository) : ViewModel() {
-
+class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseViewModel() {
+  
   var isLoading = MutableLiveData<Boolean>()
-
-  var dataChanged = MutableLiveData<Int>()
+  
+  var articleDataChanged = MutableLiveData<Int>()
   
   var bannerDataChanged = MutableLiveData<Int>()
-
+  
   private lateinit var articles: ArticleBean
-
+  
   var dataList = ArrayList<ArticleListBean>()
   
   var banner = ArrayList<BannerData>()
-
-  fun getArticleList() {
-    launch {
-      articles = repository.getArticleList()
-      dataList.addAll(articles.data.articleListBean)
-      val banners: BannerBean = repository.getBanner()
-      banner.addAll(banners.data)
-    }
+  
+  var pageId: Int = 0
+  
+  fun loadData() {
+    pageId = 0
+    launch({
+      queryBanner()
+      bannerDataChanged.value?.plus(1)
+    })
+    dataList.clear()
+    queryArticle(pageId)
   }
-
-  private fun launch(block: suspend () -> Unit) = viewModelScope.launch {
-    try {
+  
+  private suspend fun queryBanner() {
+    val banners: BannerBean = repository.getBanner()
+    banner.addAll(banners.data)
+  }
+  
+  fun queryArticle(pageId: Int) {
+    launch({
       isLoading.value = true
-      dataList.clear()
-      block()
-      dataChanged.value = dataChanged.value?.plus(1)
+      
+      articles = repository.getArticleList(pageId)
+      checkMaxPage()
+      dataList.addAll(articles.data.articleListBean)
+      
+      articleDataChanged.value = articleDataChanged.value?.plus(1)
       isLoading.value = false
-    } catch (t: Throwable) {
-      t.printStackTrace()
-      dataChanged.value = dataChanged.value?.plus(1)
+    }, {
+      articleDataChanged.value = articleDataChanged.value?.plus(1)
       isLoading.value = false
+    })
+  }
+  
+  private fun checkMaxPage() {
+    if (articles.data.curPage == articles.data.pageCount) {
+      ToastUtil.show(WanAndroidApplication.context, "已经是最后一页了")
+      throw Exception()
     }
   }
+  
 }

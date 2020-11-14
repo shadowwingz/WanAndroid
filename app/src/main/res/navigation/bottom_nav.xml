@@ -8,21 +8,17 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.shadowwingz.wanandroid.ui.home.HomeFragment"
-        tools:layout="@layout/fragment_home"
-        android:label="HomeFragment" />
+        tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/questionFragment"
         android:name="com.shadowwingz.wanandroid.ui.question.QuestionFragment"
-        android:label="question_fragment"
         tools:layout="@layout/question_fragment" />
     <fragment
         android:id="@+id/systemFragment"
         android:name="com.shadowwingz.wanandroid.ui.system.SystemFragment"
-        android:label="system_fragment"
         tools:layout="@layout/system_fragment" />
     <fragment
         android:id="@+id/mineFragment"
         android:name="com.shadowwingz.wanandroid.ui.mine.MineFragment"
-        tools:layout="@layout/fragment_mine"
-        android:label="MineFragment" />
+        tools:layout="@layout/fragment_mine" />
 </navigation>
