@@ -6,9 +6,10 @@ import android.util.Log
  * Log 工具类
  */
 object LogUtil {
-
+  
   private const val TAG: String = "shadowwingz"
-
+  
+  @JvmStatic
   fun d(msg: String) {
     Log.d(TAG, msg)
   }

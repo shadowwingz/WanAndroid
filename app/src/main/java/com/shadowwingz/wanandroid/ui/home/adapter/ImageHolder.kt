@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 class ImageHolder(@NonNull view: View?) : RecyclerView.ViewHolder(view!!) {
   var imageView: ImageView
-
+  
   init {
     imageView = view as ImageView
   }

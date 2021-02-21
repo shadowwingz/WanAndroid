@@ -17,10 +17,10 @@ class ArticleRepository private constructor(
     var banner = network.fetchBanner()
     banner
   }
-
+  
   companion object {
     private var instance: ArticleRepository? = null
-
+    
     fun getInstance(
             articleListDao: ArticleListDao,
             network: WanAndroidNetwork

@@ -86,7 +86,7 @@ class HomeFragment : BaseFragment() {
     
     rvHomeFragment.layoutManager = LinearLayoutManager(activity)
     rvHomeFragment.adapter = concatAdapter
-  
+    
     skeletonScreen = Skeleton.bind(rvHomeFragment)
             .adapter(concatAdapter)
             .load(R.layout.layout_default_item_skeleton)

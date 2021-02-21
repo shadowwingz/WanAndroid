@@ -2,6 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.android.application'
+apply plugin: 'com.didiglobal.booster'
+apply plugin: 'android-aspectjx'
 
 android {
     compileSdkVersion 29
@@ -32,6 +35,10 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    aspectjx {
+        enabled true
+        include 'com.shadowwingz.wanandroid'
+    }
 }
 
 dependencies {
@@ -74,4 +81,5 @@ dependencies {
     // 骨架屏
     implementation 'com.ethanhua:skeleton:1.1.2'
     implementation 'io.supercharge:shimmerlayout:2.1.0'
+    api 'org.aspectj:aspectjrt:1.9.5'
 }

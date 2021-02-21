@@ -44,11 +44,11 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
   fun queryArticle(pageId: Int) {
     launch({
       isLoading.value = true
-      
+  
       articles = repository.getArticleList(pageId)
       checkMaxPage()
       dataList.addAll(articles.data.articleListBean)
-      
+  
       articleDataChanged.value = articleDataChanged.value?.plus(1)
       isLoading.value = false
     }, {

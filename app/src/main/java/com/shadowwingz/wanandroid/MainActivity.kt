@@ -14,26 +14,26 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+  
   private val viewModel by lazy {
     ViewModelProviders.of(this, InjectorUtil.getArticleModeFactory()).get(HomeFragmentViewModel::class.java)
   }
-
+  
   lateinit var articleListModel: ArticleListModel
   lateinit var articleListAdapter: ArticleListAdapter
-
+  
   private var mCompositeDisposable = CompositeDisposable()
-
+  
   private val items = ArrayList<ArticleListBean>()
-
+  
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-
+    
     init()
     queryData()
   }
-
+  
   private fun init() {
 //        val binding = DataBindingUtil.bind<ActivityMainBindingImpl>(this)
     rv_main.layoutManager = LinearLayoutManager(this)
@@ -49,8 +49,9 @@ class MainActivity : AppCompatActivity() {
       }
     })
   }
-
+  
   private fun queryData() {
+    Thread.sleep(20000)
 //    val subscribe = ApiClient.retrofit().loadData("0")
 //            .subscribeOn(Schedulers.io())
 //            .observeOn(AndroidSchedulers.mainThread())
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 //
 //    mCompositeDisposable.add(subscribe)
   }
-
+  
   override fun onDestroy() {
     super.onDestroy()
 //    if (mCompositeDisposable.size() > 0) {
