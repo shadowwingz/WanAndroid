@@ -53,7 +53,6 @@
         android:id="@+id/iv_like"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_below="@id/tv_time"
         android:layout_alignBottom="@id/tv_category"
         android:layout_alignParentEnd="true"
         android:contentDescription="@string/like"
