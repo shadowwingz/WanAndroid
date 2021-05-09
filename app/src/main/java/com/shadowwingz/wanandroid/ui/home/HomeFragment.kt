@@ -4,16 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ethanhua.skeleton.RecyclerViewSkeletonScreen
-import com.ethanhua.skeleton.Skeleton
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.ui.BaseFragment
 import com.shadowwingz.wanandroid.ui.article.ArticleListAdapter
-import com.shadowwingz.wanandroid.ui.home.adapter.TopBannerAdapter
 import com.shadowwingz.wanandroid.ui.widget.OnLoadMoreListener
 import com.shadowwingz.wanandroid.utils.InjectorUtil
+import com.shadowwingz.wanandroid.utils.LogUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : BaseFragment() {
@@ -24,15 +21,12 @@ class HomeFragment : BaseFragment() {
   
   lateinit var articleListAdapter: ArticleListAdapter
   
-  lateinit var topBannerAdapter: TopBannerAdapter
-  
-  lateinit var skeletonScreen: RecyclerViewSkeletonScreen
-  
   override fun getLayoutId(): Int {
     return R.layout.fragment_home
   }
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    LogUtil.d("HomeFragment onViewCreated")
     init()
     viewModel.loadData()
     observe()
@@ -48,9 +42,7 @@ class HomeFragment : BaseFragment() {
     })
     viewModel.articleDataChanged.observe(viewLifecycleOwner, Observer {
       articleListAdapter.notifyDataSetChanged()
-      topBannerAdapter.notifyDataSetChanged()
       refresh.isRefreshing = false
-      skeletonScreen.hide()
     })
   }
   
@@ -80,22 +72,10 @@ class HomeFragment : BaseFragment() {
   }
   
   private fun initAdapter() {
-    topBannerAdapter = TopBannerAdapter(viewModel.banner)
     articleListAdapter = ArticleListAdapter(viewModel.dataList)
-    val concatAdapter = ConcatAdapter(topBannerAdapter, articleListAdapter)
-    
+
     rvHomeFragment.layoutManager = LinearLayoutManager(activity)
-    rvHomeFragment.adapter = concatAdapter
-    
-    skeletonScreen = Skeleton.bind(rvHomeFragment)
-            .adapter(concatAdapter)
-            .load(R.layout.layout_default_item_skeleton)
-            .show()
-  }
-  
-  companion object {
-    @JvmStatic
-    fun newInstance() = HomeFragment()
+    rvHomeFragment.adapter = articleListAdapter
   }
   
 }
