@@ -96,4 +96,5 @@ dependencies {
     implementation 'io.supercharge:shimmerlayout:2.1.0'
 //    api 'org.aspectj:aspectjrt:1.9.5'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.6'
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
 }

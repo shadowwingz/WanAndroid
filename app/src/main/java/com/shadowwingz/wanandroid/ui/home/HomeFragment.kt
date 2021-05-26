@@ -41,7 +41,7 @@ class HomeFragment : BaseFragment() {
       }
     })
     viewModel.articleDataChanged.observe(viewLifecycleOwner, Observer {
-      articleListAdapter.notifyDataSetChanged()
+      articleListAdapter.submitList(viewModel.dataList)
       refresh.isRefreshing = false
     })
   }
@@ -72,7 +72,7 @@ class HomeFragment : BaseFragment() {
   }
   
   private fun initAdapter() {
-    articleListAdapter = ArticleListAdapter(viewModel.dataList)
+    articleListAdapter = ArticleListAdapter()
 
     rvHomeFragment.layoutManager = LinearLayoutManager(activity)
     rvHomeFragment.adapter = articleListAdapter
