@@ -19,8 +19,8 @@ abstract class OnLoadMoreListener : RecyclerView.OnScrollListener() {
     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
       val lastItemPos = manager.findLastVisibleItemPosition()
       val itemCount = manager.itemCount
-      
-      if (lastItemPos == (itemCount - 1) && isSlidingUp) {
+
+      if (lastItemPos >= (itemCount - 1) && isSlidingUp) {
         onLoadMore()
       }
     }

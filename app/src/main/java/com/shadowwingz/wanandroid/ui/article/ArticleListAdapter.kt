@@ -17,7 +17,7 @@ class ArticleListAdapter :
 
     class DiffCallback : DiffUtil.ItemCallback<ArticleListBean>() {
         override fun areItemsTheSame(oldItem: ArticleListBean, newItem: ArticleListBean): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
@@ -39,5 +39,9 @@ class ArticleListAdapter :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val binding: ArticleListItemBinding? = DataBindingUtil.getBinding(holder.itemView)
         binding?.data = getItem(position)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return getItem(position).id.toLong()
     }
 }
