@@ -46,7 +46,10 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
       isLoading.value = true
 
       articles = repository.getArticleList(pageId)
-      if (isLastPage()) return@launch
+      if (isLastPage()) {
+        isLoading.value = false
+        return@launch
+      }
 
       dataList.addAll(articles.data.articleListBean)
 
