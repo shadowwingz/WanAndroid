@@ -6,7 +6,6 @@ import com.shadowwingz.wanandroid.base.WanAndroidApplication
 import com.shadowwingz.wanandroid.bean.ArticleBean
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.bean.BannerBean
-import com.shadowwingz.wanandroid.bean.BannerData
 import com.shadowwingz.wanandroid.network.ArticleRepository
 import com.shadowwingz.wanandroid.ui.widget.ToastUtil
 
@@ -20,25 +19,37 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
 
   private lateinit var articles: ArticleBean
 
+  /**
+   * 文章列表数据
+   */
   var dataList = mutableListOf<ArticleListBean>()
 
-  var banner = ArrayList<BannerData>()
+  /**
+   * allData 是给 MultiType 使用的数据
+   */
+  var allData = mutableListOf<Any>()
 
+  /**
+   * 当前页面索引
+   */
   var pageId: Int = 0
 
   fun loadData() {
-    pageId = 0
+    reset()
     launch({
-      queryBanner()
+      val banners: BannerBean = repository.getBanner()
+
+      allData.add(banners.data)
+
       bannerDataChanged.value?.plus(1)
     })
-    dataList = mutableListOf()
     queryArticle(pageId)
   }
 
-  private suspend fun queryBanner() {
-    val banners: BannerBean = repository.getBanner()
-    banner.addAll(banners.data)
+  private fun reset() {
+    pageId = 0
+    dataList = mutableListOf()
+    allData = mutableListOf()
   }
 
   fun queryArticle(pageId: Int) {
@@ -52,6 +63,7 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
       }
 
       dataList.addAll(articles.data.articleListBean)
+      allData.addAll(dataList)
 
       articleDataChanged.value = articleDataChanged.value?.plus(1)
       isLoading.value = false
