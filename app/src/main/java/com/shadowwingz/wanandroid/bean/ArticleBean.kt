@@ -1,13 +1,16 @@
 package com.shadowwingz.wanandroid.bean
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class ArticleBean(
         val `data`: ArticleData,
         val errorCode: Int,
         val errorMsg: String
 )
 
+@Keep
 data class ArticleData(
         val curPage: Int,
         @SerializedName("datas")
@@ -19,6 +22,7 @@ data class ArticleData(
         val total: Int
 )
 
+@Keep
 data class ArticleListBean(
         var apkLink: String,
         var audit: Int,

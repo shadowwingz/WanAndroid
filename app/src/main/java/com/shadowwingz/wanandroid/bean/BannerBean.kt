@@ -1,12 +1,13 @@
 package com.shadowwingz.wanandroid.bean
 
-/**
- * 首页 banner
- */
+import androidx.annotation.Keep
+
+@Keep
 data class BannerBean(
         val data: List<BannerData>
 )
 
+@Keep
 data class BannerData(
         val desc: String,
         val id: Int,
