@@ -1,13 +1,16 @@
 package com.shadowwingz.wanandroid.ui.home
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.shadowwingz.wanandroid.base.BaseViewModel
 import com.shadowwingz.wanandroid.base.WanAndroidApplication
 import com.shadowwingz.wanandroid.bean.ArticleBean
 import com.shadowwingz.wanandroid.bean.ArticleListBean
-import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.network.ArticleRepository
 import com.shadowwingz.wanandroid.ui.widget.ToastUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseViewModel() {
 
@@ -36,14 +39,14 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
 
   fun loadData() {
     reset()
-    launch({
-      val banners: BannerBean = repository.getBanner()
-
-      allData.add(banners.data)
-
+    viewModelScope.launch(Dispatchers.Main) {
+      val banners = withContext(Dispatchers.IO) {
+        repository.getBanner();
+      }
+      allData.add(banners.data);
       bannerDataChanged.value?.plus(1)
-    })
-    queryArticle(pageId)
+      queryArticle(pageId)
+    }
   }
 
   private fun reset() {
@@ -53,10 +56,12 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
   }
 
   fun queryArticle(pageId: Int) {
-    launch({
+    viewModelScope.launch(Dispatchers.Main) {
       isLoading.value = true
+      articles = withContext(Dispatchers.IO) {
+        repository.getArticleList(pageId)
+      }
 
-      articles = repository.getArticleList(pageId)
       if (isLastPage()) {
         isLoading.value = false
         return@launch
@@ -67,10 +72,7 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
 
       articleDataChanged.value = articleDataChanged.value?.plus(1)
       isLoading.value = false
-    }, {
-      articleDataChanged.value = articleDataChanged.value?.plus(1)
-      isLoading.value = false
-    })
+    }
   }
 
   private fun isLastPage(): Boolean {
