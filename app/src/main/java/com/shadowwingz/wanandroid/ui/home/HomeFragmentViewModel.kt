@@ -3,16 +3,13 @@ package com.shadowwingz.wanandroid.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.shadowwingz.wanandroid.base.BaseViewModel
-import com.shadowwingz.wanandroid.base.WanAndroidApplication
-import com.shadowwingz.wanandroid.bean.ArticleBean
+import com.shadowwingz.wanandroid.base.WanAndroidApp
 import com.shadowwingz.wanandroid.bean.ArticleListBean
-import com.shadowwingz.wanandroid.network.ArticleRepository
-import com.shadowwingz.wanandroid.ui.widget.ToastUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseViewModel() {
+class HomeFragmentViewModel : BaseViewModel() {
 
   var isLoading = MutableLiveData<Boolean>()
 
@@ -20,7 +17,7 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
 
   var bannerDataChanged = MutableLiveData<Int>()
 
-  private lateinit var articles: ArticleBean
+  private lateinit var articles: List<ArticleListBean>
 
   /**
    * 文章列表数据
@@ -41,7 +38,7 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
     reset()
     viewModelScope.launch(Dispatchers.Main) {
       val banners = withContext(Dispatchers.IO) {
-        repository.getBanner();
+        WanAndroidApp.repository.getBanner();
       }
       allData.add(banners.data);
       bannerDataChanged.value?.plus(1)
@@ -59,7 +56,7 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
     viewModelScope.launch(Dispatchers.Main) {
       isLoading.value = true
       articles = withContext(Dispatchers.IO) {
-        repository.getArticleList(pageId)
+        WanAndroidApp.repository.getArticleList(pageId)
       }
 
       if (isLastPage()) {
@@ -67,7 +64,7 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
         return@launch
       }
 
-      dataList.addAll(articles.data.articleListBean)
+      dataList.addAll(articles)
       allData.addAll(dataList)
 
       articleDataChanged.value = articleDataChanged.value?.plus(1)
@@ -76,12 +73,15 @@ class HomeFragmentViewModel(private val repository: ArticleRepository) : BaseVie
   }
 
   private fun isLastPage(): Boolean {
-    return if (articles.data.curPage == articles.data.pageCount) {
-      ToastUtil.show(WanAndroidApplication.context, "已经是最后一页了")
-      true
-    } else {
-      false
-    }
+    // todo 由于 repository 返回的是一个列表 ArticleListBean，不再是原始的 ArticleBean，
+    // 因此在 ViewModel 无法拿到当前页信息，待后续研究如何解决。
+    //return if (articles.data.curPage == articles.data.pageCount) {
+    //  ToastUtil.show(WanAndroidApp.context, "已经是最后一页了")
+    //  true
+    //} else {
+    //  false
+    //}
+    return false
   }
 
 }

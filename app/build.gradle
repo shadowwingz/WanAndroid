@@ -98,4 +98,9 @@ dependencies {
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
     implementation 'com.drakeet.multitype:multitype:4.2.0'
     implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
+    // room
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
 }
