@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true"
         android:background="#ccffffff"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher_round"
+        android:src="@drawable/ic_avatar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/guideLine1"
@@ -26,6 +26,7 @@
         app:riv_mutate_background="true" />
 
     <TextView
+        android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"

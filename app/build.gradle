@@ -103,4 +103,6 @@ dependencies {
     implementation "androidx.room:room-ktx:$roomVersion"
     implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
+    // 图片加载
+    implementation "io.coil-kt:coil:1.2.2"
 }

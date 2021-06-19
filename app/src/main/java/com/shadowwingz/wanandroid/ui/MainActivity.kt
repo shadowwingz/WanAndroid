@@ -8,7 +8,7 @@ import com.shadowwingz.wanandroid.BaseActivity
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.databinding.ActivityMainBinding
 import com.shadowwingz.wanandroid.ui.home.HomeFragment
-import com.shadowwingz.wanandroid.ui.mine.MineFragment
+import com.shadowwingz.wanandroid.ui.mine.ProfileFragment
 import com.shadowwingz.wanandroid.ui.question.QuestionFragment
 import com.shadowwingz.wanandroid.ui.system.SystemFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -39,7 +39,7 @@ class MainActivity : BaseActivity() {
                             0 -> HomeFragment()
                             1 -> QuestionFragment()
                             2 -> SystemFragment()
-                            else -> MineFragment()
+                            else -> ProfileFragment()
                         }
                     }
                 }

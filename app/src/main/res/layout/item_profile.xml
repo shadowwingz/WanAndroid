@@ -13,9 +13,10 @@
         android:id="@+id/ivIcon"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:tint="@color/main"
+        android:contentDescription="@string/profile_avatar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/main"
         tools:src="@drawable/ic_coin" />
 
     <TextView
@@ -25,17 +26,18 @@
         android:layout_marginStart="10dp"
         app:layout_constraintLeft_toRightOf="@id/ivIcon"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="我的积分" />
+        tools:text="@string/profile_mine_score" />
 
     <ImageView
         android:id="@+id/ivArrow"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:contentDescription="@string/profile_enter"
         android:rotation="180"
         android:src="@drawable/ic_back"
-        android:tint="#999999"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#999999" />
 
     <TextView
         android:id="@+id/tvSubDesc"
