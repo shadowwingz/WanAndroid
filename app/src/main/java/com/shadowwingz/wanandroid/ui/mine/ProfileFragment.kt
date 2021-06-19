@@ -11,7 +11,7 @@ import com.shadowwingz.wanandroid.ui.mine.viewbinder.AvatarViewBinder
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.ProfileViewBinder
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.AvatarItem
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.ProfileItem
-import kotlinx.android.synthetic.main.fragment_mine.*
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
 
@@ -19,7 +19,7 @@ class ProfileFragment : Fragment() {
   private val items = ArrayList<Any>()
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    return inflater.inflate(R.layout.fragment_mine, container, false)
+    return inflater.inflate(R.layout.fragment_profile, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

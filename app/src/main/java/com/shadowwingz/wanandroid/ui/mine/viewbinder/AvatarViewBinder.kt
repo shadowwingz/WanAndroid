@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.drakeet.multitype.ItemViewBinder
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.AvatarItem
@@ -23,7 +24,9 @@ class AvatarViewBinder : ItemViewBinder<AvatarItem, AvatarViewBinder.HeaderHolde
   }
 
   override fun onBindViewHolder(holder: HeaderHolder, item: AvatarItem) {
-    holder.ivAvatar.load(item.header)
+    holder.ivAvatar.load(item.header) {
+      transformations(CircleCropTransformation())
+    }
     holder.tvUserName.text = item.username
   }
 }
