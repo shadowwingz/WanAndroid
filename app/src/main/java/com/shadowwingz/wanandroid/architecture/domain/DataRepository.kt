@@ -5,6 +5,8 @@ import com.shadowwingz.wanandroid.architecture.response.ResponseStatus
 import com.shadowwingz.wanandroid.architecture.response.ResultSource
 import com.shadowwingz.wanandroid.architecture.testpage.TestWanAndroidService
 import com.shadowwingz.wanandroid.bean.ArticleBean
+import com.shadowwingz.wanandroid.bean.User
+import com.shadowwingz.wanandroid.ui.login.AccountService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -54,5 +56,15 @@ object DataRepository {
   fun cancelFetch() {
     mArticleCall?.cancel()
     mArticleCall = null
+  }
+
+  private var mAccountCall: Call<String>? = null
+
+  fun login(user: User) {
+    mAccountCall = retrofit.create(AccountService::class.java).login(user.name, user.password)
+  }
+
+  fun cancelLogin() {
+
   }
 }
