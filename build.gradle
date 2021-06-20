@@ -18,7 +18,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:7.0.0-alpha15'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin_version}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:${versions.kotlin_version}"
 //        classpath "com.didiglobal.booster:booster-gradle-plugin:$booster_version"
 //        classpath "com.didiglobal.booster:booster-task-analyser:$booster_version"
