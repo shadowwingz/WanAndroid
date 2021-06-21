@@ -6,7 +6,8 @@ import com.shadowwingz.wanandroid.architecture.response.ResultSource
 import com.shadowwingz.wanandroid.architecture.testpage.TestWanAndroidService
 import com.shadowwingz.wanandroid.bean.ArticleBean
 import com.shadowwingz.wanandroid.bean.User
-import com.shadowwingz.wanandroid.ui.login.AccountService
+import com.shadowwingz.wanandroid.ui.account.AccountBean
+import com.shadowwingz.wanandroid.ui.account.AccountService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -58,13 +59,26 @@ object DataRepository {
     mArticleCall = null
   }
 
-  private var mAccountCall: Call<String>? = null
+  private var mAccountCall: Call<AccountBean>? = null
 
-  fun login(user: User) {
+  fun requestLogin(user: User, result: DataResult.Result<AccountBean>) {
     mAccountCall = retrofit.create(AccountService::class.java).login(user.name, user.password)
+    mAccountCall?.enqueue(object : Callback<AccountBean> {
+      override fun onResponse(call: Call<AccountBean>, response: Response<AccountBean>) {
+        val responseStatus = ResponseStatus(response.code().toString(), response.isSuccessful, ResultSource.NETWORK)
+        result.onResult(DataResult(response.body(), responseStatus))
+      }
+
+      override fun onFailure(call: Call<AccountBean>, t: Throwable) {
+        result.onResult(DataResult(null, ResponseStatus(t.message, false, ResultSource.NETWORK)))
+        mAccountCall = null
+      }
+
+    })
   }
 
   fun cancelLogin() {
-
+    mAccountCall?.cancel()
+    mAccountCall = null
   }
 }

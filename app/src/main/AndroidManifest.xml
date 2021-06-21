@@ -13,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/WanAndroidTheme">
         <activity
-            android:name=".ui.login.AccountActivity"
-            android:exported="false">
+            android:name=".ui.account.AccountActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
