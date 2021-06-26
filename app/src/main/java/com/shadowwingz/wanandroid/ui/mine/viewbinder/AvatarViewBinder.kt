@@ -14,7 +14,7 @@ import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.AvatarItem
 
 class AvatarViewBinder : ItemViewBinder<AvatarItem, AvatarViewBinder.HeaderHolder>() {
 
-  class HeaderHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+  class HeaderHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val ivAvatar: ImageView = itemView.findViewById(R.id.civUserIcon)
     val tvUserName: TextView = itemView.findViewById(R.id.tvUserName)
   }
@@ -28,5 +28,18 @@ class AvatarViewBinder : ItemViewBinder<AvatarItem, AvatarViewBinder.HeaderHolde
       transformations(CircleCropTransformation())
     }
     holder.tvUserName.text = item.username
+    holder.itemView.setOnClickListener {
+      mListener?.avatarClick()
+    }
+  }
+
+  private var mListener: OnAvatarClickListener? = null
+
+  fun setOnAvatarClickListener(listener: OnAvatarClickListener) {
+    mListener = listener
+  }
+
+  interface OnAvatarClickListener {
+    fun avatarClick()
   }
 }
