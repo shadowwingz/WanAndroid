@@ -22,7 +22,7 @@
 
         <!-- 作者 -->
         <TextView
-            android:id="@+id/tv_author"
+            android:id="@+id/tvAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@={data.author}"
@@ -45,7 +45,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_author"
+            android:layout_below="@id/tvAuthor"
             android:layout_marginTop="5dp"
             android:text="@={data.title}"
             android:textColor="@color/colorBlack"

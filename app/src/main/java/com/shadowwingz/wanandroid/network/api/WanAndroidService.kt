@@ -9,6 +9,7 @@ import retrofit2.http.Path
 /**
  * 主页的网络请求
  */
+@Deprecated(message = "Deprecated")
 interface WanAndroidService {
   /**
    * 首页文章列表

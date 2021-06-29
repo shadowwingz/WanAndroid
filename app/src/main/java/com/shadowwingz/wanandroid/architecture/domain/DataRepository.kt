@@ -5,9 +5,11 @@ import com.shadowwingz.wanandroid.architecture.response.ResponseStatus
 import com.shadowwingz.wanandroid.architecture.response.ResultSource
 import com.shadowwingz.wanandroid.architecture.testpage.TestWanAndroidService
 import com.shadowwingz.wanandroid.bean.ArticleBean
+import com.shadowwingz.wanandroid.bean.QuestionBean
 import com.shadowwingz.wanandroid.bean.User
 import com.shadowwingz.wanandroid.ui.account.AccountBean
 import com.shadowwingz.wanandroid.ui.account.AccountService
+import com.shadowwingz.wanandroid.ui.question.QuestionService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -80,5 +82,28 @@ object DataRepository {
   fun cancelLogin() {
     mAccountCall?.cancel()
     mAccountCall = null
+  }
+
+  private var mQuestionCall: Call<QuestionBean>? = null
+
+  fun requestQuestions(pageId: Int, result: DataResult.Result<QuestionBean>) {
+    mQuestionCall = retrofit.create(QuestionService::class.java).fetchQuestions(pageId)
+    mQuestionCall?.enqueue(object : Callback<QuestionBean> {
+      override fun onResponse(call: Call<QuestionBean>, response: Response<QuestionBean>) {
+        val responseStatus = ResponseStatus(response.code().toString(), response.isSuccessful, ResultSource.NETWORK)
+        result.onResult(DataResult(response.body(), responseStatus))
+      }
+
+      override fun onFailure(call: Call<QuestionBean>, t: Throwable) {
+        result.onResult(DataResult(null, ResponseStatus(t.message, false, ResultSource.NETWORK)))
+        mQuestionCall = null
+      }
+
+    })
+  }
+
+  fun cancelRequestQuestions() {
+    mQuestionCall?.cancel()
+    mQuestionCall = null
   }
 }

@@ -1,7 +1,12 @@
 package com.shadowwingz.wanandroid.ui.question
 
-import androidx.lifecycle.ViewModel
+import com.shadowwingz.wanandroid.base.BaseViewModel
 
-class QuestionViewModel : ViewModel() {
-  // TODO: Implement the ViewModel
+class QuestionViewModel : BaseViewModel() {
+
+  val questionRequest = QuestionRequest()
+
+  fun getQuestions(pageId: Int) {
+    questionRequest.getQuestions(pageId)
+  }
 }

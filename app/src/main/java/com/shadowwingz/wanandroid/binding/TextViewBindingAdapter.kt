@@ -8,7 +8,7 @@ object TextViewBindingAdapter {
 
     @BindingAdapter("htmlText")
     @JvmStatic
-    fun loadImage(view: TextView, text: String) {
+    fun loadHtmlText(view: TextView, text: String) {
         view.text = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_COMPACT)
     }
 }
