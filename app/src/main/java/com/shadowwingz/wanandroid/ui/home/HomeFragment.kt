@@ -4,21 +4,19 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.drakeet.multitype.MultiTypeAdapter
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.ui.BaseFragment
 import com.shadowwingz.wanandroid.ui.widget.OnLoadMoreListener
-import com.shadowwingz.wanandroid.utils.InjectorUtil
-import com.shadowwingz.wanandroid.utils.LogUtil
 import kotlinx.android.synthetic.main.fragment_home.*
 
 @SuppressLint("NotifyDataSetChanged")
 class HomeFragment : BaseFragment() {
 
   private val viewModel by lazy {
-    ViewModelProviders.of(this, InjectorUtil.getArticleModeFactory()).get(HomeFragmentViewModel::class.java)
+    ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
   }
 
   var adapter = MultiTypeAdapter()
@@ -28,7 +26,6 @@ class HomeFragment : BaseFragment() {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    LogUtil.d("HomeFragment onViewCreated")
     init()
     viewModel.loadData()
     observe()
@@ -60,6 +57,8 @@ class HomeFragment : BaseFragment() {
 //      articleListAdapter.submitList(ArrayList(viewModel.dataList))
       refresh.isRefreshing = false
 
+      adapter.register(BannerItemViewBinder())
+      adapter.register(ArticleItemViewBinder())
       adapter.items = viewModel.allData
       adapter.notifyDataSetChanged()
     })
@@ -75,7 +74,7 @@ class HomeFragment : BaseFragment() {
 
     refresh.setOnRefreshListener {
       refresh.isRefreshing = true
-      viewModel.loadData()
+      viewModel.refreshData()
     }
   }
 

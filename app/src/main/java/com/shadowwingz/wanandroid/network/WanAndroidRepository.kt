@@ -6,12 +6,20 @@ import kotlinx.coroutines.withContext
 
 class WanAndroidRepository(private val wanAndroidDao: WanAndroidDao) {
   suspend fun getArticleList(pageId: Int) = withContext(Dispatchers.IO) {
-    var list = wanAndroidDao.getItems()
-    if (list.isEmpty()) {
-      list = WanAndroidNetwork.fetchArticleList(pageId).data.articleListBean
-      WanAndroidNetwork.fetchArticleList(pageId)
-      wanAndroidDao.insert(list)
-    }
+    var list = WanAndroidNetwork.fetchArticleList(pageId).data.articleListBean
+    //var list = wanAndroidDao.getArticles()
+    //if (list.isEmpty()) {
+    //  list = WanAndroidNetwork.fetchArticleList(pageId).data.articleListBean
+    //  WanAndroidNetwork.fetchArticleList(pageId)
+    //  wanAndroidDao.insertArticle(list)
+    //}
+    list
+  }
+
+  suspend fun refreshArticleList(pageId: Int) = withContext(Dispatchers.IO) {
+    //wanAndroidDao.deleteArticles()
+    val list = WanAndroidNetwork.fetchArticleList(pageId).data.articleListBean
+    //wanAndroidDao.insertArticle(list)
     list
   }
 

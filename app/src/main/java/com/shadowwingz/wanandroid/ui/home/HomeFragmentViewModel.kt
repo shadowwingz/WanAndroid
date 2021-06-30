@@ -15,8 +15,6 @@ class HomeFragmentViewModel : BaseViewModel() {
 
   var articleDataChanged = MutableLiveData<Int>()
 
-  var bannerDataChanged = MutableLiveData<Int>()
-
   private lateinit var articles: List<ArticleListBean>
 
   /**
@@ -41,7 +39,6 @@ class HomeFragmentViewModel : BaseViewModel() {
         WanAndroidApp.repository.getBanner();
       }
       allData.add(banners.data);
-      bannerDataChanged.value?.plus(1)
       queryArticle(pageId)
     }
   }
@@ -69,6 +66,23 @@ class HomeFragmentViewModel : BaseViewModel() {
 
       articleDataChanged.value = articleDataChanged.value?.plus(1)
       isLoading.value = false
+    }
+  }
+
+  fun refreshData() {
+    reset()
+    viewModelScope.launch(Dispatchers.Main) {
+      val banners = withContext(Dispatchers.IO) {
+        WanAndroidApp.repository.getBanner();
+      }
+      articles = withContext(Dispatchers.IO) {
+        WanAndroidApp.repository.refreshArticleList(pageId)
+      }
+      dataList.addAll(articles)
+
+      allData.add(banners.data)
+      allData.addAll(dataList)
+      articleDataChanged.value = articleDataChanged.value?.plus(1)
     }
   }
 
