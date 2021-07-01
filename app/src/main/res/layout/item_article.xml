@@ -16,9 +16,9 @@
         android:clickable="true"
         android:focusable="true"
         android:paddingStart="16dp"
-        android:paddingTop="5dp"
+        android:paddingTop="10dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="5dp">
+        android:paddingBottom="10dp">
 
         <!-- 作者 -->
         <TextView

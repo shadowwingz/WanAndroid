@@ -24,7 +24,7 @@ class ArticleItemViewBinder : ItemViewBinder<ArticleListBean, ArticleItemViewBin
 //        val inflater = LayoutInflater.from(parent.context)
 //        val binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, R.layout.article_list_item, parent, false)
 //        return ViewHolder(binding.root)
-        return ViewHolder(inflater.inflate(R.layout.article_list_item, parent, false))
+        return ViewHolder(inflater.inflate(R.layout.item_article, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, item: ArticleListBean) {
