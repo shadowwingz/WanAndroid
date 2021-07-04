@@ -53,7 +53,7 @@ class HomeFragmentViewModel : BaseViewModel() {
     viewModelScope.launch(Dispatchers.Main) {
       isLoading.value = true
       articles = withContext(Dispatchers.IO) {
-        WanAndroidApp.repository.getArticleList(pageId)
+        WanAndroidApp.repository.getArticleList(pageId).sortedByDescending { it.publishTime }
       }
 
       if (isLastPage()) {
