@@ -25,7 +25,7 @@
             android:id="@+id/tvAuthor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@={data.author}"
+            android:text="@{data.shareUser}"
             android:textSize="14dp"
             tools:ignore="SpUsage"
             tools:text="作者" />
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="@={data.niceDate}"
+            android:text="@{data.niceDate}"
             tools:text="2020-01-01 22:34" />
 
         <!-- 文章标题 -->
@@ -47,26 +47,43 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvAuthor"
             android:layout_marginTop="5dp"
-            android:text="@={data.title}"
+            android:text="@{data.title}"
             android:textColor="@color/colorBlack"
             tools:text="学习笔记" />
 
-        <!-- 分类 -->
+        <!-- SuperChapterName -->
         <TextView
-            android:id="@+id/tv_category"
+            android:id="@+id/tvSuperChapterName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvTitle"
-            android:layout_marginTop="5dp"
-            android:text="@={data.superChapterName}"
-            tools:text="分类" />
+            android:text="@{data.superChapterName}"
+            tools:text="广场Tab" />
+
+        <TextView
+            android:id="@+id/tvDot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle"
+            android:layout_toEndOf="@id/tvSuperChapterName"
+            android:text="@string/dot" />
+
+        <!-- chapterName -->
+        <TextView
+            android:id="@+id/tvChapterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvTitle"
+            android:layout_toEndOf="@id/tvDot"
+            android:text="@{data.chapterName}"
+            tools:text="自助" />
 
         <!-- 喜欢 -->
         <ImageView
             android:id="@+id/iv_like"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_alignBottom="@id/tv_category"
+            android:layout_alignBottom="@id/tvChapterName"
             android:layout_alignParentEnd="true"
             android:contentDescription="@string/like"
             android:src="@{data.collect ? @drawable/ic_like : @drawable/ic_like}" />
