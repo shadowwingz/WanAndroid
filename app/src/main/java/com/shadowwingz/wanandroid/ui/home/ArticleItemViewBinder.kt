@@ -24,6 +24,17 @@ class ArticleItemViewBinder : ItemViewBinder<ArticleListBean, ArticleItemViewBin
 
   override fun onBindViewHolder(holder: ViewHolder, item: ArticleListBean) {
     val binding: ItemArticleBinding? = DataBindingUtil.getBinding(holder.itemView)
+    /**
+     * 第一个参数 BR.data 是根据 item_article.xml 中定义的 variable 生成的。
+     *
+     * 我们在 item_article.xml 定义的 variable 的 name 是 data，所以我们
+     *
+     * <variable
+     *    name="data"
+     *    type="com.shadowwingz.wanandroid.bean.ArticleListBean" />
+     */
+    // binding?.setVariable(BR.data, item)
+    // 效果等同于：
     binding?.data = item
   }
 }

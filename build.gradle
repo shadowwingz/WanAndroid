@@ -9,7 +9,7 @@ buildscript {
             'compileSdk'    : 29,
             'targetSdk'     : 29,
 
-            'kotlin_version': '1.5.0',
+            'kotlin_version': '1.5.10',
     ]
 
     repositories {
