@@ -1,15 +1,22 @@
 package com.shadowwingz.wanandroid.architecture.domain
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.shadowwingz.wanandroid.architecture.response.DataResult
 import com.shadowwingz.wanandroid.architecture.response.ResponseStatus
 import com.shadowwingz.wanandroid.architecture.response.ResultSource
 import com.shadowwingz.wanandroid.architecture.testpage.TestWanAndroidService
 import com.shadowwingz.wanandroid.bean.ArticleBean
+import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.bean.QuestionBean
 import com.shadowwingz.wanandroid.bean.User
 import com.shadowwingz.wanandroid.ui.account.AccountBean
 import com.shadowwingz.wanandroid.ui.account.AccountService
+import com.shadowwingz.wanandroid.ui.article.ArticlePagingSource
+import com.shadowwingz.wanandroid.ui.article.ArticleService
 import com.shadowwingz.wanandroid.ui.question.QuestionService
+import kotlinx.coroutines.flow.Flow
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -20,6 +27,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object DataRepository {
+
+  const val NETWORK_PAGE_SIZE = 20
 
   private val retrofit: Retrofit
 
@@ -37,6 +46,16 @@ object DataRepository {
       .client(client)
       .addConverterFactory(GsonConverterFactory.create())
       .build()
+  }
+
+  fun getArticleResultStream(): Flow<PagingData<ArticleListBean>> {
+    return Pager(
+      config = PagingConfig(
+        pageSize = NETWORK_PAGE_SIZE,
+        enablePlaceholders = false
+      ),
+      pagingSourceFactory = { ArticlePagingSource(retrofit.create(ArticleService::class.java)) }
+    ).flow
   }
 
   private var mArticleCall: Call<ArticleBean>? = null
