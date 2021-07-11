@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.ui.article
+package com.shadowwingz.wanandroid.ui.article;
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,23 +7,38 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import cn.bingoogolapple.bgabanner.BGABanner
 import com.bumptech.glide.Glide
-import com.drakeet.multitype.ItemViewBinder
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.BannerData
 
-class BannerItemViewBinder : ItemViewBinder<List<BannerData>, BannerItemViewBinder.ViewHolder>() {
+/**
+ * created by shadowwingz on 2021-07-11 15:33
+ */
+class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
+
+  private val mItems: MutableList<BannerData> = mutableListOf()
+
+  fun setItems(items: List<BannerData>?) {
+    if (items != null) {
+      mItems.clear()
+      mItems.addAll(items)
+      notifyDataSetChanged()
+    }
+  }
 
   class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val banner: BGABanner = itemView.findViewById(R.id.banner)
   }
 
-  override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
-    return ViewHolder(inflater.inflate(R.layout.layout_banner, parent, false))
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    return ViewHolder(
+      LayoutInflater.from(parent.context)
+        .inflate(R.layout.layout_banner, parent, false)
+    )
   }
 
-  override fun onBindViewHolder(holder: ViewHolder, item: List<BannerData>) {
+  override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val list = mutableListOf<View>()
-    for (data in item) {
+    for (data in mItems) {
       val rootView = View.inflate(holder.banner.context, R.layout.item_banner, null)
       val imageView: ImageView = rootView.findViewById(R.id.ivBanner)
       Glide.with(holder.banner.context).load(data.imagePath).into(imageView)
@@ -31,4 +46,8 @@ class BannerItemViewBinder : ItemViewBinder<List<BannerData>, BannerItemViewBind
     }
     holder.banner.setData(list as List<View>?)
   }
+
+  override fun getItemCount(): Int {
+    return 1
+  };
 }

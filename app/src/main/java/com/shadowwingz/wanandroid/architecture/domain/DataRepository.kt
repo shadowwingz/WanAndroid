@@ -7,10 +7,7 @@ import com.shadowwingz.wanandroid.architecture.response.DataResult
 import com.shadowwingz.wanandroid.architecture.response.ResponseStatus
 import com.shadowwingz.wanandroid.architecture.response.ResultSource
 import com.shadowwingz.wanandroid.architecture.testpage.TestWanAndroidService
-import com.shadowwingz.wanandroid.bean.ArticleBean
-import com.shadowwingz.wanandroid.bean.ArticleListBean
-import com.shadowwingz.wanandroid.bean.QuestionBean
-import com.shadowwingz.wanandroid.bean.User
+import com.shadowwingz.wanandroid.bean.*
 import com.shadowwingz.wanandroid.ui.account.AccountBean
 import com.shadowwingz.wanandroid.ui.account.AccountService
 import com.shadowwingz.wanandroid.ui.article.ArticlePagingSource
@@ -101,6 +98,22 @@ object DataRepository {
   fun cancelLogin() {
     mAccountCall?.cancel()
     mAccountCall = null
+  }
+
+  private var mBannerCall: Call<BannerBean>? = null
+
+  fun requestBanner(result: DataResult.Result<BannerBean>) {
+    mBannerCall = retrofit.create(ArticleService::class.java).getBanner()
+    mBannerCall?.enqueue(object : Callback<BannerBean> {
+      override fun onResponse(call: Call<BannerBean>, response: Response<BannerBean>) {
+        val responseStatus = ResponseStatus(response.code().toString(), response.isSuccessful, ResultSource.NETWORK)
+        result.onResult(DataResult(response.body(), responseStatus))
+      }
+
+      override fun onFailure(call: Call<BannerBean>, t: Throwable) {
+        result.onResult(DataResult(null, ResponseStatus(t.message, false, ResultSource.NETWORK)))
+      }
+    })
   }
 
   private var mQuestionCall: Call<QuestionBean>? = null

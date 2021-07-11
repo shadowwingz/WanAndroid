@@ -2,12 +2,15 @@ package com.shadowwingz.wanandroid.ui.article
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.drakeet.multitype.MultiTypeAdapter
 import com.shadowwingz.wanandroid.R
+import com.shadowwingz.wanandroid.architecture.response.DataResult
+import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Job
@@ -20,9 +23,8 @@ class HomeFragment : BaseFragment() {
     ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
   }
 
-  var adapter = MultiTypeAdapter()
-
   private val pagingAdapter = ArticleAdapter()
+  private val bannerAdapter = BannerAdapter()
 
   private var loadJob: Job? = null
 
@@ -32,25 +34,31 @@ class HomeFragment : BaseFragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     init()
-    // viewModel.loadData()
+    loadData()
+    observe()
+  }
 
+  private fun loadData() {
+    viewModel.loadBanner()
     loadJob?.cancel()
     loadJob = lifecycleScope.launch {
       viewModel.loadArticles().collectLatest {
         pagingAdapter.submitData(it)
       }
     }
-
-    observe()
   }
 
   private fun init() {
     initAdapter()
-
     initRefreshListener()
   }
 
   private fun observe() {
+    viewModel.bannerRequest.bannerLiveData.observe(viewLifecycleOwner, object : Observer<DataResult<BannerBean>> {
+      override fun onChanged(t: DataResult<BannerBean>?) {
+        bannerAdapter.setItems(t?.getResult()?.data)
+      }
+    })
   }
 
   private fun initRefreshListener() {
@@ -62,7 +70,7 @@ class HomeFragment : BaseFragment() {
     )
 
     refresh.setOnRefreshListener {
-      pagingAdapter.refresh()
+      handleRefresh()
     }
 
     pagingAdapter.addLoadStateListener {
@@ -78,16 +86,13 @@ class HomeFragment : BaseFragment() {
   }
 
   private fun initAdapter() {
-//    articleListAdapter.setHasStableIds(true)
-
+    val concatAdapter = ConcatAdapter(bannerAdapter, pagingAdapter)
     rvArticleList.layoutManager = LinearLayoutManager(activity)
-    rvArticleList.adapter = pagingAdapter
-
-    // adapter.register(BannerItemViewBinder())
-    // adapter.register(ArticleItemViewBinder())
-
-    // adapter.items = viewModel.allData
-    // adapter.notifyDataSetChanged()
+    rvArticleList.adapter = concatAdapter
   }
 
+  private fun handleRefresh() {
+    viewModel.loadBanner()
+    pagingAdapter.refresh()
+  }
 }

@@ -10,6 +10,12 @@ import kotlinx.coroutines.flow.Flow
 
 class HomeFragmentViewModel() : BaseViewModel() {
 
+  val bannerRequest = BannerRequest()
+
+  fun loadBanner() {
+    bannerRequest.getBanner()
+  }
+
   fun loadArticles(): Flow<PagingData<ArticleListBean>> {
     return DataRepository.getArticleResultStream().cachedIn(viewModelScope)
   }
