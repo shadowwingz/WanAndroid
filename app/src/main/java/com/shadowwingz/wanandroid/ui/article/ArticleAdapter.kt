@@ -32,7 +32,7 @@ class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHol
   class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-    val binding: ItemArticleBinding? = DataBindingUtil.getBinding(holder.itemView)
+    // val binding: ItemArticleBinding? = DataBindingUtil.getBinding(holder.itemView)
     /**
      * 第一个参数 BR.data 是根据 item_article.xml 中定义的 variable 生成的。
      *
@@ -44,7 +44,10 @@ class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHol
      */
     // binding?.setVariable(BR.data, item)
     // 效果等同于：
-    binding?.data = getItem(position)
+    // binding?.data = getItem(position)
+    DataBindingUtil.getBinding<ItemArticleBinding>(holder.itemView)?.let {
+      it.data = getItem(position)
+    }
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

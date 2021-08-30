@@ -23,7 +23,10 @@ class ArticleItemViewBinder : ItemViewBinder<ArticleListBean, ArticleItemViewBin
   }
 
   override fun onBindViewHolder(holder: ViewHolder, item: ArticleListBean) {
-    val binding: ItemArticleBinding? = DataBindingUtil.getBinding(holder.itemView)
-    binding?.data = item
+    // val binding: ItemArticleBinding? = DataBindingUtil.getBinding(holder.itemView)
+    // binding?.data = item
+    DataBindingUtil.getBinding<ItemArticleBinding>(holder.itemView)?.let {
+      it.data = item
+    }
   }
 }

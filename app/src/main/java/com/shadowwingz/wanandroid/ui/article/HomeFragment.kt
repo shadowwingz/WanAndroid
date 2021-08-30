@@ -62,15 +62,17 @@ class HomeFragment : BaseFragment() {
   }
 
   private fun initRefreshListener() {
-    refresh.setColorSchemeResources(
-      android.R.color.holo_blue_dark,
-      android.R.color.holo_blue_light,
-      android.R.color.holo_green_light,
-      android.R.color.holo_green_light
-    )
+    with(refresh) {
+      setColorSchemeResources(
+        android.R.color.holo_blue_dark,
+        android.R.color.holo_blue_light,
+        android.R.color.holo_green_light,
+        android.R.color.holo_green_light
+      )
 
-    refresh.setOnRefreshListener {
-      handleRefresh()
+      setOnRefreshListener {
+        handleRefresh()
+      }
     }
 
     pagingAdapter.addLoadStateListener {
@@ -87,8 +89,10 @@ class HomeFragment : BaseFragment() {
 
   private fun initAdapter() {
     val concatAdapter = ConcatAdapter(bannerAdapter, pagingAdapter)
-    rvArticleList.layoutManager = LinearLayoutManager(activity)
-    rvArticleList.adapter = concatAdapter
+    with(rvArticleList) {
+      layoutManager = LinearLayoutManager(activity)
+      adapter = concatAdapter
+    }
   }
 
   private fun handleRefresh() {
