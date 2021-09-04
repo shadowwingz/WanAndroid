@@ -104,4 +104,6 @@ dependencies {
     kapt "androidx.room:room-compiler:$roomVersion"
     // 图片加载
     implementation "io.coil-kt:coil:1.2.2"
+    // X5 WebView
+    api 'com.tencent.tbs:tbssdk:44085'
 }
