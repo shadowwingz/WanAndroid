@@ -1,5 +1,6 @@
 package com.shadowwingz.wanandroid.ui.article
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -10,8 +11,11 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.architecture.response.DataResult
+import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.bean.BannerBean
+import com.shadowwingz.wanandroid.listeners.OnItemClickListener
 import com.shadowwingz.wanandroid.ui.BaseFragment
+import com.shadowwingz.wanandroid.ui.web.WebActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -88,6 +92,13 @@ class HomeFragment : BaseFragment() {
   }
 
   private fun initAdapter() {
+    pagingAdapter.setOnItemClickListener(object : OnItemClickListener<ArticleListBean?> {
+      override fun onItemClick(data: ArticleListBean?) {
+        val intent = Intent(activity, WebActivity::class.java)
+        intent.putExtra("url", data?.link)
+        activity?.startActivity(intent)
+      }
+    })
     val concatAdapter = ConcatAdapter(bannerAdapter, pagingAdapter)
     with(rvArticleList) {
       layoutManager = LinearLayoutManager(activity)

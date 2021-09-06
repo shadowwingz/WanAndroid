@@ -11,11 +11,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.databinding.ItemArticleBinding
+import com.shadowwingz.wanandroid.listeners.OnItemClickListener
 
 /**
  * created by shadowwingz on 2021-07-10 22:19
  */
 class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHolder>(ARTICLE_COMPARATOR) {
+
+  private var mOnItemClickListener: OnItemClickListener<ArticleListBean?>? = null
+
+  fun setOnItemClickListener(onItemClickListener: OnItemClickListener<ArticleListBean?>) {
+    mOnItemClickListener = onItemClickListener
+  }
 
   companion object {
     private val ARTICLE_COMPARATOR = object : DiffUtil.ItemCallback<ArticleListBean>() {
@@ -47,6 +54,12 @@ class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHol
     // binding?.data = getItem(position)
     DataBindingUtil.getBinding<ItemArticleBinding>(holder.itemView)?.let {
       it.data = getItem(position)
+      it.root.setOnClickListener(object : View.OnClickListener {
+        override fun onClick(v: View?) {
+          mOnItemClickListener?.onItemClick(it.data)
+        }
+
+      })
     }
   }
 

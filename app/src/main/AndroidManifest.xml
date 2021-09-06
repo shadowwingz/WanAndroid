@@ -28,6 +28,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.web.WebActivity" />
+
         <service
             android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
             android:label="dexopt"
