@@ -1,21 +1,27 @@
 package com.shadowwingz.wanandroid
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
-import android.view.ViewGroup
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    protected var root: ViewGroup? = null
-    protected abstract fun setViewBinding(): ViewGroup
+  abstract fun getLayoutId(): Int
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setViewBindingImpl(setViewBinding())
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    if (getLayoutId() > 0) {
+      setContentView(getLayoutId())
     }
 
-    private fun setViewBindingImpl(root: ViewGroup) {
-        this.root = root
-        setContentView(root)
+    if (Build.VERSION.SDK_INT >= 21) {
+      val decorView = window.decorView
+      val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+      decorView.systemUiVisibility = option
+      window.statusBarColor = Color.TRANSPARENT
     }
+    supportActionBar?.hide()
+  }
 }

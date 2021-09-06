@@ -1,7 +1,7 @@
 package com.shadowwingz.wanandroid.ui.web;
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.shadowwingz.wanandroid.BaseActivity
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.base.WanAndroidApp
 import com.shadowwingz.wanandroid.utils.LogUtil
@@ -11,7 +11,9 @@ import kotlinx.android.synthetic.main.activity_web.*
 /**
  * created by shadowwingz on 2021-09-05 12:00
  */
-class WebActivity : AppCompatActivity() {
+class WebActivity : BaseActivity() {
+
+  override fun getLayoutId(): Int = R.layout.activity_web
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
