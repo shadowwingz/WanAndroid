@@ -106,4 +106,5 @@ dependencies {
     implementation "io.coil-kt:coil:1.2.2"
     // X5 WebView
     api 'com.tencent.tbs:tbssdk:44085'
+    implementation 'com.github.JavaNoober.BackgroundLibrary:libraryx:1.7.2'
 }

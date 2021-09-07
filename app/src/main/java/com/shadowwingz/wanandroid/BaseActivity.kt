@@ -5,12 +5,14 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.noober.background.BackgroundLibrary
 
 abstract class BaseActivity : AppCompatActivity() {
 
   abstract fun getLayoutId(): Int
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    BackgroundLibrary.inject(this)
     super.onCreate(savedInstanceState)
     if (getLayoutId() > 0) {
       setContentView(getLayoutId())
