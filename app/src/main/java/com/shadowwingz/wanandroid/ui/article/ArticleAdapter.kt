@@ -52,11 +52,12 @@ class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHol
     // binding?.setVariable(BR.data, item)
     // 效果等同于：
     // binding?.data = getItem(position)
-    DataBindingUtil.getBinding<ItemArticleBinding>(holder.itemView)?.let {
+    val binding = DataBindingUtil.getBinding<ItemArticleBinding>(holder.itemView)
+    binding?.let {
       it.data = getItem(position)
       it.root.setOnClickListener(object : View.OnClickListener {
         override fun onClick(v: View?) {
-          mOnItemClickListener?.onItemClick(it.data)
+          mOnItemClickListener?.onItemClick(it.data!!)
         }
         
       })
