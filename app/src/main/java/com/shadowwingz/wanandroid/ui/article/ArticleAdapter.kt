@@ -17,27 +17,27 @@ import com.shadowwingz.wanandroid.listeners.OnItemClickListener
  * created by shadowwingz on 2021-07-10 22:19
  */
 class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHolder>(ARTICLE_COMPARATOR) {
-
+  
   private var mOnItemClickListener: OnItemClickListener<ArticleListBean?>? = null
-
+  
   fun setOnItemClickListener(onItemClickListener: OnItemClickListener<ArticleListBean?>) {
     mOnItemClickListener = onItemClickListener
   }
-
+  
   companion object {
     private val ARTICLE_COMPARATOR = object : DiffUtil.ItemCallback<ArticleListBean>() {
       override fun areItemsTheSame(oldItem: ArticleListBean, newItem: ArticleListBean): Boolean {
         return oldItem.title == newItem.title
       }
-
+      
       override fun areContentsTheSame(oldItem: ArticleListBean, newItem: ArticleListBean): Boolean {
         return oldItem == newItem
       }
     }
   }
-
+  
   class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-
+  
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     // val binding: ItemArticleBinding? = DataBindingUtil.getBinding(holder.itemView)
     /**
@@ -58,11 +58,11 @@ class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHol
         override fun onClick(v: View?) {
           mOnItemClickListener?.onItemClick(it.data)
         }
-
+        
       })
     }
   }
-
+  
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     val binding = DataBindingUtil.inflate<ViewDataBinding>(
       LayoutInflater.from(parent.context), R.layout.item_article, parent, false

@@ -11,14 +11,14 @@ import com.shadowwingz.wanandroid.bean.ArticleListBean
 private const val WANANDROID_STARTING_PAGE_INDEX = 0
 
 class ArticlePagingSource(private val service: ArticleService) : PagingSource<Int, ArticleListBean>() {
-
+  
   override fun getRefreshKey(state: PagingState<Int, ArticleListBean>): Int? {
     return state.anchorPosition?.let { anchorPosition ->
       state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
         ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
     }
   }
-
+  
   override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleListBean> {
     // params.key 是即将加载的页面索引
     val position = params.key ?: WANANDROID_STARTING_PAGE_INDEX

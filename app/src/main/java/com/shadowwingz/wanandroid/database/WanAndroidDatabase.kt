@@ -8,12 +8,12 @@ import com.shadowwingz.wanandroid.bean.ArticleListBean
 
 @Database(entities = [ArticleListBean::class], version = 1, exportSchema = false)
 abstract class WanAndroidDatabase : RoomDatabase() {
-
+  
   abstract fun wanandroidDao(): WanAndroidDao
-
+  
   companion object {
     private var INSTANCE: WanAndroidDatabase? = null
-
+    
     fun getDatabase(context: Context): WanAndroidDatabase {
       //if (INSTANCE != null) {
       //  return INSTANCE as WanAndroidDatabase
@@ -24,7 +24,7 @@ abstract class WanAndroidDatabase : RoomDatabase() {
       if (tempInstance != null) {
         return tempInstance
       }
-
+      
       synchronized(this) {
         val instance = Room.databaseBuilder(
           context.applicationContext,

@@ -14,9 +14,9 @@ import com.shadowwingz.wanandroid.bean.BannerData
  * created by shadowwingz on 2021-07-11 15:33
  */
 class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
-
+  
   private val mItems: MutableList<BannerData> = mutableListOf()
-
+  
   fun setItems(items: List<BannerData>?) {
     if (items != null) {
       mItems.clear()
@@ -24,18 +24,18 @@ class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
       notifyDataSetChanged()
     }
   }
-
+  
   class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val banner: BGABanner = itemView.findViewById(R.id.banner)
   }
-
+  
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
     return ViewHolder(
       LayoutInflater.from(parent.context)
         .inflate(R.layout.layout_banner, parent, false)
     )
   }
-
+  
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     val list = mutableListOf<View>()
     for (data in mItems) {
@@ -46,7 +46,7 @@ class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
     }
     holder.banner.setData(list as List<View>?)
   }
-
+  
   override fun getItemCount(): Int {
     return 1
   };

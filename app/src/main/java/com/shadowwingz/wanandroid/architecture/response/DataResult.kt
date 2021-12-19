@@ -6,20 +6,20 @@ package com.shadowwingz.wanandroid.architecture.response;
 class DataResult<T>(entity: T?, responseStatus: ResponseStatus) {
   private var mEntity: T?
   private var mResponseStatus: ResponseStatus
-
+  
   init {
     mEntity = entity
     mResponseStatus = responseStatus
   }
-
+  
   fun getResult(): T? {
     return mEntity
   }
-
+  
   fun getResponseStatus(): ResponseStatus {
     return mResponseStatus
   }
-
+  
   interface Result<T> {
     fun onResult(dataResult: DataResult<T>?)
   }

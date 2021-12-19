@@ -7,64 +7,58 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shadowwingz.wanandroid.R
-import com.shadowwingz.wanandroid.architecture.response.DataResult
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.listeners.OnItemClickListener
 import com.shadowwingz.wanandroid.ui.BaseFragment
 import com.shadowwingz.wanandroid.ui.web.WebActivity
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment() {
-
+  
   private val viewModel by lazy {
-    ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
+    ViewModelProvider(this).get(HomeViewModel::class.java)
   }
-
+  
   private val pagingAdapter = ArticleAdapter()
   private val bannerAdapter = BannerAdapter()
-
-  private var loadJob: Job? = null
-
+  
   override fun getLayoutId(): Int {
     return R.layout.fragment_home
   }
-
+  
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     init()
-    loadData()
+    viewModel.loadData()
     observe()
   }
-
-  private fun loadData() {
-    viewModel.loadBanner()
-    loadJob?.cancel()
-    loadJob = lifecycleScope.launch {
-      viewModel.loadArticles().collectLatest {
-        pagingAdapter.submitData(it)
-      }
-    }
-  }
-
+  
   private fun init() {
     initAdapter()
     initRefreshListener()
   }
-
+  
   private fun observe() {
-    viewModel.bannerRequest.bannerLiveData.observe(viewLifecycleOwner, object : Observer<DataResult<BannerBean>> {
-      override fun onChanged(t: DataResult<BannerBean>?) {
-        bannerAdapter.setItems(t?.getResult()?.data)
+    viewModel.bannerRequest.bannerLiveData.observe(viewLifecycleOwner, object : Observer<BannerBean> {
+      override fun onChanged(bannerBean: BannerBean) {
+        bannerAdapter.setItems(bannerBean.data)
+      }
+    })
+    
+    viewModel.articleLiveData.observe(viewLifecycleOwner, object : Observer<PagingData<ArticleListBean>> {
+      override fun onChanged(pagingData: PagingData<ArticleListBean>) {
+        lifecycleScope.launch {
+          pagingAdapter.submitData(pagingData)
+        }
       }
     })
   }
-
+  
   private fun initRefreshListener() {
     with(refresh) {
       setColorSchemeResources(
@@ -73,12 +67,12 @@ class HomeFragment : BaseFragment() {
         android.R.color.holo_green_light,
         android.R.color.holo_green_light
       )
-
+      
       setOnRefreshListener {
         handleRefresh()
       }
     }
-
+    
     pagingAdapter.addLoadStateListener {
       when (it.refresh) {
         LoadState.Loading -> {
@@ -90,7 +84,7 @@ class HomeFragment : BaseFragment() {
       }
     }
   }
-
+  
   private fun initAdapter() {
     pagingAdapter.setOnItemClickListener(object : OnItemClickListener<ArticleListBean?> {
       override fun onItemClick(data: ArticleListBean?) {
@@ -105,9 +99,9 @@ class HomeFragment : BaseFragment() {
       adapter = concatAdapter
     }
   }
-
+  
   private fun handleRefresh() {
-    viewModel.loadBanner()
+    viewModel.loadData()
     pagingAdapter.refresh()
   }
 }

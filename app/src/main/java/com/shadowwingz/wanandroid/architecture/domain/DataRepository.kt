@@ -6,8 +6,10 @@ import androidx.paging.PagingData
 import com.shadowwingz.wanandroid.architecture.response.DataResult
 import com.shadowwingz.wanandroid.architecture.response.ResponseStatus
 import com.shadowwingz.wanandroid.architecture.response.ResultSource
-import com.shadowwingz.wanandroid.architecture.testpage.TestWanAndroidService
-import com.shadowwingz.wanandroid.bean.*
+import com.shadowwingz.wanandroid.bean.ArticleListBean
+import com.shadowwingz.wanandroid.bean.BannerBean
+import com.shadowwingz.wanandroid.bean.QuestionBean
+import com.shadowwingz.wanandroid.bean.User
 import com.shadowwingz.wanandroid.ui.account.AccountBean
 import com.shadowwingz.wanandroid.ui.account.AccountService
 import com.shadowwingz.wanandroid.ui.article.ArticlePagingSource
@@ -24,11 +26,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object DataRepository {
-
+  
   const val NETWORK_PAGE_SIZE = 20
-
+  
   private val retrofit: Retrofit
-
+  
   init {
     val logging = HttpLoggingInterceptor()
     logging.level = HttpLoggingInterceptor.Level.BODY
@@ -44,7 +46,7 @@ object DataRepository {
       .addConverterFactory(GsonConverterFactory.create())
       .build()
   }
-
+  
   fun getArticleResultStream(): Flow<PagingData<ArticleListBean>> {
     return Pager(
       config = PagingConfig(
@@ -54,31 +56,9 @@ object DataRepository {
       pagingSourceFactory = { ArticlePagingSource(retrofit.create(ArticleService::class.java)) }
     ).flow
   }
-
-  private var mArticleCall: Call<ArticleBean>? = null
-
-  fun fetchArticle(pageId: Int, result: DataResult.Result<ArticleBean>) {
-    mArticleCall = retrofit.create(TestWanAndroidService::class.java).getArticleList(pageId)
-    mArticleCall?.enqueue(object : Callback<ArticleBean> {
-      override fun onResponse(call: Call<ArticleBean>, response: Response<ArticleBean>) {
-        val responseStatus = ResponseStatus(response.code().toString(), response.isSuccessful, ResultSource.NETWORK)
-        result.onResult(DataResult(response.body(), responseStatus))
-      }
-
-      override fun onFailure(call: Call<ArticleBean>, t: Throwable) {
-        result.onResult(DataResult(null, ResponseStatus(t.message, false, ResultSource.NETWORK)))
-        mArticleCall = null
-      }
-    })
-  }
-
-  fun cancelFetch() {
-    mArticleCall?.cancel()
-    mArticleCall = null
-  }
-
+  
   private var mAccountCall: Call<AccountBean>? = null
-
+  
   fun requestLogin(user: User, result: DataResult.Result<AccountBean>) {
     mAccountCall = retrofit.create(AccountService::class.java).login(user.name, user.password)
     mAccountCall?.enqueue(object : Callback<AccountBean> {
@@ -86,38 +66,26 @@ object DataRepository {
         val responseStatus = ResponseStatus(response.code().toString(), response.isSuccessful, ResultSource.NETWORK)
         result.onResult(DataResult(response.body(), responseStatus))
       }
-
+      
       override fun onFailure(call: Call<AccountBean>, t: Throwable) {
         result.onResult(DataResult(null, ResponseStatus(t.message, false, ResultSource.NETWORK)))
         mAccountCall = null
       }
-
+      
     })
   }
-
+  
   fun cancelLogin() {
     mAccountCall?.cancel()
     mAccountCall = null
   }
-
-  private var mBannerCall: Call<BannerBean>? = null
-
-  fun requestBanner(result: DataResult.Result<BannerBean>) {
-    mBannerCall = retrofit.create(ArticleService::class.java).getBanner()
-    mBannerCall?.enqueue(object : Callback<BannerBean> {
-      override fun onResponse(call: Call<BannerBean>, response: Response<BannerBean>) {
-        val responseStatus = ResponseStatus(response.code().toString(), response.isSuccessful, ResultSource.NETWORK)
-        result.onResult(DataResult(response.body(), responseStatus))
-      }
-
-      override fun onFailure(call: Call<BannerBean>, t: Throwable) {
-        result.onResult(DataResult(null, ResponseStatus(t.message, false, ResultSource.NETWORK)))
-      }
-    })
+  
+  suspend fun requestBanner(): BannerBean {
+    return retrofit.create(ArticleService::class.java).getBanner()
   }
-
+  
   private var mQuestionCall: Call<QuestionBean>? = null
-
+  
   fun requestQuestions(pageId: Int, result: DataResult.Result<QuestionBean>) {
     mQuestionCall = retrofit.create(QuestionService::class.java).fetchQuestions(pageId)
     mQuestionCall?.enqueue(object : Callback<QuestionBean> {
@@ -125,15 +93,15 @@ object DataRepository {
         val responseStatus = ResponseStatus(response.code().toString(), response.isSuccessful, ResultSource.NETWORK)
         result.onResult(DataResult(response.body(), responseStatus))
       }
-
+      
       override fun onFailure(call: Call<QuestionBean>, t: Throwable) {
         result.onResult(DataResult(null, ResponseStatus(t.message, false, ResultSource.NETWORK)))
         mQuestionCall = null
       }
-
+      
     })
   }
-
+  
   fun cancelRequestQuestions() {
     mQuestionCall?.cancel()
     mQuestionCall = null

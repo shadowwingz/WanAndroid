@@ -12,9 +12,9 @@ import com.shadowwingz.wanandroid.bean.QuestionBean
  * created by shadowwingz on 2021-06-29 20:39
  */
 class QuestionRequest : BaseRequest(), DefaultLifecycleObserver {
-
+  
   val questionLiveData: MutableLiveData<DataResult<QuestionBean>> = MutableLiveData()
-
+  
   /**
    * 每日问答
    */
@@ -25,11 +25,11 @@ class QuestionRequest : BaseRequest(), DefaultLifecycleObserver {
       }
     })
   }
-
+  
   private fun cancelRequestQuestions() {
     DataRepository.cancelRequestQuestions()
   }
-
+  
   override fun onStop(owner: LifecycleOwner) {
     super.onStop(owner)
     cancelRequestQuestions()

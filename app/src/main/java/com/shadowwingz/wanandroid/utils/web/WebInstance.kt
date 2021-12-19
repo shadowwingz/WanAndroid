@@ -16,9 +16,9 @@ import com.tencent.smtt.sdk.WebView
  * created by shadowwingz on 2021-09-04 23:35
  */
 class WebInstance private constructor() {
-
+  
   companion object {
-
+    
     @JvmStatic
     fun create(context: Context): X5WebView {
       return X5WebView(context).apply {
@@ -52,5 +52,5 @@ class WebInstance private constructor() {
       }
     }
   }
-
+  
 }

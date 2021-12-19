@@ -12,15 +12,15 @@ import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.BannerData
 
 class BannerItemViewBinder : ItemViewBinder<List<BannerData>, BannerItemViewBinder.ViewHolder>() {
-
+  
   class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val banner: BGABanner = itemView.findViewById(R.id.banner)
   }
-
+  
   override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ViewHolder {
     return ViewHolder(inflater.inflate(R.layout.layout_banner, parent, false))
   }
-
+  
   override fun onBindViewHolder(holder: ViewHolder, item: List<BannerData>) {
     val list = mutableListOf<View>()
     for (data in item) {

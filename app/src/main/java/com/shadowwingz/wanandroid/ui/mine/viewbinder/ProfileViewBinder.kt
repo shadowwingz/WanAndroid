@@ -12,17 +12,17 @@ import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.ProfileItem
 
 class ProfileViewBinder : ItemViewBinder<ProfileItem, ProfileViewBinder.ProfileHolder>() {
-
+  
   class ProfileHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val ivIcon: ImageView = itemView.findViewById(R.id.ivIcon)
     val tvSubTitle: TextView = itemView.findViewById(R.id.tvSubTitle)
     val tvSubDesc: TextView = itemView.findViewById(R.id.tvSubDesc)
   }
-
+  
   override fun onCreateViewHolder(inflater: LayoutInflater, parent: ViewGroup): ProfileHolder {
     return ProfileHolder(inflater.inflate(R.layout.item_profile, parent, false))
   }
-
+  
   override fun onBindViewHolder(holder: ProfileHolder, item: ProfileItem) {
     holder.ivIcon.load(item.icon)
     holder.tvSubTitle.text = item.desc

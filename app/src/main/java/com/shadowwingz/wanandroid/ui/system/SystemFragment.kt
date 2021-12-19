@@ -17,8 +17,8 @@ class SystemFragment : Fragment() {
   private lateinit var viewModel: SystemViewModel
   
   override fun onCreateView(
-          inflater: LayoutInflater, container: ViewGroup?,
-          savedInstanceState: Bundle?
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
   ): View? {
     return inflater.inflate(R.layout.system_fragment, container, false)
   }

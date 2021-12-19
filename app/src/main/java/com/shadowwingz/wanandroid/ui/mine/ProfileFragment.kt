@@ -16,20 +16,20 @@ import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.ProfileItem
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
-
+  
   private val adapter = MultiTypeAdapter()
   private val items = ArrayList<Any>()
-
+  
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     return inflater.inflate(R.layout.fragment_profile, container, false)
   }
-
+  
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     val avatarViewBinder = AvatarViewBinder()
     adapter.register(avatarViewBinder)
     adapter.register(ProfileViewBinder())
     rvProfile.adapter = adapter
-
+    
     avatarViewBinder.apply {
       setOnAvatarClickListener(object : AvatarViewBinder.OnAvatarClickListener {
         override fun avatarClick() {
@@ -37,7 +37,7 @@ class ProfileFragment : Fragment() {
         }
       })
     }
-
+    
     val avatarItem = AvatarItem(R.drawable.ic_avatar, "shadowwingz")
     val subItems = listOf(
       ProfileItem.MY_COIN,
@@ -49,7 +49,7 @@ class ProfileFragment : Fragment() {
       ProfileItem.ABOUT,
       ProfileItem.SETTINGS
     )
-
+    
     items.add(avatarItem)
     items.addAll(subItems)
     adapter.items = items
