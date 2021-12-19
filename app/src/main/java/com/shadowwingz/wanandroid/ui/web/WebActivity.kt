@@ -1,9 +1,9 @@
 package com.shadowwingz.wanandroid.ui.web;
 
 import android.os.Bundle
-import com.shadowwingz.wanandroid.BaseActivity
 import com.shadowwingz.wanandroid.R
-import com.shadowwingz.wanandroid.base.WanAndroidApp
+import com.shadowwingz.wanandroid.WanAndroidApp
+import com.shadowwingz.wanandroid.base.BaseActivity
 import com.shadowwingz.wanandroid.utils.LogUtil
 import com.shadowwingz.wanandroid.utils.web.WebInstance
 import kotlinx.android.synthetic.main.activity_web.*

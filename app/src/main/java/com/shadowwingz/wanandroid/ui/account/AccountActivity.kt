@@ -3,7 +3,7 @@ package com.shadowwingz.wanandroid.ui.account
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.shadowwingz.wanandroid.BaseActivity
+import com.shadowwingz.wanandroid.base.BaseActivity
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.utils.LogUtil
 import kotlinx.android.synthetic.main.activity_account.*

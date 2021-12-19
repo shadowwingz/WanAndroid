@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.architecture.domain
+package com.shadowwingz.wanandroid.network
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -6,9 +6,9 @@ import androidx.paging.PagingData
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.bean.QuestionBean
-import com.shadowwingz.wanandroid.ui.account.UserBean
 import com.shadowwingz.wanandroid.ui.account.AccountBean
 import com.shadowwingz.wanandroid.ui.account.AccountService
+import com.shadowwingz.wanandroid.ui.account.UserBean
 import com.shadowwingz.wanandroid.ui.article.ArticlePagingSource
 import com.shadowwingz.wanandroid.ui.article.ArticleService
 import com.shadowwingz.wanandroid.ui.question.QuestionService

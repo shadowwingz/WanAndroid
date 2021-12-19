@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid
+package com.shadowwingz.wanandroid.base
 
 import android.graphics.Color
 import android.os.Build

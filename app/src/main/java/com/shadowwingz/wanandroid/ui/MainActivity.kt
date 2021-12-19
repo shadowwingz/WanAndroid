@@ -3,7 +3,7 @@ package com.shadowwingz.wanandroid.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.shadowwingz.wanandroid.BaseActivity
+import com.shadowwingz.wanandroid.base.BaseActivity
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.ui.article.HomeFragment
 import com.shadowwingz.wanandroid.ui.mine.ProfileFragment

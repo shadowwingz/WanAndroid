@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.base
+package com.shadowwingz.wanandroid
 
 import android.annotation.SuppressLint
 import android.app.Application

@@ -1,8 +1,8 @@
 package com.shadowwingz.wanandroid.ui.account;
 
 import androidx.lifecycle.MutableLiveData
-import com.shadowwingz.wanandroid.architecture.domain.BaseRequest
-import com.shadowwingz.wanandroid.architecture.domain.DataRepository
+import com.shadowwingz.wanandroid.network.BaseRequest
+import com.shadowwingz.wanandroid.network.DataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

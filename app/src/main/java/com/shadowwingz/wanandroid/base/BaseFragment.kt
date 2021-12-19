@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.ui
+package com.shadowwingz.wanandroid.base
 
 import android.app.ProgressDialog
 import android.os.Bundle
