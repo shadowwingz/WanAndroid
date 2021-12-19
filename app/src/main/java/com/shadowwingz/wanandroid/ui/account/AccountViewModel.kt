@@ -2,7 +2,6 @@ package com.shadowwingz.wanandroid.ui.account;
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shadowwingz.wanandroid.bean.User
 import kotlinx.coroutines.launch
 
 /**
@@ -12,9 +11,9 @@ class AccountViewModel : ViewModel() {
   
   val accountRequest = AccountRequest()
   
-  fun login(user: User) {
+  fun login(userBean: UserBean) {
     viewModelScope.launch {
-      accountRequest.requestLogin(user)
+      accountRequest.requestLogin(userBean)
     }
   }
 }

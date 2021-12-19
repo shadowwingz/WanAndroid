@@ -5,7 +5,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.shadowwingz.wanandroid.BaseActivity
 import com.shadowwingz.wanandroid.R
-import com.shadowwingz.wanandroid.bean.User
 import com.shadowwingz.wanandroid.utils.LogUtil
 import kotlinx.android.synthetic.main.activity_account.*
 
@@ -21,7 +20,7 @@ class AccountActivity : BaseActivity() {
     super.onCreate(savedInstanceState)
     
     btnLogin.setOnClickListener {
-      val user = User(etUserName.text.toString(), etPassword.text.toString())
+      val user = UserBean(etUserName.text.toString(), etPassword.text.toString())
       mViewModel.login(user)
       
       mViewModel.accountRequest.tokenLiveData.observe(this, object: Observer<AccountBean>{

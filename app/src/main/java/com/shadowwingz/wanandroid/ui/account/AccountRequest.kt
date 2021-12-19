@@ -3,7 +3,6 @@ package com.shadowwingz.wanandroid.ui.account;
 import androidx.lifecycle.MutableLiveData
 import com.shadowwingz.wanandroid.architecture.domain.BaseRequest
 import com.shadowwingz.wanandroid.architecture.domain.DataRepository
-import com.shadowwingz.wanandroid.bean.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -14,9 +13,9 @@ class AccountRequest : BaseRequest() {
   
   val tokenLiveData: MutableLiveData<AccountBean> = MutableLiveData()
   
-  suspend fun requestLogin(user: User) {
+  suspend fun requestLogin(userBean: UserBean) {
     withContext(Dispatchers.IO) {
-      tokenLiveData.postValue(DataRepository.requestLogin(user))
+      tokenLiveData.postValue(DataRepository.requestLogin(userBean))
     }
   }
   

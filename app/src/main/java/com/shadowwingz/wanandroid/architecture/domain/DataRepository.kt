@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.bean.QuestionBean
-import com.shadowwingz.wanandroid.bean.User
+import com.shadowwingz.wanandroid.ui.account.UserBean
 import com.shadowwingz.wanandroid.ui.account.AccountBean
 import com.shadowwingz.wanandroid.ui.account.AccountService
 import com.shadowwingz.wanandroid.ui.article.ArticlePagingSource
@@ -51,8 +51,8 @@ object DataRepository {
     ).flow
   }
   
-  suspend fun requestLogin(user: User): AccountBean {
-    return retrofit.create(AccountService::class.java).login(user.name, user.password)
+  suspend fun requestLogin(userBean: UserBean): AccountBean {
+    return retrofit.create(AccountService::class.java).login(userBean.name, userBean.password)
   }
   
   suspend fun requestBanner(): BannerBean {

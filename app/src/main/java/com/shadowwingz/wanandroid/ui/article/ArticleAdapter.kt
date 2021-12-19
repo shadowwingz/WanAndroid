@@ -18,9 +18,9 @@ import com.shadowwingz.wanandroid.listeners.OnItemClickListener
  */
 class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHolder>(ARTICLE_COMPARATOR) {
   
-  private var mOnItemClickListener: OnItemClickListener<ArticleListBean?>? = null
+  private var mOnItemClickListener: OnItemClickListener<ArticleListBean>? = null
   
-  fun setOnItemClickListener(onItemClickListener: OnItemClickListener<ArticleListBean?>) {
+  fun setOnItemClickListener(onItemClickListener: OnItemClickListener<ArticleListBean>) {
     mOnItemClickListener = onItemClickListener
   }
   

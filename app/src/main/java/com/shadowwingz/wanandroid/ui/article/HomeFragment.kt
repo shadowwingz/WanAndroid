@@ -36,13 +36,13 @@ class HomeFragment : BaseFragment() {
   
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     init()
-    viewModel.loadData()
     observe()
   }
   
   private fun init() {
     initAdapter()
     initRefreshListener()
+    viewModel.loadData()
   }
   
   private fun observe() {
@@ -88,10 +88,10 @@ class HomeFragment : BaseFragment() {
   }
   
   private fun initAdapter() {
-    pagingAdapter.setOnItemClickListener(object : OnItemClickListener<ArticleListBean?> {
-      override fun onItemClick(data: ArticleListBean?) {
+    pagingAdapter.setOnItemClickListener(object : OnItemClickListener<ArticleListBean> {
+      override fun onItemClick(data: ArticleListBean) {
         val intent = Intent(activity, WebActivity::class.java)
-        intent.putExtra("url", data?.link)
+        intent.putExtra("url", data.link)
         activity?.startActivity(intent)
       }
     })
