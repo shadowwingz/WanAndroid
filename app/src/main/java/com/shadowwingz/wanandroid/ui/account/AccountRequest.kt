@@ -1,34 +1,23 @@
 package com.shadowwingz.wanandroid.ui.account;
 
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import com.shadowwingz.wanandroid.architecture.domain.BaseRequest
 import com.shadowwingz.wanandroid.architecture.domain.DataRepository
-import com.shadowwingz.wanandroid.architecture.response.DataResult
 import com.shadowwingz.wanandroid.bean.User
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * created by shadowwingz on 2021-06-20 22:58
  */
-class AccountRequest : BaseRequest(), DefaultLifecycleObserver {
+class AccountRequest : BaseRequest() {
   
-  private val tokenLiveData: MutableLiveData<DataResult<AccountBean>> = MutableLiveData()
+  val tokenLiveData: MutableLiveData<AccountBean> = MutableLiveData()
   
-  fun requestLogin(user: User) {
-    DataRepository.requestLogin(user, object : DataResult.Result<AccountBean> {
-      override fun onResult(dataResult: DataResult<AccountBean>?) {
-        tokenLiveData.postValue(dataResult)
-      }
-    })
+  suspend fun requestLogin(user: User) {
+    withContext(Dispatchers.IO) {
+      tokenLiveData.postValue(DataRepository.requestLogin(user))
+    }
   }
   
-  private fun cancelLogin() {
-    DataRepository.cancelLogin()
-  }
-  
-  override fun onStop(owner: LifecycleOwner) {
-    super.onStop(owner)
-    cancelLogin()
-  }
 }

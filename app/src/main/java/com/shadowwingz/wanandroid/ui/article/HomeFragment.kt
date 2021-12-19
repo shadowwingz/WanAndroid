@@ -15,6 +15,8 @@ import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.listeners.OnItemClickListener
 import com.shadowwingz.wanandroid.ui.BaseFragment
+import com.shadowwingz.wanandroid.ui.article.banner.BannerAdapter
+import com.shadowwingz.wanandroid.ui.article.banner.HomeViewModel
 import com.shadowwingz.wanandroid.ui.web.WebActivity
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.launch

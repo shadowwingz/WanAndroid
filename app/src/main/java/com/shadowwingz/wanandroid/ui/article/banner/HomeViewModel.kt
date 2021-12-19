@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.ui.article
+package com.shadowwingz.wanandroid.ui.article.banner
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope

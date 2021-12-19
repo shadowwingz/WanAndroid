@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.ui.article;
+package com.shadowwingz.wanandroid.ui.article.banner;
 
 import androidx.lifecycle.MutableLiveData
 import com.shadowwingz.wanandroid.architecture.domain.BaseRequest

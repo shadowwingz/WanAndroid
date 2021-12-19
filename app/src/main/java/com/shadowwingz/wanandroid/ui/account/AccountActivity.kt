@@ -1,15 +1,17 @@
 package com.shadowwingz.wanandroid.ui.account
 
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.shadowwingz.wanandroid.BaseActivity
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.User
+import com.shadowwingz.wanandroid.utils.LogUtil
 import kotlinx.android.synthetic.main.activity_account.*
 
 class AccountActivity : BaseActivity() {
   
-  private val mState by lazy {
+  private val mViewModel by lazy {
     ViewModelProvider(this).get(AccountViewModel::class.java)
   }
   
@@ -20,7 +22,13 @@ class AccountActivity : BaseActivity() {
     
     btnLogin.setOnClickListener {
       val user = User(etUserName.text.toString(), etPassword.text.toString())
-      mState.accountRequest.requestLogin(user)
+      mViewModel.login(user)
+      
+      mViewModel.accountRequest.tokenLiveData.observe(this, object: Observer<AccountBean>{
+        override fun onChanged(accountBean: AccountBean) {
+          LogUtil.d(accountBean.toString())
+        }
+      })
     }
     
   }
