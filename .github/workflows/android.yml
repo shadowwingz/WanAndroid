@@ -14,4 +14,10 @@ jobs:
         with:
           java-version: 11
       - name: Build debug APK
-        run: bash ./gradlew assembleDebug --stacktrace
+        run: bash ./gradlew app:assembleDebug --stacktrace
+      - name: upload apk
+        uses: actions/upload-artifact@master
+        if: always()
+        with:
+          name: wanandroid-apk
+          path: ${{ github.workspace }}/app/build/outputs/apk/debug
