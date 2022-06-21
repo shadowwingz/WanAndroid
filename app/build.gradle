@@ -107,4 +107,5 @@ dependencies {
     // X5 WebView
     api 'com.tencent.tbs:tbssdk:44085'
     implementation 'com.github.JavaNoober.BackgroundLibrary:libraryx:1.7.2'
+    implementation 'com.github.liangjingkanji:BRV:1.3.78'
 }
