@@ -3,41 +3,40 @@ package com.shadowwingz.wanandroid.ui.article;
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.ArticleListBean
-import com.shadowwingz.wanandroid.databinding.ItemArticleBinding
 import com.shadowwingz.wanandroid.listeners.OnItemClickListener
+import kotlinx.android.synthetic.main.item_article.view.*
 
 /**
  * created by shadowwingz on 2021-07-10 22:19
  */
 class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHolder>(ARTICLE_COMPARATOR) {
-  
+
   private var mOnItemClickListener: OnItemClickListener<ArticleListBean>? = null
-  
+
   fun setOnItemClickListener(onItemClickListener: OnItemClickListener<ArticleListBean>) {
     mOnItemClickListener = onItemClickListener
   }
-  
+
   companion object {
     private val ARTICLE_COMPARATOR = object : DiffUtil.ItemCallback<ArticleListBean>() {
       override fun areItemsTheSame(oldItem: ArticleListBean, newItem: ArticleListBean): Boolean {
         return oldItem.title == newItem.title
       }
-      
+
       override fun areContentsTheSame(oldItem: ArticleListBean, newItem: ArticleListBean): Boolean {
         return oldItem == newItem
       }
     }
   }
-  
+
   class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-  
+
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     // val binding: ItemArticleBinding? = DataBindingUtil.getBinding(holder.itemView)
     /**
@@ -52,7 +51,7 @@ class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHol
     // binding?.setVariable(BR.data, item)
     // 效果等同于：
     // binding?.data = getItem(position)
-    val binding = DataBindingUtil.getBinding<ItemArticleBinding>(holder.itemView)
+    /*val binding = DataBindingUtil.getBinding<ItemArticleBinding>(holder.itemView)
     binding?.let {
       it.data = getItem(position)
       it.root.setOnClickListener(object : View.OnClickListener {
@@ -61,13 +60,32 @@ class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHol
         }
         
       })
+    }*/
+
+    val data = getItem(position)
+    holder.itemView.apply {
+      data?.let { articleListBean ->
+        tvAuthor.text = articleListBean.author
+        tv_time.text = articleListBean.niceDate
+        tvTitle.text = articleListBean.title
+        tvSuperChapterName.text = articleListBean.superChapterName
+        tvChapterName.text = articleListBean.chapterName
+
+        val likeIcon = if (articleListBean.collect) R.drawable.ic_like else R.drawable.ic_like
+        iv_like.setImageDrawable(AppCompatResources.getDrawable(context, likeIcon))
+
+        setOnClickListener {
+          mOnItemClickListener?.onItemClick(articleListBean)
+        }
+      }
     }
   }
-  
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-    val binding = DataBindingUtil.inflate<ViewDataBinding>(
+    val view = LayoutInflater.from(parent.context).inflate(R.layout.item_article, parent, false)
+    /*val binding = DataBindingUtil.inflate<ViewDataBinding>(
       LayoutInflater.from(parent.context), R.layout.item_article, parent, false
-    )
-    return ViewHolder(binding.root)
+    )*/
+    return ViewHolder(view)
   }
 }

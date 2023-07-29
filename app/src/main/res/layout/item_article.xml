@@ -1,92 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ripple_bg"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingStart="16dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="10dp">
 
-    <data>
-
-        <variable
-            name="data"
-            type="com.shadowwingz.wanandroid.bean.ArticleListBean" />
-    </data>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <!-- 作者 -->
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple_bg"
-        android:clickable="true"
-        android:focusable="true"
-        android:paddingStart="16dp"
-        android:paddingTop="10dp"
-        android:paddingEnd="16dp"
-        android:paddingBottom="10dp">
+        android:textSize="14dp"
+        tools:ignore="SpUsage"
+        tools:text="作者" />
 
-        <!-- 作者 -->
-        <TextView
-            android:id="@+id/tvAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{data.shareUser}"
-            android:textSize="14dp"
-            tools:ignore="SpUsage"
-            tools:text="作者" />
+    <!-- todo android:layout_toEndOf="@id/tv_author" 会使日期靠左，导致无法靠右，先屏蔽掉，待后面研究 -->
+    <!-- 发布日期 -->
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        tools:text="2020-01-01 22:34" />
 
-        <!-- todo android:layout_toEndOf="@id/tv_author" 会使日期靠左，导致无法靠右，先屏蔽掉，待后面研究 -->
-        <!-- 发布日期 -->
-        <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:text="@{data.niceDate}"
-            tools:text="2020-01-01 22:34" />
+    <!-- 文章标题 -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvAuthor"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/colorBlack"
+        tools:text="学习笔记" />
 
-        <!-- 文章标题 -->
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvAuthor"
-            android:layout_marginTop="5dp"
-            android:text="@{data.title}"
-            android:textColor="@color/colorBlack"
-            tools:text="学习笔记" />
+    <!-- SuperChapterName -->
+    <TextView
+        android:id="@+id/tvSuperChapterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        tools:text="广场Tab" />
 
-        <!-- SuperChapterName -->
-        <TextView
-            android:id="@+id/tvSuperChapterName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvTitle"
-            android:text="@{data.superChapterName}"
-            tools:text="广场Tab" />
+    <TextView
+        android:id="@+id/tvDot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        android:layout_toEndOf="@id/tvSuperChapterName"
+        android:text="@string/dot" />
 
-        <TextView
-            android:id="@+id/tvDot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvTitle"
-            android:layout_toEndOf="@id/tvSuperChapterName"
-            android:text="@string/dot" />
+    <!-- chapterName -->
+    <TextView
+        android:id="@+id/tvChapterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        android:layout_toEndOf="@id/tvDot"
+        tools:text="自助" />
 
-        <!-- chapterName -->
-        <TextView
-            android:id="@+id/tvChapterName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvTitle"
-            android:layout_toEndOf="@id/tvDot"
-            android:text="@{data.chapterName}"
-            tools:text="自助" />
+    <!-- 喜欢 -->
+    <ImageView
+        android:id="@+id/iv_like"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignBottom="@id/tvChapterName"
+        android:layout_alignParentEnd="true"
+        android:contentDescription="@string/like" />
 
-        <!-- 喜欢 -->
-        <ImageView
-            android:id="@+id/iv_like"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_alignBottom="@id/tvChapterName"
-            android:layout_alignParentEnd="true"
-            android:contentDescription="@string/like"
-            android:src="@{data.collect ? @drawable/ic_like : @drawable/ic_like}" />
-
-    </RelativeLayout>
-</layout>
+</RelativeLayout>
