@@ -16,16 +16,11 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor() : ViewModel() {
 
-  // @Inject
-  // lateinit var vmData: VMData
-
-  val bannerRequest = BannerRequest()
-  // @Inject
-  // lateinit var bannerRequest: BannerRequest
+  @Inject
+  lateinit var bannerRequest: BannerRequest
   var articleLiveData: MutableLiveData<PagingData<ArticleListBean>> = MutableLiveData()
 
   fun loadData() {
-    // Timber.d("vmData: $vmData")
     viewModelScope.launch {
       bannerRequest.getBanner()
       loadArticles().collectLatest {

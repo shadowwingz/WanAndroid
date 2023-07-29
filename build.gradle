@@ -3,14 +3,14 @@
 buildscript {
 
     ext.booster_version = '3.1.0'
-    ext.hiltVersion = '2.43.2'
+    ext.hiltVersion = '2.47'
 
     ext.versions = [
             'minSdk'        : 21,
             'compileSdk'    : 29,
             'targetSdk'     : 29,
 
-            'kotlin_version': '1.7.0',
+            'kotlin_version': '1.6.20',
     ]
 
     repositories {

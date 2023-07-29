@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -22,7 +21,6 @@ import com.shadowwingz.wanandroid.listeners.OnItemClickListener
 import com.shadowwingz.wanandroid.ui.article.banner.BannerAdapter
 import com.shadowwingz.wanandroid.ui.article.banner.BannerRequest
 import com.shadowwingz.wanandroid.ui.article.banner.HomeViewModel
-import com.shadowwingz.wanandroid.ui.article.banner.VMData
 import com.shadowwingz.wanandroid.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -37,12 +35,7 @@ class HomeFragment @Inject constructor() : BaseFragment() {
   @Inject
   lateinit var bannerRequest: BannerRequest
 
-  @Inject
-  lateinit var vmData: VMData
-
-  private val viewModel: HomeViewModel by viewModels {
-    SavedStateViewModelFactory(requireActivity().application, this)
-  }
+  private val viewModel: HomeViewModel by viewModels()
 
   private val pagingAdapter = ArticleAdapter()
   private val bannerAdapter = BannerAdapter()
@@ -63,7 +56,6 @@ class HomeFragment @Inject constructor() : BaseFragment() {
 
   private fun init() {
     Timber.d("request: $bannerRequest")
-    Timber.d("vmData: $vmData")
     initAdapter()
     initRefreshListener()
     viewModel.loadData()
