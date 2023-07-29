@@ -5,13 +5,14 @@ import android.app.Application
 import android.content.Context
 import com.tencent.smtt.export.external.TbsCoreSettings
 import com.tencent.smtt.sdk.QbSdk
-
+import timber.log.Timber
 
 class WanAndroidApp : Application() {
   
   override fun onCreate() {
     super.onCreate()
     context = this
+    Timber.plant(Timber.DebugTree())
     
     initX5WebView()
   }

@@ -1,9 +1,9 @@
 package com.shadowwingz.wanandroid.ui.article.banner;
 
 import androidx.lifecycle.MutableLiveData
+import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.network.BaseRequest
 import com.shadowwingz.wanandroid.network.DataRepository
-import com.shadowwingz.wanandroid.bean.BannerBean
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

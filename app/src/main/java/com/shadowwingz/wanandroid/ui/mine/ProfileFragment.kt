@@ -8,28 +8,31 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.drakeet.multitype.MultiTypeAdapter
 import com.shadowwingz.wanandroid.R
+import com.shadowwingz.wanandroid.databinding.FragmentProfileBinding
 import com.shadowwingz.wanandroid.ui.account.AccountActivity
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.AvatarViewBinder
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.ProfileViewBinder
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.AvatarItem
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.ProfileItem
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
-  
+
+  private lateinit var binding: FragmentProfileBinding
+
   private val adapter = MultiTypeAdapter()
   private val items = ArrayList<Any>()
-  
+
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    return inflater.inflate(R.layout.fragment_profile, container, false)
+    binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
+    return binding.root
   }
-  
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     val avatarViewBinder = AvatarViewBinder()
     adapter.register(avatarViewBinder)
     adapter.register(ProfileViewBinder())
-    rvProfile.adapter = adapter
-    
+    binding.rvProfile.adapter = adapter
+
     avatarViewBinder.apply {
       setOnAvatarClickListener(object : AvatarViewBinder.OnAvatarClickListener {
         override fun avatarClick() {
@@ -37,7 +40,7 @@ class ProfileFragment : Fragment() {
         }
       })
     }
-    
+
     val avatarItem = AvatarItem(R.drawable.ic_avatar, "shadowwingz")
     val subItems = listOf(
       ProfileItem.MY_COIN,
@@ -49,7 +52,7 @@ class ProfileFragment : Fragment() {
       ProfileItem.ABOUT,
       ProfileItem.SETTINGS
     )
-    
+
     items.add(avatarItem)
     items.addAll(subItems)
     adapter.items = items

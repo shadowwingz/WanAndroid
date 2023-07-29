@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.ArticleListBean
+import com.shadowwingz.wanandroid.databinding.ItemArticleBinding
 import com.shadowwingz.wanandroid.listeners.OnItemClickListener
-import kotlinx.android.synthetic.main.item_article.view.*
 
 /**
  * created by shadowwingz on 2021-07-10 22:19
@@ -62,19 +62,21 @@ class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHol
       })
     }*/
 
+    val binding = ItemArticleBinding.bind(holder.itemView)
+
     val data = getItem(position)
-    holder.itemView.apply {
+    binding.apply {
       data?.let { articleListBean ->
         tvAuthor.text = articleListBean.author
-        tv_time.text = articleListBean.niceDate
+        tvTime.text = articleListBean.niceDate
         tvTitle.text = articleListBean.title
         tvSuperChapterName.text = articleListBean.superChapterName
         tvChapterName.text = articleListBean.chapterName
 
         val likeIcon = if (articleListBean.collect) R.drawable.ic_like else R.drawable.ic_like
-        iv_like.setImageDrawable(AppCompatResources.getDrawable(context, likeIcon))
+        ivLike.setImageDrawable(AppCompatResources.getDrawable(root.context, likeIcon))
 
-        setOnClickListener {
+        root.setOnClickListener {
           mOnItemClickListener?.onItemClick(articleListBean)
         }
       }

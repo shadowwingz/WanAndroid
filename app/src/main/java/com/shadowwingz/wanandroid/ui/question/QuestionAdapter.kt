@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.Question
-import kotlinx.android.synthetic.main.item_question.view.*
+import com.shadowwingz.wanandroid.databinding.ItemQuestionBinding
 
 /**
  * created by shadowwingz on 2021-06-29 21:46
@@ -33,8 +33,9 @@ class QuestionAdapter : ListAdapter<Question, QuestionAdapter.ViewHolder>(Questi
   }
   
   override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    val binding = ItemQuestionBinding.bind(holder.itemView)
     val data = getItem(position)
-    holder.itemView.apply {
+    binding.apply {
       tvAuthor.text = data.author
       tvTag.text = data.tags[0].name
       tvNiceDate.text = data.niceDate

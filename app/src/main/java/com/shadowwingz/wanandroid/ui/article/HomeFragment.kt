@@ -2,7 +2,9 @@ package com.shadowwingz.wanandroid.ui.article
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -14,14 +16,17 @@ import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.base.BaseFragment
 import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.bean.BannerBean
+import com.shadowwingz.wanandroid.databinding.FragmentHomeBinding
 import com.shadowwingz.wanandroid.listeners.OnItemClickListener
 import com.shadowwingz.wanandroid.ui.article.banner.BannerAdapter
 import com.shadowwingz.wanandroid.ui.article.banner.HomeViewModel
 import com.shadowwingz.wanandroid.ui.web.WebActivity
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class HomeFragment : BaseFragment() {
+
+  private lateinit var binding: FragmentHomeBinding
 
   private val viewModel by viewModels<HomeViewModel>()
 
@@ -32,7 +37,13 @@ class HomeFragment : BaseFragment() {
     return R.layout.fragment_home
   }
 
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+    return binding.root
+  }
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    Timber.d("onViewCreated")
     init()
     observe()
   }
@@ -60,7 +71,7 @@ class HomeFragment : BaseFragment() {
   }
 
   private fun initRefreshListener() {
-    with(refresh) {
+    with(binding.refresh) {
       setColorSchemeResources(
         android.R.color.holo_blue_dark,
         android.R.color.holo_blue_light,
@@ -76,10 +87,10 @@ class HomeFragment : BaseFragment() {
     pagingAdapter.addLoadStateListener {
       when (it.refresh) {
         LoadState.Loading -> {
-          refresh.isRefreshing = true
+          binding.refresh.isRefreshing = true
         }
         else -> {
-          refresh.isRefreshing = false
+          binding.refresh.isRefreshing = false
         }
       }
     }
@@ -94,7 +105,7 @@ class HomeFragment : BaseFragment() {
       }
     })
     val concatAdapter = ConcatAdapter(bannerAdapter, pagingAdapter)
-    with(rvArticleList) {
+    with(binding.rvArticleList) {
       layoutManager = LinearLayoutManager(activity)
       adapter = concatAdapter
     }

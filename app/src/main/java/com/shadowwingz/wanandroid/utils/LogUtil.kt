@@ -1,6 +1,6 @@
 package com.shadowwingz.wanandroid.utils
 
-import android.util.Log
+import timber.log.Timber
 
 /**
  * Log 工具类
@@ -11,6 +11,6 @@ object LogUtil {
   
   @JvmStatic
   fun d(msg: String) {
-    Log.d(TAG, msg)
+    Timber.d(msg)
   }
 }
