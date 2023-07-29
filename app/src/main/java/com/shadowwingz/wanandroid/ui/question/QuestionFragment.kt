@@ -5,17 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.bean.QuestionBean
 import kotlinx.android.synthetic.main.question_fragment.*
 
 class QuestionFragment : Fragment() {
   
-  private val mViewModel by lazy {
-    ViewModelProvider(this).get(QuestionViewModel::class.java)
-  }
+  private val viewModel by viewModels<QuestionViewModel>()
   
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     return inflater.inflate(R.layout.question_fragment, container, false)
@@ -27,9 +25,9 @@ class QuestionFragment : Fragment() {
     val adapter = QuestionAdapter()
     rvQuestion.adapter = adapter
     
-    mViewModel.getQuestions(1)
+    viewModel.getQuestions(1)
     
-    mViewModel.questionRequest.questionLiveData.observe(viewLifecycleOwner, object : Observer<QuestionBean> {
+    viewModel.questionRequest.questionLiveData.observe(viewLifecycleOwner, object : Observer<QuestionBean> {
       override fun onChanged(questionBean: QuestionBean) {
         adapter.submitList(questionBean.data.data)
       }
