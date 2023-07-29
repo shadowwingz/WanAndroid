@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
@@ -19,16 +20,29 @@ import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.databinding.FragmentHomeBinding
 import com.shadowwingz.wanandroid.listeners.OnItemClickListener
 import com.shadowwingz.wanandroid.ui.article.banner.BannerAdapter
+import com.shadowwingz.wanandroid.ui.article.banner.BannerRequest
 import com.shadowwingz.wanandroid.ui.article.banner.HomeViewModel
+import com.shadowwingz.wanandroid.ui.article.banner.VMData
 import com.shadowwingz.wanandroid.ui.web.WebActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
-class HomeFragment : BaseFragment() {
+@AndroidEntryPoint
+class HomeFragment @Inject constructor() : BaseFragment() {
 
   private lateinit var binding: FragmentHomeBinding
 
-  private val viewModel by viewModels<HomeViewModel>()
+  @Inject
+  lateinit var bannerRequest: BannerRequest
+
+  @Inject
+  lateinit var vmData: VMData
+
+  private val viewModel: HomeViewModel by viewModels {
+    SavedStateViewModelFactory(requireActivity().application, this)
+  }
 
   private val pagingAdapter = ArticleAdapter()
   private val bannerAdapter = BannerAdapter()
@@ -43,12 +57,13 @@ class HomeFragment : BaseFragment() {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    Timber.d("onViewCreated")
     init()
     observe()
   }
 
   private fun init() {
+    Timber.d("request: $bannerRequest")
+    Timber.d("vmData: $vmData")
     initAdapter()
     initRefreshListener()
     viewModel.loadData()

@@ -5,8 +5,10 @@ import android.app.Application
 import android.content.Context
 import com.tencent.smtt.export.external.TbsCoreSettings
 import com.tencent.smtt.sdk.QbSdk
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
+@HiltAndroidApp
 class WanAndroidApp : Application() {
   
   override fun onCreate() {

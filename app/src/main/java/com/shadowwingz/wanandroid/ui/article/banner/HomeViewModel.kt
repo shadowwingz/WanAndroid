@@ -11,13 +11,21 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor() : ViewModel() {
+
+  // @Inject
+  // lateinit var vmData: VMData
 
   val bannerRequest = BannerRequest()
+  // @Inject
+  // lateinit var bannerRequest: BannerRequest
   var articleLiveData: MutableLiveData<PagingData<ArticleListBean>> = MutableLiveData()
 
   fun loadData() {
+    // Timber.d("vmData: $vmData")
     viewModelScope.launch {
       bannerRequest.getBanner()
       loadArticles().collectLatest {

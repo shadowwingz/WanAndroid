@@ -3,6 +3,7 @@ package com.shadowwingz.wanandroid.ui
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.base.BaseActivity
 import com.shadowwingz.wanandroid.databinding.ActivityMainBinding
@@ -10,8 +11,23 @@ import com.shadowwingz.wanandroid.ui.article.HomeFragment
 import com.shadowwingz.wanandroid.ui.mine.ProfileFragment
 import com.shadowwingz.wanandroid.ui.question.QuestionFragment
 import com.shadowwingz.wanandroid.ui.system.SystemFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
+
+  @Inject
+  lateinit var homeFragment: HomeFragment
+
+  @Inject
+  lateinit var questionFragment: QuestionFragment
+
+  @Inject
+  lateinit var systemFragment: SystemFragment
+
+  @Inject
+  lateinit var profileFragment: ProfileFragment
 
   private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
@@ -29,16 +45,24 @@ class MainActivity : BaseActivity() {
 
         override fun createFragment(position: Int): Fragment {
           return when (position) {
-            0 -> HomeFragment()
-            1 -> QuestionFragment()
-            2 -> SystemFragment()
-            else -> ProfileFragment()
+            0 -> homeFragment
+            1 -> questionFragment
+            2 -> systemFragment
+            else -> profileFragment
           }
         }
       }
-      
+
+      registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+          binding.navView.apply {
+            selectedItemId = menu.getItem(position).itemId
+          }
+        }
+      })
+
       // 禁止左右滑动
-      isUserInputEnabled = false
+      // isUserInputEnabled = false
     }
 
     // 当 ViewPager 切换页面时，改变 ViewPager 的显示

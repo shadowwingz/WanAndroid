@@ -14,8 +14,9 @@ import com.shadowwingz.wanandroid.ui.mine.viewbinder.AvatarViewBinder
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.ProfileViewBinder
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.AvatarItem
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.ProfileItem
+import javax.inject.Inject
 
-class ProfileFragment : Fragment() {
+class ProfileFragment @Inject constructor() : Fragment() {
 
   private lateinit var binding: FragmentProfileBinding
 

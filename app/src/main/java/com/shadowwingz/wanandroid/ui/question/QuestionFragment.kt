@@ -9,8 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.shadowwingz.wanandroid.bean.QuestionBean
 import com.shadowwingz.wanandroid.databinding.FragmentQuestionBinding
+import javax.inject.Inject
 
-class QuestionFragment : Fragment() {
+class QuestionFragment @Inject constructor() : Fragment() {
 
   private lateinit var binding: FragmentQuestionBinding
 

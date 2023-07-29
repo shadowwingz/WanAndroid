@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.shadowwingz.wanandroid.R
+import javax.inject.Inject
 
-class SystemFragment : Fragment() {
+class SystemFragment @Inject constructor() : Fragment() {
   
   companion object {
     fun newInstance() = SystemFragment()
