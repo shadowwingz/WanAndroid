@@ -63,9 +63,6 @@ class MainActivity : BaseActivity() {
           }
         }
       })
-
-      // 禁止左右滑动
-      // isUserInputEnabled = false
     }
 
     // 当 ViewPager 切换页面时，改变 ViewPager 的显示

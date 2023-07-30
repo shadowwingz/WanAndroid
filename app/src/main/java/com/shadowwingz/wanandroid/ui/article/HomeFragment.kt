@@ -23,6 +23,7 @@ import com.shadowwingz.wanandroid.ui.article.banner.HomeViewModel
 import com.shadowwingz.wanandroid.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -61,6 +62,7 @@ class HomeFragment @Inject constructor() : BaseFragment() {
     lifecycleScope.launch {
       lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
         viewModel.articleCombinedFlow.collect {
+          Timber.d("articleCombinedFlow")
           bannerAdapter.setItems(it.first)
           pagingAdapter.submitData(it.second)
           binding.refresh.isRefreshing = false
