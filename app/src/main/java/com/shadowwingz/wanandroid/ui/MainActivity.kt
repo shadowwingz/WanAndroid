@@ -1,6 +1,8 @@
 package com.shadowwingz.wanandroid.ui
 
+import android.os.Build
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -33,6 +35,7 @@ class MainActivity : BaseActivity() {
 
   override fun getLayoutId(): Int = R.layout.activity_main
 
+  @RequiresApi(Build.VERSION_CODES.R)
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(binding.root)
@@ -86,5 +89,10 @@ class MainActivity : BaseActivity() {
     }
 
     binding.navView.setOnClickListener { /*Do nothing*/ }
+
+    window.apply {
+      setDecorFitsSystemWindows(true)
+    }
+    // supportActionBar?.hide()
   }
 }
