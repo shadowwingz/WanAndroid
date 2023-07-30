@@ -6,16 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.base.BaseFragment
 import com.shadowwingz.wanandroid.bean.ArticleListBean
-import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.databinding.FragmentHomeBinding
 import com.shadowwingz.wanandroid.listeners.OnItemClickListener
 import com.shadowwingz.wanandroid.ui.article.banner.BannerAdapter
@@ -58,23 +57,18 @@ class HomeFragment @Inject constructor() : BaseFragment() {
     Timber.d("request: $bannerRequest")
     initAdapter()
     initRefreshListener()
-    viewModel.loadData()
   }
 
   private fun observe() {
-    viewModel.bannerRequest.bannerLiveData.observe(viewLifecycleOwner, object : Observer<BannerBean> {
-      override fun onChanged(bannerBean: BannerBean) {
-        bannerAdapter.setItems(bannerBean.data)
-      }
-    })
-
-    viewModel.articleLiveData.observe(viewLifecycleOwner, object : Observer<PagingData<ArticleListBean>> {
-      override fun onChanged(pagingData: PagingData<ArticleListBean>) {
-        lifecycleScope.launch {
-          pagingAdapter.submitData(pagingData)
+    lifecycleScope.launch {
+      lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+        viewModel.articleCombinedFlow.collect {
+          bannerAdapter.setItems(it.first)
+          pagingAdapter.submitData(it.second)
+          binding.refresh.isRefreshing = false
         }
       }
-    })
+    }
   }
 
   private fun initRefreshListener() {
@@ -119,7 +113,6 @@ class HomeFragment @Inject constructor() : BaseFragment() {
   }
 
   private fun handleRefresh() {
-    viewModel.loadData()
-    pagingAdapter.refresh()
+    observe()
   }
 }

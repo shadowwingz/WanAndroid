@@ -4,7 +4,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.shadowwingz.wanandroid.bean.ArticleListBean
-import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.bean.QuestionBean
 import com.shadowwingz.wanandroid.ui.account.AccountBean
 import com.shadowwingz.wanandroid.ui.account.AccountService
@@ -55,9 +54,9 @@ object DataRepository {
     return retrofit.create(AccountService::class.java).login(userBean.name, userBean.password)
   }
   
-  suspend fun requestBanner(): BannerBean {
-    return retrofit.create(ArticleService::class.java).getBanner()
-  }
+  // suspend fun requestBanner(): BannerBean {
+  //   return retrofit.create(ArticleService::class.java).getBanner()
+  // }
   
   suspend fun requestQuestions(pageId: Int): QuestionBean {
     return retrofit.create(QuestionService::class.java).fetchQuestions(pageId)

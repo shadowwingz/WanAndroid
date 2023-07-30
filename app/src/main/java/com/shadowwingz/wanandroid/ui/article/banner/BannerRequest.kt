@@ -2,9 +2,6 @@ package com.shadowwingz.wanandroid.ui.article.banner;
 
 import androidx.lifecycle.MutableLiveData
 import com.shadowwingz.wanandroid.bean.BannerBean
-import com.shadowwingz.wanandroid.network.DataRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 /**
@@ -15,8 +12,8 @@ class BannerRequest @Inject constructor() {
   var bannerLiveData: MutableLiveData<BannerBean> = MutableLiveData()
 
   suspend fun getBanner() {
-    withContext(Dispatchers.IO) {
-      bannerLiveData.postValue(DataRepository.requestBanner())
-    }
+    // withContext(Dispatchers.IO) {
+    //   bannerLiveData.postValue(DataRepository.requestBanner())
+    // }
   }
 }

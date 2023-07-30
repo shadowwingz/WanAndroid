@@ -8,21 +8,19 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.bingoogolapple.bgabanner.BGABanner
 import com.bumptech.glide.Glide
 import com.shadowwingz.wanandroid.R
-import com.shadowwingz.wanandroid.bean.BannerData
+import com.shadowwingz.wanandroid.article.domain.model.BannerUiModel
 
 /**
  * created by shadowwingz on 2021-07-11 15:33
  */
 class BannerAdapter : RecyclerView.Adapter<BannerAdapter.ViewHolder>() {
   
-  private val mItems: MutableList<BannerData> = mutableListOf()
+  private val mItems: MutableList<BannerUiModel> = mutableListOf()
   
-  fun setItems(items: List<BannerData>?) {
-    if (items != null) {
-      mItems.clear()
-      mItems.addAll(items)
-      notifyDataSetChanged()
-    }
+  fun setItems(items: List<BannerUiModel>) {
+    mItems.clear()
+    mItems.addAll(items)
+    notifyDataSetChanged()
   }
   
   class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
