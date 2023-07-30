@@ -23,7 +23,6 @@ import com.shadowwingz.wanandroid.ui.article.banner.HomeViewModel
 import com.shadowwingz.wanandroid.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -54,7 +53,6 @@ class HomeFragment @Inject constructor() : BaseFragment() {
   }
 
   private fun init() {
-    Timber.d("request: $bannerRequest")
     initAdapter()
     initRefreshListener()
   }
