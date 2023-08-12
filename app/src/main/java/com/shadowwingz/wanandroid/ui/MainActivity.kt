@@ -9,7 +9,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.base.BaseActivity
 import com.shadowwingz.wanandroid.databinding.ActivityMainBinding
-import com.shadowwingz.wanandroid.ui.article.HomeFragment
+import com.shadowwingz.wanandroid.home.ui.HomeFragment
 import com.shadowwingz.wanandroid.ui.mine.ProfileFragment
 import com.shadowwingz.wanandroid.ui.question.QuestionFragment
 import com.shadowwingz.wanandroid.ui.system.SystemFragment

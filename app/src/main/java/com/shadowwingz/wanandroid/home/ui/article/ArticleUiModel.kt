@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.ui.article
+package com.shadowwingz.wanandroid.home.ui.article
 
 import android.app.Activity
 import android.content.Intent

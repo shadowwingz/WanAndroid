@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.ui.article
+package com.shadowwingz.wanandroid.home.data.api
 
 import com.shadowwingz.wanandroid.bean.ArticleBean
 import retrofit2.http.GET

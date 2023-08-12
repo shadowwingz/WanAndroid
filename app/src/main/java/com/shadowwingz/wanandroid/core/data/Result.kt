@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.shadowwingz.wanandroid.network
+package com.shadowwingz.wanandroid.core.data
 
 /**
  * A generic class that holds a value with its loading status.

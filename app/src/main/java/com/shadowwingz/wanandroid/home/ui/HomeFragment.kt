@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.ui.article
+package com.shadowwingz.wanandroid.home.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.base.BaseFragment
 import com.shadowwingz.wanandroid.databinding.FragmentHomeBinding
-import com.shadowwingz.wanandroid.ui.article.banner.BannerAdapter
-import com.shadowwingz.wanandroid.ui.article.banner.BannerRequest
-import com.shadowwingz.wanandroid.ui.article.banner.HomeViewModel
+import com.shadowwingz.wanandroid.home.ui.article.ArticleAdapter
+import com.shadowwingz.wanandroid.home.ui.article.toArticleListUiModel
+import com.shadowwingz.wanandroid.home.ui.banner.BannerAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -27,9 +27,6 @@ import javax.inject.Inject
 class HomeFragment @Inject constructor() : BaseFragment() {
 
   private lateinit var binding: FragmentHomeBinding
-
-  @Inject
-  lateinit var bannerRequest: BannerRequest
 
   private val viewModel: HomeViewModel by viewModels()
 

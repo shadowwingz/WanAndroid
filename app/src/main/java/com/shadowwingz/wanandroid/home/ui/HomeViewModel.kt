@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.ui.article.banner
+package com.shadowwingz.wanandroid.home.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,9 +7,9 @@ import androidx.paging.cachedIn
 import com.shadowwingz.wanandroid.article.domain.model.BannerUiModel
 import com.shadowwingz.wanandroid.article.domain.model.toBannerUiModel
 import com.shadowwingz.wanandroid.bean.ArticleListBean
-import com.shadowwingz.wanandroid.network.DataRepository
-import com.shadowwingz.wanandroid.network.Result.Success
-import com.shadowwingz.wanandroid.ui.article.BannerRepository
+import com.shadowwingz.wanandroid.core.data.Result.Success
+import com.shadowwingz.wanandroid.home.data.article.DataRepository
+import com.shadowwingz.wanandroid.home.data.banner.BannerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted

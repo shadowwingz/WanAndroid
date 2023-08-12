@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.ui.article.banner
+package com.shadowwingz.wanandroid.home.data.api
 
 import com.shadowwingz.wanandroid.bean.BannerBean
 import retrofit2.Response

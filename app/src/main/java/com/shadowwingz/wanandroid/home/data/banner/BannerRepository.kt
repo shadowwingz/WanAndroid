@@ -1,7 +1,7 @@
-package com.shadowwingz.wanandroid.ui.article
+package com.shadowwingz.wanandroid.home.data.banner
 
 import com.shadowwingz.wanandroid.bean.BannerBean
-import com.shadowwingz.wanandroid.network.Result
+import com.shadowwingz.wanandroid.core.data.Result
 import javax.inject.Inject
 
 class BannerRepository @Inject constructor(private val bannerDataSource: SearchBannerDataSource) {

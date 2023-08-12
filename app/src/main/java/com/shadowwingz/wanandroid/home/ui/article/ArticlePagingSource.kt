@@ -1,24 +1,21 @@
-package com.shadowwingz.wanandroid.ui.article;
+package com.shadowwingz.wanandroid.home.ui.article
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.shadowwingz.wanandroid.bean.ArticleListBean
-
-/**
- * created by shadowwingz on 2021-07-10 21:45
- */
+import com.shadowwingz.wanandroid.home.data.api.ArticleService
 
 private const val WANANDROID_STARTING_PAGE_INDEX = 0
 
 class ArticlePagingSource(private val service: ArticleService) : PagingSource<Int, ArticleListBean>() {
-  
+
   override fun getRefreshKey(state: PagingState<Int, ArticleListBean>): Int? {
     return state.anchorPosition?.let { anchorPosition ->
       state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
         ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
     }
   }
-  
+
   override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleListBean> {
     // params.key 是即将加载的页面索引
     val position = params.key ?: WANANDROID_STARTING_PAGE_INDEX

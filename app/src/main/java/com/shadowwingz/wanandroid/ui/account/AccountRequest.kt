@@ -1,15 +1,14 @@
 package com.shadowwingz.wanandroid.ui.account;
 
 import androidx.lifecycle.MutableLiveData
-import com.shadowwingz.wanandroid.network.BaseRequest
-import com.shadowwingz.wanandroid.network.DataRepository
+import com.shadowwingz.wanandroid.home.data.article.DataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
  * created by shadowwingz on 2021-06-20 22:58
  */
-class AccountRequest : BaseRequest() {
+class AccountRequest {
   
   val tokenLiveData: MutableLiveData<AccountBean> = MutableLiveData()
   

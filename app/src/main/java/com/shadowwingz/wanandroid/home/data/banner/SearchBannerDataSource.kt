@@ -1,9 +1,9 @@
-package com.shadowwingz.wanandroid.ui.article
+package com.shadowwingz.wanandroid.home.data.banner
 
 import com.shadowwingz.wanandroid.bean.BannerBean
-import com.shadowwingz.wanandroid.network.Result
-import com.shadowwingz.wanandroid.network.safeApiCall
-import com.shadowwingz.wanandroid.ui.article.banner.BannerSearchService
+import com.shadowwingz.wanandroid.core.data.Result
+import com.shadowwingz.wanandroid.core.data.safeApiCall
+import com.shadowwingz.wanandroid.home.data.api.BannerSearchService
 import java.io.IOException
 import javax.inject.Inject
 

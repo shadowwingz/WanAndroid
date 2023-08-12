@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.ui.article.banner;
+package com.shadowwingz.wanandroid.home.ui.banner;
 
 import android.view.LayoutInflater
 import android.view.View

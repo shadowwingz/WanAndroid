@@ -2,16 +2,15 @@ package com.shadowwingz.wanandroid.ui.question;
 
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.MutableLiveData
-import com.shadowwingz.wanandroid.network.BaseRequest
-import com.shadowwingz.wanandroid.network.DataRepository
 import com.shadowwingz.wanandroid.bean.QuestionBean
+import com.shadowwingz.wanandroid.home.data.article.DataRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 /**
  * created by shadowwingz on 2021-06-29 20:39
  */
-class QuestionRequest : BaseRequest(), DefaultLifecycleObserver {
+class QuestionRequest : DefaultLifecycleObserver {
   
   val questionLiveData: MutableLiveData<QuestionBean> = MutableLiveData()
   

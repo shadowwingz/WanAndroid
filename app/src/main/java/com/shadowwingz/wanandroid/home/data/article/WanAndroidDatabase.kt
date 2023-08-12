@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.database
+package com.shadowwingz.wanandroid.home.data.article
 
 import android.content.Context
 import androidx.room.Database

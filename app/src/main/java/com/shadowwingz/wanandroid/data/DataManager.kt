@@ -17,7 +17,7 @@ class DataManager @Inject constructor(
   //   scope.launch {
   //     val result = loadBanner()
   //     when (result) {
-  //       is com.shadowwingz.wanandroid.network.Result.Success ->
+  //       is com.shadowwingz.wanandroid.core.data.Result.Success ->
   //     }
   //   }
   // }

@@ -1,7 +1,7 @@
 package com.shadowwingz.wanandroid.di
 
-import com.shadowwingz.wanandroid.network.APIs
-import com.shadowwingz.wanandroid.ui.article.banner.BannerSearchService
+import com.shadowwingz.wanandroid.core.api.APIs
+import com.shadowwingz.wanandroid.home.data.api.BannerSearchService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

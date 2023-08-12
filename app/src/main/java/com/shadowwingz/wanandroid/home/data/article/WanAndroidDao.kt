@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.database
+package com.shadowwingz.wanandroid.home.data.article
 
 import androidx.room.Dao
 import androidx.room.Insert
