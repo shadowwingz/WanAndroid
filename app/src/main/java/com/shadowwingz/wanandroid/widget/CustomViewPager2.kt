@@ -35,13 +35,18 @@ class CustomViewPager2 @JvmOverloads constructor(
         startY = ev.y
       }
       MotionEvent.ACTION_MOVE -> {
-        val deltaX = ev.x - startX
-        val distanceX = abs(deltaX)
-        val distanceY = abs(ev.y - startY)
-        val bannerCount = banner.size
-        val userWantSwipeBanner = banner.currentItem < bannerCount || (banner.currentItem == bannerCount && distanceX > distanceY && deltaX > 0)
-        Timber.d("isTouchingBanner: ${banner.isTouching(ev)}, userWantSwipeBanner: $userWantSwipeBanner")
-        viewpager.isUserInputEnabled = !(banner.isTouching(ev) && userWantSwipeBanner)
+        viewpager.isUserInputEnabled =
+          if (viewpager.currentItem != 0) {
+            true
+          } else {
+            val deltaX = ev.x - startX
+            val distanceX = abs(deltaX)
+            val distanceY = abs(ev.y - startY)
+            val bannerCount = banner.size
+            val userWantSwipeBanner = banner.currentItem < bannerCount || (banner.currentItem == bannerCount && distanceX > distanceY && deltaX > 0)
+            Timber.d("isTouchingBanner: ${banner.isTouching(ev)}, userWantSwipeBanner: $userWantSwipeBanner")
+            !(banner.isTouching(ev) && userWantSwipeBanner)
+          }
       }
     }
     return super.onInterceptTouchEvent(ev)
