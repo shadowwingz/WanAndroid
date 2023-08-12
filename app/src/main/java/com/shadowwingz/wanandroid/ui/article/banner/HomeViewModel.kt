@@ -11,7 +11,11 @@ import com.shadowwingz.wanandroid.network.DataRepository
 import com.shadowwingz.wanandroid.network.Result.Success
 import com.shadowwingz.wanandroid.ui.article.BannerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.zip
 import timber.log.Timber
 import javax.inject.Inject
 

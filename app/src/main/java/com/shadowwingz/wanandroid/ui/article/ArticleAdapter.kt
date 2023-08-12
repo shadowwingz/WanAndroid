@@ -8,28 +8,20 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.shadowwingz.wanandroid.R
-import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.databinding.ItemArticleBinding
-import com.shadowwingz.wanandroid.listeners.OnItemClickListener
 
 /**
  * created by shadowwingz on 2021-07-10 22:19
  */
-class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHolder>(ARTICLE_COMPARATOR) {
-
-  private var mOnItemClickListener: OnItemClickListener<ArticleListBean>? = null
-
-  fun setOnItemClickListener(onItemClickListener: OnItemClickListener<ArticleListBean>) {
-    mOnItemClickListener = onItemClickListener
-  }
+class ArticleAdapter : PagingDataAdapter<ArticleListUiModel, ArticleAdapter.ViewHolder>(ARTICLE_COMPARATOR) {
 
   companion object {
-    private val ARTICLE_COMPARATOR = object : DiffUtil.ItemCallback<ArticleListBean>() {
-      override fun areItemsTheSame(oldItem: ArticleListBean, newItem: ArticleListBean): Boolean {
+    private val ARTICLE_COMPARATOR = object : DiffUtil.ItemCallback<ArticleListUiModel>() {
+      override fun areItemsTheSame(oldItem: ArticleListUiModel, newItem: ArticleListUiModel): Boolean {
         return oldItem.title == newItem.title
       }
 
-      override fun areContentsTheSame(oldItem: ArticleListBean, newItem: ArticleListBean): Boolean {
+      override fun areContentsTheSame(oldItem: ArticleListUiModel, newItem: ArticleListUiModel): Boolean {
         return oldItem == newItem
       }
     }
@@ -66,18 +58,16 @@ class ArticleAdapter : PagingDataAdapter<ArticleListBean, ArticleAdapter.ViewHol
 
     val data = getItem(position)
     binding.apply {
-      data?.let { articleListBean ->
-        tvAuthor.text = articleListBean.author
-        tvTime.text = articleListBean.niceDate
-        tvTitle.text = articleListBean.title
-        tvSuperChapterName.text = articleListBean.superChapterName
-        tvChapterName.text = articleListBean.chapterName
-
-        val likeIcon = if (articleListBean.collect) R.drawable.ic_like else R.drawable.ic_like
-        ivLike.setImageDrawable(AppCompatResources.getDrawable(root.context, likeIcon))
+      data?.let { article ->
+        tvAuthor.text = article.author
+        tvTime.text = article.date
+        tvTitle.text = article.title
+        tvSuperChapterName.text = article.superChapterName
+        tvChapterName.text = article.chapterName
+        ivLike.setImageDrawable(AppCompatResources.getDrawable(root.context, article.collectIcon))
 
         root.setOnClickListener {
-          mOnItemClickListener?.onItemClick(articleListBean)
+          data.itemClickListener()
         }
       }
     }

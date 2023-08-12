@@ -1,6 +1,5 @@
 package com.shadowwingz.wanandroid.ui.article
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +9,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
+import androidx.paging.map
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.base.BaseFragment
-import com.shadowwingz.wanandroid.bean.ArticleListBean
 import com.shadowwingz.wanandroid.databinding.FragmentHomeBinding
-import com.shadowwingz.wanandroid.listeners.OnItemClickListener
 import com.shadowwingz.wanandroid.ui.article.banner.BannerAdapter
 import com.shadowwingz.wanandroid.ui.article.banner.BannerRequest
 import com.shadowwingz.wanandroid.ui.article.banner.HomeViewModel
-import com.shadowwingz.wanandroid.ui.web.WebActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -64,7 +61,7 @@ class HomeFragment @Inject constructor() : BaseFragment() {
         viewModel.articleCombinedFlow.collect {
           Timber.d("articleCombinedFlow")
           bannerAdapter.setItems(it.first)
-          pagingAdapter.submitData(it.second)
+          pagingAdapter.submitData(it.second.map { article -> article.toArticleListUiModel(activity) })
           binding.refresh.isRefreshing = false
         }
       }
@@ -98,13 +95,6 @@ class HomeFragment @Inject constructor() : BaseFragment() {
   }
 
   private fun initAdapter() {
-    pagingAdapter.setOnItemClickListener(object : OnItemClickListener<ArticleListBean> {
-      override fun onItemClick(data: ArticleListBean) {
-        val intent = Intent(activity, WebActivity::class.java)
-        intent.putExtra("url", data.link)
-        activity?.startActivity(intent)
-      }
-    })
     val concatAdapter = ConcatAdapter(bannerAdapter, pagingAdapter)
     with(binding.rvArticleList) {
       layoutManager = LinearLayoutManager(activity)
