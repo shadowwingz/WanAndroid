@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.shadowwingz.wanandroid.bean.ArticleListBean
+import com.shadowwingz.wanandroid.home.data.article.model.ArticleListBean
 
 @Database(entities = [ArticleListBean::class], version = 1, exportSchema = false)
 abstract class WanAndroidDatabase : RoomDatabase() {

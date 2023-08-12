@@ -2,7 +2,7 @@ package com.shadowwingz.wanandroid.home.ui.article
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.shadowwingz.wanandroid.bean.ArticleListBean
+import com.shadowwingz.wanandroid.home.data.article.model.ArticleListBean
 import com.shadowwingz.wanandroid.home.data.api.ArticleService
 
 private const val WANANDROID_STARTING_PAGE_INDEX = 0

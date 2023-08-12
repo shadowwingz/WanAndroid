@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.shadowwingz.wanandroid.bean.ArticleListBean
+import com.shadowwingz.wanandroid.home.data.article.model.ArticleListBean
 
 @Dao
 interface WanAndroidDao {

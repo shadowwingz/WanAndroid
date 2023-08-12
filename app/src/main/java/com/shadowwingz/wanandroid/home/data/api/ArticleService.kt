@@ -1,6 +1,6 @@
 package com.shadowwingz.wanandroid.home.data.api
 
-import com.shadowwingz.wanandroid.bean.ArticleBean
+import com.shadowwingz.wanandroid.home.data.article.model.ArticleBean
 import retrofit2.http.GET
 import retrofit2.http.Path
 

@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.bean
+package com.shadowwingz.wanandroid.home.data.article.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

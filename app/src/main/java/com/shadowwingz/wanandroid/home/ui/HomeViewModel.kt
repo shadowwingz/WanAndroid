@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.shadowwingz.wanandroid.article.domain.model.BannerUiModel
 import com.shadowwingz.wanandroid.article.domain.model.toBannerUiModel
-import com.shadowwingz.wanandroid.bean.ArticleListBean
+import com.shadowwingz.wanandroid.home.data.article.model.ArticleListBean
 import com.shadowwingz.wanandroid.core.data.Result.Success
 import com.shadowwingz.wanandroid.home.data.article.DataRepository
 import com.shadowwingz.wanandroid.home.data.banner.BannerRepository

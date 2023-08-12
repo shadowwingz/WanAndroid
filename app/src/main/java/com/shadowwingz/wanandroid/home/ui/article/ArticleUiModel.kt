@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.annotation.DrawableRes
 import com.shadowwingz.wanandroid.R
-import com.shadowwingz.wanandroid.bean.ArticleListBean
+import com.shadowwingz.wanandroid.home.data.article.model.ArticleListBean
 import com.shadowwingz.wanandroid.ui.web.WebActivity
 
 data class ArticleListUiModel(

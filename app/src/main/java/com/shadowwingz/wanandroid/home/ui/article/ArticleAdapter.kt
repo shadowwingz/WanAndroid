@@ -38,7 +38,7 @@ class ArticleAdapter : PagingDataAdapter<ArticleListUiModel, ArticleAdapter.View
      *
      * <variable
      *    name="data"
-     *    type="com.shadowwingz.wanandroid.bean.ArticleListBean" />
+     *    type="com.shadowwingz.wanandroid.home.data.article.model.ArticleListBean" />
      */
     // binding?.setVariable(BR.data, item)
     // 效果等同于：
