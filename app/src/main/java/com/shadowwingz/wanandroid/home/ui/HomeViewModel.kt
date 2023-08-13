@@ -6,9 +6,9 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.shadowwingz.wanandroid.article.domain.model.BannerUiModel
 import com.shadowwingz.wanandroid.article.domain.model.toBannerUiModel
-import com.shadowwingz.wanandroid.home.data.article.model.ArticleListBean
 import com.shadowwingz.wanandroid.core.data.Result.Success
-import com.shadowwingz.wanandroid.home.data.article.DataRepository
+import com.shadowwingz.wanandroid.home.data.article.ArticleRepository
+import com.shadowwingz.wanandroid.home.data.article.model.ArticleListBean
 import com.shadowwingz.wanandroid.home.data.banner.BannerRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -21,10 +21,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-  private val bannerRepository: BannerRepository
+  private val bannerRepository: BannerRepository,
+  articleRepository: ArticleRepository
 ) : ViewModel() {
 
-  private val articleFlow = DataRepository.getArticleResultStream().cachedIn(viewModelScope)
+  private val articleFlow = articleRepository.article.cachedIn(viewModelScope)
 
   private val bannerFlow: Flow<List<BannerUiModel>> = flow {
     val result = bannerRepository.search()

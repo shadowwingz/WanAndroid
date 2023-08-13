@@ -1,26 +1,4 @@
-package com.shadowwingz.wanandroid.bean;
-
-import com.google.gson.annotations.SerializedName
-
-/**
- * created by shadowwingz on 2021-06-29 20:28
- */
-data class QuestionBean(
-  var `data`: Data,
-  var errorCode: Int,
-  var errorMsg: String
-)
-
-data class Data(
-  var curPage: Int,
-  @SerializedName("datas")
-  var data: List<Question>,
-  var offset: Int,
-  var over: Boolean,
-  var pageCount: Int,
-  var size: Int,
-  var total: Int
-)
+package com.shadowwingz.wanandroid.question.data.model
 
 data class Question(
   var apkLink: String,
@@ -56,9 +34,4 @@ data class Question(
   var userId: Int,
   var visible: Int,
   var zan: Int
-)
-
-data class Tag(
-  var name: String,
-  var url: String
 )

@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.di
+package com.shadowwingz.wanandroid.di.banner
 
 import com.shadowwingz.wanandroid.core.api.APIs
 import com.shadowwingz.wanandroid.home.data.api.BannerSearchService
@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 
 @InstallIn(SingletonComponent::class)
 @Module
-class DataModule {
+class BannerModule {
 
   @Provides
   fun provideBannerSearchService(

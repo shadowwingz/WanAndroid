@@ -54,7 +54,7 @@ class HomeFragment @Inject constructor() : BaseFragment() {
 
   private fun observe() {
     lifecycleScope.launch {
-      lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+      viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
         viewModel.articleCombinedFlow.collect {
           Timber.d("articleCombinedFlow")
           bannerAdapter.setItems(it.first)
