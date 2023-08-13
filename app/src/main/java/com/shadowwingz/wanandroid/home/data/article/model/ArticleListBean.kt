@@ -2,24 +2,6 @@ package com.shadowwingz.wanandroid.home.data.article.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
-
-data class ArticleBean(
-  val `data`: ArticleData,
-  val errorCode: Int,
-  val errorMsg: String
-)
-
-data class ArticleData(
-  val curPage: Int,
-  @SerializedName("datas")
-  val articleListBean: List<ArticleListBean>,
-  val offset: Int,
-  val over: Boolean,
-  val pageCount: Int,
-  val size: Int,
-  val total: Int
-)
 
 @Entity(tableName = "article_list")
 data class ArticleListBean(

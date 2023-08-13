@@ -1,6 +1,6 @@
 package com.shadowwingz.wanandroid.home.ui.banner
 
-import com.shadowwingz.wanandroid.bean.BannerData
+import com.shadowwingz.wanandroid.home.data.banner.model.BannerData
 
 data class BannerUiModel(
   val description: String,

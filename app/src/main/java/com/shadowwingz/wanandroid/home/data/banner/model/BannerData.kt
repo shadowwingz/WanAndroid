@@ -1,11 +1,6 @@
-package com.shadowwingz.wanandroid.bean
+package com.shadowwingz.wanandroid.home.data.banner.model
 
 import androidx.annotation.Keep
-
-@Keep
-data class BannerBean(
-  val data: List<BannerData>
-)
 
 @Keep
 data class BannerData(
