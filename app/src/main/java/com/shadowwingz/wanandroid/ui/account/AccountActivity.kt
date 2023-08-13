@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.base.BaseActivity
 import com.shadowwingz.wanandroid.databinding.ActivityAccountBinding
-import com.shadowwingz.wanandroid.utils.LogUtil
+import timber.log.Timber
 
 class AccountActivity : BaseActivity() {
 
@@ -26,7 +26,7 @@ class AccountActivity : BaseActivity() {
 
       viewModel.accountRequest.tokenLiveData.observe(this, object : Observer<AccountBean> {
         override fun onChanged(accountBean: AccountBean) {
-          LogUtil.d(accountBean.toString())
+          Timber.d(accountBean.toString())
         }
       })
     }

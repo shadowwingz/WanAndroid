@@ -4,9 +4,9 @@ import android.os.Bundle
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.base.BaseActivity
 import com.shadowwingz.wanandroid.databinding.ActivityWebBinding
-import com.shadowwingz.wanandroid.utils.LogUtil
 import com.shadowwingz.wanandroid.widget.X5WebView
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -27,7 +27,7 @@ class WebActivity : BaseActivity() {
     setContentView(binding.root)
     
     val url = intent.getStringExtra("url") ?: ""
-    LogUtil.d(url)
+    Timber.d("url: $url")
 
     webView.apply {
       binding.flContainer.addView(this)
