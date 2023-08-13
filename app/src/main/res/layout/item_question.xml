@@ -21,13 +21,11 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="xiaoyang" />
 
-    <TextView
+    <com.shadowwingz.wanandroid.widget.BorderTextView
         android:id="@+id/tvTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:maxLines="1"
-        android:textSize="12sp"
         app:layout_constraintLeft_toRightOf="@id/tvAuthor"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="本站发布" />

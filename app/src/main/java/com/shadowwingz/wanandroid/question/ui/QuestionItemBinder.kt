@@ -6,7 +6,7 @@ object QuestionItemBinder {
   fun bind(view: ItemQuestionBinding, data: QuestionUiModel) {
     view.apply {
       tvAuthor.text = data.author
-      tvTag.text = data.name
+      tvTag.content = data.name
       tvNiceDate.text = data.date
       tvTitle.text = data.title
       tvDesc.text = data.description

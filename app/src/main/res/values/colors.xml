@@ -11,4 +11,5 @@
     <color name="main">#4282f4</color>
     <color name="color_white">#FFFFFF</color>
     <color name="color_EEEEEE">#EEEEEE</color>
+    <color name="color_text_border">#3F7FF4</color>
 </resources>
