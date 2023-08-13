@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -55,11 +56,18 @@ class HomeFragment @Inject constructor() : BaseFragment() {
   private fun observe() {
     lifecycleScope.launch {
       viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-        viewModel.articleCombinedFlow.collect {
-          Timber.d("articleCombinedFlow")
-          bannerAdapter.setItems(it.first)
-          pagingAdapter.submitData(it.second.map { article -> article.toArticleListUiModel(activity) })
-          binding.refresh.isRefreshing = false
+        launch {
+          viewModel.errorTip.collect {
+            Toast.makeText(activity, it, Toast.LENGTH_LONG).show()
+          }
+        }
+        launch {
+          viewModel.articleCombinedFlow.collect {
+            Timber.d("articleCombinedFlow")
+            bannerAdapter.setItems(it.first)
+            pagingAdapter.submitData(it.second.map { article -> article.toArticleListUiModel(activity) })
+            binding.refresh.isRefreshing = false
+          }
         }
       }
     }

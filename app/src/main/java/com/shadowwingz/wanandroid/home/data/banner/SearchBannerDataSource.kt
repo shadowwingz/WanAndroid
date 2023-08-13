@@ -11,7 +11,7 @@ class SearchBannerDataSource @Inject constructor(private val service: BannerSear
 
   suspend fun search() = safeApiCall(
     call = { requestSearch() },
-    errorMessage = "Error getting banner data"
+    errorMessage = "轮播图加载失败"
   )
 
   private suspend fun requestSearch(): Result<BannerBean> {
@@ -22,6 +22,6 @@ class SearchBannerDataSource @Inject constructor(private val service: BannerSear
         return Result.Success(body)
       }
     }
-    return Result.Error(IOException("Error getting banner data ${response.code()} ${response.message()}"))
+    return Result.Error(IOException("${response.code()} ${response.message()}"))
   }
 }
