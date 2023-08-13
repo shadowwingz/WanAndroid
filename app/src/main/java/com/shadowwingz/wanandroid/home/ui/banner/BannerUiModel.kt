@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.article.domain.model
+package com.shadowwingz.wanandroid.home.ui.banner
 
 import com.shadowwingz.wanandroid.bean.BannerData
 

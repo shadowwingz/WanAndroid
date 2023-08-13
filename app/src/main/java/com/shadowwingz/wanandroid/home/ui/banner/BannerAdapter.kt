@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.bingoogolapple.bgabanner.BGABanner
 import com.bumptech.glide.Glide
 import com.shadowwingz.wanandroid.R
-import com.shadowwingz.wanandroid.article.domain.model.BannerUiModel
 import com.shadowwingz.wanandroid.extension.dp
 import com.shadowwingz.wanandroid.extension.emptyImageView
 

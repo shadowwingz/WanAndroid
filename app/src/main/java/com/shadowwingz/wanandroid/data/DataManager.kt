@@ -1,6 +1,6 @@
 package com.shadowwingz.wanandroid.data
 
-import com.shadowwingz.wanandroid.article.domain.SearchBannerUserCase
+import com.shadowwingz.wanandroid.home.domain.banner.SearchBannerUserCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Inject
