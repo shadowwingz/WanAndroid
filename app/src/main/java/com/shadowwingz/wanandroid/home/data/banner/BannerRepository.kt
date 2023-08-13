@@ -4,7 +4,9 @@ import com.shadowwingz.wanandroid.bean.BannerBean
 import com.shadowwingz.wanandroid.core.data.Result
 import javax.inject.Inject
 
-class BannerRepository @Inject constructor(private val bannerDataSource: SearchBannerDataSource) {
+class BannerRepository @Inject constructor(
+  private val bannerDataSource: SearchBannerDataSource
+) {
 
   private val bannerCache = mutableListOf<BannerBean>()
 
