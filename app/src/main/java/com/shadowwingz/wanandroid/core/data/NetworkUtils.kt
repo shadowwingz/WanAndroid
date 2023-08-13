@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-package com.shadowwingz.wanandroid.core.data
 
 import timber.log.Timber
 import java.io.IOException
@@ -29,6 +28,6 @@ suspend fun <T : Any> safeApiCall(call: suspend () -> Result<T>, errorMessage: S
   } catch (e: Exception) {
     Timber.e("safeApiCall, error: ${e.message}")
     // An exception was thrown when calling the API so we're converting this to an IOException
-    Result.Error(IOException("$errorMessage because of [${e.message}]"))
+    Result.failure(IOException("$errorMessage because of [${e.message}]"))
   }
 }

@@ -4,8 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.shadowwingz.wanandroid.core.data.Result
-import com.shadowwingz.wanandroid.core.data.Result.Success
 import com.shadowwingz.wanandroid.home.data.article.ArticleRepository
 import com.shadowwingz.wanandroid.home.data.article.model.ArticleListBean
 import com.shadowwingz.wanandroid.home.domain.banner.SearchBannerUserCase
@@ -31,13 +29,14 @@ class HomeViewModel @Inject constructor(
   private val articleFlow = articleRepository.article.cachedIn(viewModelScope)
 
   private val bannerFlow: Flow<List<BannerUiModel>> = flow {
-    val result: Result<List<BannerUiModel>> = bannerUserCase(Unit)
-    if (result is Success) {
-      emit(result.data)
-    } else {
-      _errorTip.emit(result.toString())
-      emit(emptyList())
-    }
+    bannerUserCase(Unit)
+      .onSuccess {
+        emit(it)
+      }
+      .onFailure {
+        _errorTip.emit(it.toString())
+        emit(emptyList())
+      }
   }
 
   val articleCombinedFlow: Flow<Pair<List<BannerUiModel>, PagingData<ArticleListBean>>> =

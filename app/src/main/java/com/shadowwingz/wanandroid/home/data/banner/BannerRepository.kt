@@ -1,7 +1,7 @@
 package com.shadowwingz.wanandroid.home.data.banner
 
 import com.shadowwingz.wanandroid.bean.BannerBean
-import com.shadowwingz.wanandroid.core.data.Result
+import timber.log.Timber
 import javax.inject.Inject
 
 class BannerRepository @Inject constructor(
@@ -11,18 +11,19 @@ class BannerRepository @Inject constructor(
   private val bannerCache = mutableListOf<BannerBean>()
 
   suspend fun search(): Result<BannerBean> {
-    val result = bannerDataSource.search()
-    if (result is Result.Success) {
-      cache(result.data)
-    }
-    return result
+    return bannerDataSource.search()
+      .onSuccess {
+        cache(it)
+      }.onFailure {
+        Timber.d("轮播图 onFailure")
+      }
   }
 
   fun getBanner(): Result<BannerBean> {
     return if (bannerCache.isNotEmpty()) {
-      Result.Success(bannerCache[0])
+      Result.success(bannerCache[0])
     } else {
-      Result.Error(IllegalStateException("banner not cached"))
+      Result.failure(IllegalStateException("banner not cached"))
     }
   }
 

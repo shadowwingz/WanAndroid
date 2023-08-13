@@ -1,6 +1,5 @@
 package com.shadowwingz.wanandroid.home.domain.banner
 
-import com.shadowwingz.wanandroid.core.data.Result
 import com.shadowwingz.wanandroid.core.domain.usebase.CoroutineUseCase
 import com.shadowwingz.wanandroid.di.coroutines.IoDispatcher
 import com.shadowwingz.wanandroid.home.data.banner.BannerRepository
@@ -15,13 +14,10 @@ class SearchBannerUserCase @Inject constructor(
 ) : CoroutineUseCase<Unit, Result<List<BannerUiModel>>>(dispatcher) {
 
   override suspend fun execute(parameters: Unit): Result<List<BannerUiModel>> {
-    return when (val result = bannerRepository.search()) {
-      is Result.Success -> {
-        val banners = result.data.data.map { it.toBannerUiModel() }
-        Result.Success(banners)
+    return bannerRepository.search().map {
+      it.data.map { banner ->
+        banner.toBannerUiModel()
       }
-
-      is Result.Error -> result
     }
   }
 }

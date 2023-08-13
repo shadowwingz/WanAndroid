@@ -1,9 +1,8 @@
 package com.shadowwingz.wanandroid.home.data.banner
 
 import com.shadowwingz.wanandroid.bean.BannerBean
-import com.shadowwingz.wanandroid.core.data.Result
-import com.shadowwingz.wanandroid.core.data.safeApiCall
 import com.shadowwingz.wanandroid.home.data.api.BannerSearchService
+import safeApiCall
 import java.io.IOException
 import javax.inject.Inject
 
@@ -19,9 +18,9 @@ class SearchBannerDataSource @Inject constructor(private val service: BannerSear
     if (response.isSuccessful) {
       val body = response.body()
       if (body != null) {
-        return Result.Success(body)
+        return Result.success(body)
       }
     }
-    return Result.Error(IOException("${response.code()} ${response.message()}"))
+    return Result.failure(IOException("${response.code()} ${response.message()}"))
   }
 }
