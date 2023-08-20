@@ -3,33 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideLine1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+    android:layout_height="226dp"
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/civUserIcon"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_centerHorizontal="true"
-        android:background="#ccffffff"
+        android:layout_marginTop="70dp"
         android:contentDescription="@string/profile_avatar"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guideLine1"
+        app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_avatar" />
 
     <TextView
         android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:text="@string/app_name"
+        android:textColor="@color/color_white"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/civUserIcon" />
@@ -38,6 +34,8 @@
         android:id="@+id/tv_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/color_level"
+        android:textSize="11sp"
         app:layout_constraintEnd_toStartOf="@id/tv_rank"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +46,9 @@
         android:id="@+id/tv_rank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/color_level"
+        android:textSize="11sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_level"
         app:layout_constraintTop_toBottomOf="@id/tvUserName"
