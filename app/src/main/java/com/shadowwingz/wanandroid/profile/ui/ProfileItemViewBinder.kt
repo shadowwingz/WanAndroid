@@ -1,4 +1,4 @@
-package com.shadowwingz.wanandroid.ui.mine.viewbinder
+package com.shadowwingz.wanandroid.profile.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,7 @@ import com.drakeet.multitype.ItemViewBinder
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.ProfileItem
 
-class ProfileViewBinder : ItemViewBinder<ProfileItem, ProfileViewBinder.ProfileHolder>() {
+class ProfileItemViewBinder : ItemViewBinder<ProfileItem, ProfileItemViewBinder.ProfileHolder>() {
   
   class ProfileHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val ivIcon: ImageView = itemView.findViewById(R.id.ivIcon)

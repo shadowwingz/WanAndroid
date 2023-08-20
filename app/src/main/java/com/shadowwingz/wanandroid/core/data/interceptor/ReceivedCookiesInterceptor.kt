@@ -14,7 +14,7 @@ class ReceivedCookiesInterceptor @Inject constructor(
 ) : Interceptor {
 
   companion object {
-    private const val KEY_COOKIES = "cookies"
+    const val KEY_COOKIES = "cookies"
     private const val KEY_EXPIRE_DATE = "expire_date"
   }
 

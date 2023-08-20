@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.shadowwingz.wanandroid.home.data.article.model.ArticleListBean
 
 @Dao
-interface WanAndroidDao {
+interface ArticleDao {
   
   @Insert(onConflict = OnConflictStrategy.IGNORE)
   suspend fun insertArticle(item: List<ArticleListBean>)

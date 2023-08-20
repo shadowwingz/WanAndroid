@@ -37,4 +37,8 @@ class PreferenceManager private constructor(context: Context) {
   fun putStringSet(key: String, set: Set<String>) {
     sharedPreferences.edit().putStringSet(key, set).apply()
   }
+
+  fun getStringSet(key: String): Set<String> {
+    return sharedPreferences.getStringSet(key, emptySet()) ?: emptySet()
+  }
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import com.shadowwingz.wanandroid.BuildConfig
 import com.shadowwingz.wanandroid.core.api.APIs
 import com.shadowwingz.wanandroid.core.data.PreferenceManager
+import com.shadowwingz.wanandroid.core.data.interceptor.AddCookiesInterceptor
 import com.shadowwingz.wanandroid.core.data.interceptor.ReceivedCookiesInterceptor
 import dagger.Module
 import dagger.Provides
@@ -36,12 +37,14 @@ class CoreDataModule {
   @Provides
   fun provideOkHttpClient(
     httpLoggingInterceptor: HttpLoggingInterceptor,
-    receivedCookiesInterceptor: ReceivedCookiesInterceptor
+    receivedCookiesInterceptor: ReceivedCookiesInterceptor,
+    addCookiesInterceptor: AddCookiesInterceptor
   ): OkHttpClient =
     OkHttpClient
       .Builder()
       .addInterceptor(httpLoggingInterceptor)
       .addInterceptor(receivedCookiesInterceptor)
+      .addInterceptor(addCookiesInterceptor)
       .build()
 
   @Provides

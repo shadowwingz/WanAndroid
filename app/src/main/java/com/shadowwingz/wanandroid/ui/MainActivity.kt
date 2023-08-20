@@ -10,7 +10,7 @@ import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.base.BaseActivity
 import com.shadowwingz.wanandroid.databinding.ActivityMainBinding
 import com.shadowwingz.wanandroid.home.ui.HomeFragment
-import com.shadowwingz.wanandroid.ui.mine.ProfileFragment
+import com.shadowwingz.wanandroid.profile.ui.ProfileFragment
 import com.shadowwingz.wanandroid.question.ui.QuestionFragment
 import com.shadowwingz.wanandroid.ui.system.SystemFragment
 import dagger.hilt.android.AndroidEntryPoint

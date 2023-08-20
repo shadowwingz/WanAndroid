@@ -9,4 +9,6 @@
     <string name="password_input_tip">请输入密码</string>
     <string name="login">登录</string>
     <string name="dot">•</string>
+    <string name="level">登录: %d</string>
+    <string name="rank">排名: %s</string>
 </resources>

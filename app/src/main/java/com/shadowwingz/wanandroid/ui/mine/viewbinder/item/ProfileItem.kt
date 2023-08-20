@@ -1,11 +1,13 @@
 package com.shadowwingz.wanandroid.ui.mine.viewbinder.item
 
+import android.app.Activity
 import com.shadowwingz.wanandroid.R
 
 enum class ProfileItem(
-  val icon: Int,
+  var icon: Int,
   val desc: String,
   val extra: String = "",
+  var onClick: ((activity: Activity?) -> Unit)? = null
 ) {
   MY_COIN(R.drawable.ic_coin, "我的积分", "771"),
   MY_SHARE(R.drawable.ic_share_article, "我的分享"),
