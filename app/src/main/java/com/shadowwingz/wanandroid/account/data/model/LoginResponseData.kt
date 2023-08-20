@@ -1,15 +1,6 @@
-package com.shadowwingz.wanandroid.ui.account;
+package com.shadowwingz.wanandroid.account.data.model
 
-/**
- * created by shadowwingz on 2021-06-21 22:49
- */
-data class AccountBean(
-  val `data`: Data,
-  val errorCode: Int,
-  val errorMsg: String
-)
-
-data class Data(
+data class LoginResponseData(
   val admin: Boolean,
   val chapterTops: List<Any>,
   val coinCount: Int,

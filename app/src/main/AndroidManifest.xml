@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/WanAndroidTheme">
-        <activity android:name=".ui.account.AccountActivity" />
+        <activity android:name=".account.ui.AccountActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">

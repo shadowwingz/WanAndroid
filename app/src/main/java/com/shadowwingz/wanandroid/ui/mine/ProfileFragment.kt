@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.drakeet.multitype.MultiTypeAdapter
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.databinding.FragmentProfileBinding
-import com.shadowwingz.wanandroid.ui.account.AccountActivity
+import com.shadowwingz.wanandroid.account.ui.AccountActivity
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.AvatarViewBinder
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.ProfileViewBinder
 import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.AvatarItem
