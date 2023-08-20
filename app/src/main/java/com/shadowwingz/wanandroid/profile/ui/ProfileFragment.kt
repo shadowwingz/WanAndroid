@@ -46,8 +46,11 @@ class ProfileFragment @Inject constructor() : Fragment() {
     lifecycleScope.launch {
       viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
         launch {
-          viewModel.profile.collect {
-            avatarItemViewBinder.adapterItems = listOf(it)
+          viewModel.profiles.collect { (topProfile, profileItems) ->
+            adapter.items = mutableListOf<Any>().apply {
+              add(topProfile)
+              addAll(profileItems)
+            }
             adapter.notifyDataSetChanged()
           }
         }

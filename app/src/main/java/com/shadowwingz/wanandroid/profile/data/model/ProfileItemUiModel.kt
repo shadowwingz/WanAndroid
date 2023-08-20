@@ -1,9 +1,10 @@
 package com.shadowwingz.wanandroid.profile.data.model
 
-import android.app.Activity
+import androidx.annotation.DrawableRes
 
 data class ProfileItemUiModel(
-  var icon: Int,
-  val desc: String,
-  var onClick: ((activity: Activity?) -> Unit)? = null
+  val id: String = "",
+  @DrawableRes var icon: Int,
+  val leftDesc: String,
+  var rightDesc: String = ""
 )

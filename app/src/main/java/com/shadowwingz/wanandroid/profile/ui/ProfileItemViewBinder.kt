@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.drakeet.multitype.ItemViewBinder
 import com.shadowwingz.wanandroid.R
-import com.shadowwingz.wanandroid.ui.mine.viewbinder.item.ProfileItem
+import com.shadowwingz.wanandroid.profile.data.model.ProfileItemUiModel
 
-class ProfileItemViewBinder : ItemViewBinder<ProfileItem, ProfileItemViewBinder.ProfileHolder>() {
+class ProfileItemViewBinder : ItemViewBinder<ProfileItemUiModel, ProfileItemViewBinder.ProfileHolder>() {
   
   class ProfileHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val ivIcon: ImageView = itemView.findViewById(R.id.ivIcon)
@@ -23,9 +23,9 @@ class ProfileItemViewBinder : ItemViewBinder<ProfileItem, ProfileItemViewBinder.
     return ProfileHolder(inflater.inflate(R.layout.item_profile, parent, false))
   }
   
-  override fun onBindViewHolder(holder: ProfileHolder, item: ProfileItem) {
+  override fun onBindViewHolder(holder: ProfileHolder, item: ProfileItemUiModel) {
     holder.ivIcon.load(item.icon)
-    holder.tvSubTitle.text = item.desc
-    holder.tvSubDesc.text = item.extra
+    holder.tvSubTitle.text = item.leftDesc
+    holder.tvSubDesc.text = item.rightDesc
   }
 }

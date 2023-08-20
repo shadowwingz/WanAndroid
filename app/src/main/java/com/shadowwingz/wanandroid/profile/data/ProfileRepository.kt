@@ -1,5 +1,6 @@
 package com.shadowwingz.wanandroid.profile.data
 
+import com.shadowwingz.wanandroid.profile.data.model.ProfileItemUiModel
 import com.shadowwingz.wanandroid.profile.data.model.ProfileResponse
 import timber.log.Timber
 import javax.inject.Inject
@@ -18,5 +19,9 @@ class ProfileRepository @Inject constructor(
       .onFailure {
         Timber.d(it)
       }
+  }
+
+  fun queryProfileItems(): List<ProfileItemUiModel> {
+    return profileLocalDataSource.getProfileItems()
   }
 }
