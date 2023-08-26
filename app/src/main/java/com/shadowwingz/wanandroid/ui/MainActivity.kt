@@ -3,9 +3,11 @@ package com.shadowwingz.wanandroid.ui
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.drake.statusbar.immersive
 import com.shadowwingz.wanandroid.R
 import com.shadowwingz.wanandroid.base.BaseActivity
 import com.shadowwingz.wanandroid.databinding.ActivityMainBinding
@@ -39,6 +41,7 @@ class MainActivity : BaseActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(binding.root)
+    setupToolbar()
 
     binding.viewpager.apply {
       adapter = object : FragmentStateAdapter(this@MainActivity) {
@@ -77,19 +80,33 @@ class MainActivity : BaseActivity() {
       }
 
       when (it.itemId) {
-        R.id.navigation_home -> performClickNavigationItem(0)
-        R.id.navigation_question -> performClickNavigationItem(1)
-        R.id.navigation_system -> performClickNavigationItem(2)
-        R.id.navigation_mine -> performClickNavigationItem(3)
+        R.id.navigation_home -> {
+          performClickNavigationItem(0)
+          binding.toolbar.title = resources.getString(R.string.title_home)
+        }
+        R.id.navigation_question -> {
+          performClickNavigationItem(1)
+          binding.toolbar.title = resources.getString(R.string.title_question)
+        }
+        R.id.navigation_system -> {
+          performClickNavigationItem(2)
+          binding.toolbar.title = resources.getString(R.string.title_system)
+        }
+        R.id.navigation_mine -> {
+          performClickNavigationItem(3)
+          binding.toolbar.title = resources.getString(R.string.title_profile)
+        }
       }
       true
     }
 
     binding.navView.setOnClickListener { /*Do nothing*/ }
 
-    window.apply {
-      setDecorFitsSystemWindows(true)
-    }
-    // supportActionBar?.hide()
+    window.setDecorFitsSystemWindows(true)
+  }
+
+  private fun setupToolbar() {
+    immersive(binding.toolbar)
+    binding.toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.color_white))
   }
 }

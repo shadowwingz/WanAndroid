@@ -11,4 +11,8 @@
     <string name="dot">•</string>
     <string name="level">登录: %d</string>
     <string name="rank">排名: %s</string>
+    <string name="title_home">首页</string>
+    <string name="title_question">问答</string>
+    <string name="title_system">体系</string>
+    <string name="title_profile">我的</string>
 </resources>
